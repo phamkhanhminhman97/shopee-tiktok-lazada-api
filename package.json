@@ -1,19 +1,19 @@
 {
-  "name": "shopee-tiktok-lazada-api",
-  "version": "1.0.1",
+  "name": "shopee-tiktokshops-lazada-api",
+  "version": "2.0.3",
   "description": "Shopee Tiktokshops Lazada OPEN API",
   "files": [
     "dist"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/phamkhanhminhman97"
+    "url": "https://github.com/phamkhanhminhman97/shopee-tiktok-lazada-api"
   },
   "main": "dist/app.js",
   "types": "dist/app.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
+    "build": "rm -rf ./dist && tsc",
     "start": "tsc && node dist/app.js"
   },
   "keywords": [
