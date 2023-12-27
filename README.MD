@@ -23,6 +23,15 @@
 
 ![alt](./src/assets/tiktok.method.png)
 
+## Lazada MODULE
+```
+  const lazada = new LazadaModule({
+  appKey: '1234567890',
+  appSecret: '1234567890',
+  shopId: '1234567890',
+  appAccessToken: '1234567890',
+});
+
 ## Contact
 ```
 Mail: phamkhanhminhman97@gmail.com
