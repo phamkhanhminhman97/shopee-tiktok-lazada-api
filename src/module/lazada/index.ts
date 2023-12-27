@@ -13,13 +13,11 @@ import {
 } from "./dto/request/product.request";
 
 export const configLazada = {
-  appKey: process.env.SHOP_ID || 112470,
-  appSecret: process.env.PARTNER_ID || "X15jOyVyRvsN78kSj6Lmhm2XexjVwjZ5",
-  shopId: process.env.API_KEY || "29935989",
-  appAccessToken:
-    process.env.API_SECRET ||
-    "50000301938fwMcsqgddgq7KytjGDth1fxXFc3HQveJoVxMqVw1644f4663pjo6h",
-  refreshToken: process.env.API_TOKEN || "6c53626e62411a411677586c5a76624e624d",
+  appKey: process.env.SHOP_ID || 123123,
+  appSecret: process.env.PARTNER_ID || "123123",
+  shopId: process.env.API_KEY || "123123",
+  appAccessToken: process.env.API_SECRET || "123123",
+  refreshToken: process.env.API_TOKEN || "123123",
 };
 
 export class LazadaModule {
@@ -58,10 +56,7 @@ export class LazadaModule {
     return await updateStatusProduct(this.config, itemId, [payload]);
   }
 
-  async updatePrice(
-    itemId: number,
-    payload: any
-  ) {
+  async updatePrice(itemId: number, payload: any) {
     return await updatePrice(this.config, itemId, [payload]);
   }
 

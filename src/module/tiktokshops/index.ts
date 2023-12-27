@@ -15,14 +15,13 @@ import {
 import { TiktokConfig } from "./dto/request/config.request";
 
 export const configTiktok: TiktokConfig = {
-  appKey: process.env.TIKTOK_APP_KEY || "664d5qmeq73q6",
+  appKey: process.env.TIKTOK_APP_KEY || "123123",
   appSecret:
-    process.env.TIKTOK_APP_SECRET || "2d6f25655f90832c13532b37a4d9ad3150a43884",
-  shopId: process.env.TIKTOK_SHOP_ID || "7494605277310061286",
+    process.env.TIKTOK_APP_SECRET || "123123",
+  shopId: process.env.TIKTOK_SHOP_ID || "123123",
   accessToken:
-    process.env.TIKTOK_ACCESS_TOKEN ||
-    "ROW_D951SAAAAACf8kHaP46oBxcoU1k4h7Wn3C0W2wY7Gs7EJ6pFYTZ9LLjZuvldvnKcYUWuO0Hulo0lqhh7xlha29Gbd35djdK2tlQ7qVVt-G-lzoZpJG16D4zYawTkZJ9owyBQV2RMZDyi9bMxXHpELIUYqi7l3xlf8M4y6sPnzCc22cSPnUSAkA",
-  refreshToken: process.env.API_TOKEN || "6c53626e62411a411677586c5a76624e624d",
+    process.env.TIKTOK_ACCESS_TOKEN || "abcdef",
+  refreshToken: process.env.API_TOKEN || "123123",
 };
 
 export class TiktokModule {

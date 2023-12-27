@@ -22,12 +22,12 @@ export const configShopee = {
   partnerId: process.env.SHOPEE_PARTNER_ID || 1009026,
   partnerKey:
     process.env.SHOPEE_PARTNER_KEY ||
-    "1749221d2d0e4fef756435eb95dfc19f8c4a56e6abf80c102affee8d69712856",
-  shopId: process.env.SHOPEE_SHOP_ID || "69683",
+    "123123",
+  shopId: process.env.SHOPEE_SHOP_ID || "6968311111",
   accessToken:
-    process.env.SHOPEE_ACCESS_TOKEN || "79547747686450775546676a75676873",
+    process.env.SHOPEE_ACCESS_TOKEN || "123123",
   refreshToken:
-    process.env.SHOPEE_REFRESH_TOKEN || "54554173477a72577a74524d636a515a",
+    process.env.SHOPEE_REFRESH_TOKEN || "123123",
 };
 
 export class ShopeeModule {
