@@ -21,6 +21,8 @@
 });
 ```
 
+![alt](./src/assets/tiktok.method.png)
+
 ## Contact
 ```
 Mail: phamkhanhminhman97@gmail.com
