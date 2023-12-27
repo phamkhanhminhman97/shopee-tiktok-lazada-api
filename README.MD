@@ -1,4 +1,10 @@
+## ⚡️ Installation
+
+- **npm**: `npm i shopee-tiktokshops-lazada-api`
+- **yarn**: `yarn add shopee-tiktokshops-lazada-api`
+
 ## SHOPEE MODULE
+
 ```
   const shopee = new ShopeeModule({
   partnerId: 1234567890,
@@ -10,8 +16,8 @@
 
 ![alt](./src/assets/shopee.method.png)
 
-
 ## TIKTOK MODULE
+
 ```
   const tiktok = new TiktokModule({
   appKey: '1234567890',
@@ -24,6 +30,7 @@
 ![alt](./src/assets/tiktok.method.png)
 
 ## Lazada MODULE
+
 ```
   const lazada = new LazadaModule({
   appKey: '1234567890',
@@ -32,12 +39,16 @@
   appAccessToken: '1234567890',
 });
 ```
+
 ![alt](./src/assets/lazada.method.png)
 
 ## Contact
+
 ```
 Mail: phamkhanhminhman97@gmail.com
 Skype: phamkhanhminhman97@gmail.com
 ```
+
 ## To be continued...# shopee-tiktok-lazada-api
+
 # shopee-tiktok-lazada-api
