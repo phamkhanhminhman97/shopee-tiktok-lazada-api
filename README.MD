@@ -31,6 +31,8 @@
   shopId: '1234567890',
   appAccessToken: '1234567890',
 });
+```
+![alt](./src/assets/lazada.method.png)
 
 ## Contact
 ```
