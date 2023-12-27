@@ -1,0 +1,33 @@
+{
+  "name": "shopee-tiktok-lazada-api",
+  "version": "1.0.1",
+  "description": "Shopee Tiktokshops Lazada OPEN API",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phamkhanhminhman97"
+  },
+  "main": "dist/app.js",
+  "types": "dist/app.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "tsc && node dist/app.js"
+  },
+  "keywords": [
+    "shopee",
+    "tiktokshops",
+    "lazada"
+  ],
+  "author": "PKMM97",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "crypto-js": "^4.2.0"
+  }
+}
