@@ -8,6 +8,8 @@
 });
 ```
 
+![alt](./src/assets/shopee.method.png)
+
 
 ## TIKTOK MODULE
 ```
