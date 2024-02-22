@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from "axios";
-import { TiktokConfig } from "../dto/request/config.request";
-import { TIKTOK_PATH } from "../common/constant";
+import { TiktokConfig } from "../../dto/request/config.request";
+import { TIKTOK_PATH } from "../../common/constant";
 import {
   commonParameter,
   genURLwithSignature,
   getTimestampHoursAgo,
-} from "../common/helper";
+} from "../../common/helper";
 
 /**
  *

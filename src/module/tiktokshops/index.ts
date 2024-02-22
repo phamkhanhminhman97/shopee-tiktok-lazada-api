@@ -1,4 +1,4 @@
-import { getOrderDetail, getOrderList } from "./api/order.api";
+import { getOrderDetail, getOrderList } from "./api/v1/order.api";
 import {
   getProductsLists,
   updateStock,
@@ -11,7 +11,7 @@ import {
   fetchToken,
   getAuthorizedShop,
   getWarehouseList,
-} from "./api/product.api";
+} from "./api/v1/product.api";
 import { TiktokConfig } from "./dto/request/config.request";
 
 export const configTiktok: TiktokConfig = {

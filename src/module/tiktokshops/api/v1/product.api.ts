@@ -1,6 +1,6 @@
-import { TIKTOK_PATH } from "../common/constant";
-import { commonParameter, genURLwithSignature } from "../common/helper";
-import { TiktokConfig } from "../dto/request/config.request";
+import { TIKTOK_PATH } from "../../common/constant";
+import { commonParameter, genURLwithSignature } from "../../common/helper";
+import { TiktokConfig } from "../../dto/request/config.request";
 import axios from "axios";
 
 /**
