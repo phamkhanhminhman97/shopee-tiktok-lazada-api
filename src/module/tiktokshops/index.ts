@@ -1,5 +1,5 @@
-import { getOrderList } from "./api/v1/order.api";
-import { getOrderDetail } from "./api/v2/order.api";
+import { getOrderList, getOrderDetail } from "./api/v1/order.api";
+// import { getOrderDetail } from "./api/v2/order.api";
 import {
   getProductsLists,
   updateStock,
@@ -14,16 +14,6 @@ import {
   getWarehouseList,
 } from "./api/v1/product.api";
 import { TiktokConfig } from "./dto/request/config.request";
-
-export const configTiktok: TiktokConfig = {
-  appKey: process.env.TIKTOK_APP_KEY || "123123",
-  appSecret:
-    process.env.TIKTOK_APP_SECRET || "123123",
-  shopId: process.env.TIKTOK_SHOP_ID || "123123",
-  accessToken:
-    process.env.TIKTOK_ACCESS_TOKEN || "abcdef",
-  refreshToken: process.env.API_TOKEN || "123123",
-};
 
 export class TiktokModule {
   private config: TiktokConfig;

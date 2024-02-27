@@ -48,7 +48,7 @@ export function parseParmsURL(url) {
   return params;
 }
 export function genURLwithSignature(path, commonParam, config) {
-  const url = new URL(process.env.TIKTOK_ENDPOINT + path + commonParam);
+  const url = new URL(TIKTOK_END_POINT + path + commonParam);
   const params = parseParmsURL(url);
   const signature2 = signRequest(params, path, config);
   url.searchParams.set("sign", signature2);

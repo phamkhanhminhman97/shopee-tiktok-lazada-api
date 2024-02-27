@@ -12,14 +12,6 @@ import {
   LZD_UPDATE_STATUS_PRODUCT,
 } from "./dto/request/product.request";
 
-export const configLazada = {
-  appKey: process.env.SHOP_ID || 123123,
-  appSecret: process.env.PARTNER_ID || "123123",
-  shopId: process.env.API_KEY || "123123",
-  appAccessToken: process.env.API_SECRET || "123123",
-  refreshToken: process.env.API_TOKEN || "123123",
-};
-
 export class LazadaModule {
   private config;
   constructor(config) {

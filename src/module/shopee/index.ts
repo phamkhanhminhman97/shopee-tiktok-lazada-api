@@ -16,19 +16,6 @@ import {
   getAttributes,
   getBrandList,
 } from "./api/product.api";
-require("dotenv").config();
-
-export const configShopee = {
-  partnerId: process.env.SHOPEE_PARTNER_ID || 1009026,
-  partnerKey:
-    process.env.SHOPEE_PARTNER_KEY ||
-    "123123",
-  shopId: process.env.SHOPEE_SHOP_ID || "6968311111",
-  accessToken:
-    process.env.SHOPEE_ACCESS_TOKEN || "123123",
-  refreshToken:
-    process.env.SHOPEE_REFRESH_TOKEN || "123123",
-};
 
 export class ShopeeModule {
   private config: ShopeeConfig;
