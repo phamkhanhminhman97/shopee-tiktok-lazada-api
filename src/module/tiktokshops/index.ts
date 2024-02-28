@@ -9,10 +9,10 @@ import {
   createProduct,
   getCategories,
   fetchToken,
-  getAuthorizedShop,
   getWarehouseList,
 } from "./api/v1/product.api";
 import { TiktokConfig } from "./dto/request/config.request";
+import { getAuthorizedShop } from "./api/v2/authorization.api";
 
 export class TiktokModule {
   private config: TiktokConfig;

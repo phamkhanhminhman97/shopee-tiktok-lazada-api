@@ -3,6 +3,7 @@ import { TiktokConfig } from "../../dto/request/config.request";
 import { TIKTOK_PATH, TIKTOK_PATH_202309 } from "../../common/constant";
 import {
   commonParameter,
+  commonParameter2,
   genURLwithSignature,
   getTimestampHoursAgo,
 } from "../../common/helper";
@@ -19,10 +20,14 @@ export async function getAuthorizedShop(
     config
   );
   try {
-    const res = await axios.get(url);
-    const { order_list } = res.data.data;
-    return order_list;
-  } catch (error) {
-    console.log("[GetOrder]", error);
+    const res = await axios.get(url, {
+      headers: {
+        "Content-Type": "application/json",
+        "x-tts-access-token": config.accessToken,
+      },
+    });
+    return res.data;
+  } catch (err: any) {
+    return err.response.data;
   }
 }
