@@ -35,6 +35,36 @@ interface PaymentInfo {
   total_amount: string; //total_amount=sub_total+shipping_fee+taxes+retail_delivery_fee.
 }
 
+interface LineItems {
+  id: string;
+  sku_id: string;
+  display_status: string;
+  product_id: string;
+  product_name: string;
+  sku_name: string;
+  sku_image: string;
+  original_price: string;
+  sale_price: string;
+  platform_discount: string;
+  seller_discount: string;
+  cancel_user: string;
+  sku_type: string;
+  seller_sku: string;
+  shipping_provider_id: string;
+  shipping_provider_name: string;
+  currency: string;
+  package_id: string;
+  rts_time: number;
+  package_status: string;
+  tracking_number: string;
+  is_gift: boolean;
+  cancel_reason: string;
+}
+
+interface Packages {
+  id: string;
+}
+
 interface ResponseOrderDetail {
   id: string;
   status: string;
@@ -69,7 +99,6 @@ interface ResponseOrderDetail {
   cancel_reason: string;
   cancellation_initiator: string; // SELLER/BUYER/SYSTEM
   cancel_user: string;
-  package_list: Array<any>;
   receiver_address_updated?: number; //0:no update, 1:updated;
   buyer_uid: string;
   split_or_combine_tag?: string;
@@ -85,8 +114,8 @@ interface ResponseOrderDetail {
   delivery_option_name: string;
   is_on_hold_order: boolean;
   is_sample_order: boolean;
-  line_items: Array<any>;
-  packages: Array<any>;
+  line_items: Array<LineItems>;
+  packages: Array<Packages>;
 }
 
 // interface ResponseOrderDetail extends TiktokResponseCommon {

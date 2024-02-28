@@ -75,3 +75,8 @@ export function getTimestampHoursAgo(hours: number): number {
   oldDate.setMilliseconds(0);
   return Math.floor((oldDate.getTime() - hours * 60 * 60 * 1000) / 1000);
 }
+
+
+export function replacePackageId(path: string, packageId: string): string {
+  return path.replace("{package_id}", packageId);
+}

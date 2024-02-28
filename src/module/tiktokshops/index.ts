@@ -1,18 +1,8 @@
 import { getOrderDetail, getOrderList } from "./api/v2/order.api";
-import {
-  getProductsLists,
-  updateStock,
-  deactiveProduct,
-  activeProduct,
-  updatePrice,
-  createProduct,
-  getCategories,
-  fetchToken,
-  getWarehouseList,
-} from "./api/v1/product.api";
 import { TiktokConfig } from "./dto/request/config.request";
 import { getAuthorizedShop } from "./api/v2/authorization.api";
 import { getProductDetail } from "./api/v2/product.api";
+import { getPackageTimeSlots } from "./api/v2/fulfillment.api";
 
 export class TiktokModule {
   private config: TiktokConfig;
@@ -34,5 +24,9 @@ export class TiktokModule {
 
   async getAuthorizedShop() {
     return await getAuthorizedShop(this.config);
+  }
+
+  async getPackageTimeSlots(packageId: string) {
+    return await getPackageTimeSlots(packageId, this.config);
   }
 }
