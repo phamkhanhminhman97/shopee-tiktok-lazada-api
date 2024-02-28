@@ -10,6 +10,7 @@
   appKey: '1234567890',
   appSecret: '1234567890',
   shopId: '1234567890',
+  shopCipher: '1234567890',
   accessToken: '1234567890',
 });
 ```
