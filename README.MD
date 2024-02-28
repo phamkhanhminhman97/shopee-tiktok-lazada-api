@@ -3,6 +3,19 @@
 - **npm**: `npm i shopee-tiktokshops-lazada-api`
 - **yarn**: `yarn add shopee-tiktokshops-lazada-api`
 
+## TIKTOK MODULE (UPDATE API V2 VERSION 2309)
+
+```
+  const tiktok = new TiktokModule({
+  appKey: '1234567890',
+  appSecret: '1234567890',
+  shopId: '1234567890',
+  accessToken: '1234567890',
+});
+```
+
+![alt](./src/assets/tiktok.method.png)
+
 ## SHOPEE MODULE
 
 ```
@@ -15,19 +28,6 @@
 ```
 
 ![alt](./src/assets/shopee.method.png)
-
-## TIKTOK MODULE
-
-```
-  const tiktok = new TiktokModule({
-  appKey: '1234567890',
-  appSecret: '1234567890',
-  shopId: '1234567890',
-  accessToken: '1234567890',
-});
-```
-
-![alt](./src/assets/tiktok.method.png)
 
 ## Lazada MODULE
 
