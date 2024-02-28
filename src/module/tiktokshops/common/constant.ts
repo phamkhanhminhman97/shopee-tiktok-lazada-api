@@ -99,6 +99,7 @@ enum PATH_202309 {
   ORDER_DETAIL = "/order/202309/orders",
   PRODUCT_DETAIL = "/product/202309/products/",
   PACKAGE_TIME_SLOT = "/fulfillment/202309/packages/{package_id}/handover_time_slots",
+  SHIP_PACKAGE = "/fulfillment/202309/packages/{package_id}/ship",
 }
 
 export {

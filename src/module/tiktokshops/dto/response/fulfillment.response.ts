@@ -1,13 +1,18 @@
 import { TiktokResponseCommon } from "./config.response";
 
-interface PACKAGE_TIME_SLOT extends TiktokResponseCommon {
+interface PickupSlot {
+  avaliable: boolean;
+  end_time: boolean;
+  start_time: boolean;
+}
+
+interface PackageTimeSlot extends TiktokResponseCommon {
   data: {
     can_drop_off: boolean;
     can_pickup: boolean;
     drop_off_point_url: string;
+    pickup_slots: Array<PickupSlot>;
   };
 }
 
-export {
-  PACKAGE_TIME_SLOT as TIKTOK_PACKAGE_TIME_SLOT
-}
+export { PackageTimeSlot as TiktokResponsePackageTimeSlot };

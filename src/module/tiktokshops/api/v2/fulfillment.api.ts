@@ -6,6 +6,7 @@ import {
   replacePackageId,
 } from "../../common/helper";
 import { TiktokConfig } from "../../dto/request/config.request";
+import { TiktokRequestShipPackage } from "../../dto/request/fulfillment.request";
 
 export async function getPackageTimeSlots(
   packageId: string,
@@ -22,6 +23,41 @@ export async function getPackageTimeSlots(
 
   try {
     const res: AxiosResponse = await axios.get(url, {
+      headers: {
+        "Content-Type": "application/json",
+        "x-tts-access-token": config.accessToken,
+      },
+    });
+    return res.data;
+  } catch (err: any) {
+    return err.response.data;
+  }
+}
+
+export async function shipPackage(
+  packageId: string,
+  payload: TiktokRequestShipPackage,
+  config: TiktokConfig
+): Promise<any> {
+  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const commonParam = commonParameter2(config, timestamp);
+  const pathTimeSlot = replacePackageId(
+    TIKTOK_PATH_202309.SHIP_PACKAGE,
+    packageId
+  );
+
+  const url = genURLwithSignature(pathTimeSlot, commonParam, config);
+
+  const body: TiktokRequestShipPackage = {
+    handover_method: payload.handover_method,
+    pickup_slot: {
+      start_time: payload.pickup_slot.start_time,
+      end_time: payload.pickup_slot.end_time,
+    },
+  };
+
+  try {
+    const res: AxiosResponse = await axios.post(url, body, {
       headers: {
         "Content-Type": "application/json",
         "x-tts-access-token": config.accessToken,
