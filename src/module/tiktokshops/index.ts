@@ -2,7 +2,9 @@ import { getOrderDetail, getOrderList } from "./api/v2/order.api";
 import { TiktokConfig } from "./dto/request/config.request";
 import { getAuthorizedShop } from "./api/v2/authorization.api";
 import { getProductDetail } from "./api/v2/product.api";
-import { getPackageTimeSlots } from "./api/v2/fulfillment.api";
+import { getPackageShippingDocument, getPackageTimeSlots, shipPackage } from "./api/v2/fulfillment.api";
+import { TiktokRequestShipPackage } from "./dto/request/fulfillment.request";
+import { TIKTOK_DOCUMENT_TYPE } from "./common/constant";
 
 export class TiktokModule {
   private config: TiktokConfig;
@@ -28,5 +30,13 @@ export class TiktokModule {
 
   async getPackageTimeSlots(packageId: string) {
     return await getPackageTimeSlots(packageId, this.config);
+  }
+
+  async shipPackage(packageId: string, payload: TiktokRequestShipPackage) {
+    return await shipPackage(packageId, payload, this.config);
+  }
+
+  async getShippingDocument(packageId: string, documentType: TIKTOK_DOCUMENT_TYPE) {
+    return await getPackageShippingDocument(packageId, documentType, this.config);
   }
 }

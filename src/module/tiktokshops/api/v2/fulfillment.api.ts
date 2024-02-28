@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { TIKTOK_PATH_202309 } from "../../common/constant";
+import { TIKTOK_DOCUMENT_TYPE, TIKTOK_PATH_202309 } from "../../common/constant";
 import {
   commonParameter2,
   genURLwithSignature,
@@ -58,6 +58,33 @@ export async function shipPackage(
 
   try {
     const res: AxiosResponse = await axios.post(url, body, {
+      headers: {
+        "Content-Type": "application/json",
+        "x-tts-access-token": config.accessToken,
+      },
+    });
+    return res.data;
+  } catch (err: any) {
+    return err.response.data;
+  }
+}
+
+export async function getPackageShippingDocument(
+  packageId: string,
+  documentType: TIKTOK_DOCUMENT_TYPE,
+  config: TiktokConfig
+) {
+  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const commonParam = commonParameter2(config, timestamp) + "&document_type=" + documentType;
+  const pathShippingDocument = replacePackageId(
+    TIKTOK_PATH_202309.PACKAGE_SHIPPING_DOCUMENT,
+    packageId
+  );
+
+  const url = genURLwithSignature(pathShippingDocument, commonParam, config);
+
+  try {
+    const res: AxiosResponse = await axios.get(url, {
       headers: {
         "Content-Type": "application/json",
         "x-tts-access-token": config.accessToken,

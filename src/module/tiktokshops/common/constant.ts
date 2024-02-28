@@ -100,6 +100,14 @@ enum PATH_202309 {
   PRODUCT_DETAIL = "/product/202309/products/",
   PACKAGE_TIME_SLOT = "/fulfillment/202309/packages/{package_id}/handover_time_slots",
   SHIP_PACKAGE = "/fulfillment/202309/packages/{package_id}/ship",
+  PACKAGE_SHIPPING_DOCUMENT = "/fulfillment/202309/packages/{package_id}/shipping_documents",
+}
+
+enum DOCUMENT_TYPE {
+  PACKING_SLIP = "PACKING_SLIP", //PDF
+  SHIPPING_LABEL = "SHIPPING_LABEL", //PDF
+  SHIPPING_LABEL_PICTURE = "SHIPPING_LABEL_PICTURE", //PNG
+  SHIPPING_LABEL_AND_PACKING_SLIP = "SHIPPING_LABEL_AND_PACKING_SLIP",
 }
 
 export {
@@ -113,6 +121,7 @@ export {
   USER as TIKTOK_USER,
   PATH as TIKTOK_PATH,
   PATH_202309 as TIKTOK_PATH_202309,
+  DOCUMENT_TYPE as TIKTOK_DOCUMENT_TYPE,
   ALGORITHM as TIKTOK_ALGORITHM,
   DIGEST as TIKTOK_DIGEST,
   END_POINT as TIKTOK_END_POINT,
