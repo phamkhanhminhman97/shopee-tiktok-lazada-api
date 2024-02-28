@@ -370,25 +370,6 @@ export async function fetchToken(code: string, config) {
   }
 }
 
-export async function getAuthorizedShop(config) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
-
-  delete config.shopId;
-  console.log(config);
-  const commonParam = commonParameter(config, timestamp);
-  const url = genURLwithSignature(
-    TIKTOK_PATH.GET_AUTHORIZED,
-    commonParam,
-    config
-  );
-  try {
-    const res = await axios.get(url.toString());
-    return res.data;
-  } catch (error) {
-    // console.log('[getAuthorizedShop]', error);
-  }
-}
-
 export async function getWarehouseList(config) {
   const timestamp = Date.parse(new Date().toString()) / 1000;
   const commonParam = commonParameter(config, timestamp);

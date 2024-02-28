@@ -22,7 +22,7 @@ export async function getOrderDetail(
   );
 
   try {
-    const res = await axios.get(url, {
+    const res: AxiosResponse = await axios.get(url, {
       headers: {
         "Content-Type": "application/json",
         "x-tts-access-token": config.accessToken,
@@ -50,10 +50,8 @@ export async function getOrderList(before, config: TiktokConfig) {
     body
   );
 
-  
-
   try {
-    const res = await axios.post(url, body, {
+    const res: AxiosResponse = await axios.post(url, body, {
       headers: {
         "content-type": "application/json",
         "x-tts-access-token": config.accessToken,

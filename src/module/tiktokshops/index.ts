@@ -2,7 +2,6 @@ import { getOrderDetail, getOrderList } from "./api/v2/order.api";
 import {
   getProductsLists,
   updateStock,
-  getProductDetail,
   deactiveProduct,
   activeProduct,
   updatePrice,
@@ -13,6 +12,7 @@ import {
 } from "./api/v1/product.api";
 import { TiktokConfig } from "./dto/request/config.request";
 import { getAuthorizedShop } from "./api/v2/authorization.api";
+import { getProductDetail } from "./api/v2/product.api";
 
 export class TiktokModule {
   private config: TiktokConfig;
