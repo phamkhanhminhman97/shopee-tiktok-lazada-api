@@ -95,6 +95,7 @@ enum PATH {
 
 enum PATH_202309 {
   AUTHORIZED_SHOP = "/authorization/202309/shops",
+  ORDER_LIST = "/order/202309/orders/search",
   ORDER_DETAIL = "/order/202309/orders"
 }
 

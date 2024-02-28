@@ -18,7 +18,22 @@ interface ResponseAccessToken extends ResponseCommon {
   };
 }
 
+interface ShopList {
+  region: string;
+  shop_cipher: string;
+  shop_code: string;
+  shop_id: string;
+  shop_name: string;
+  type: number;
+}
+interface ResponseAuthorizedShop extends ResponseCommon {
+  data: {
+    shop_list: ShopList[];
+  };
+}
+
 export {
   ResponseCommon as TiktokResponseCommon,
   ResponseAccessToken as TiktokResponseAccessToken,
+  ResponseAuthorizedShop as TiktokResponseAuthorized,
 };

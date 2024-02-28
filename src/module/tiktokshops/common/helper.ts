@@ -17,6 +17,23 @@ export function commonParameter(config, timestamp) {
   return commonParam;
 }
 
+export function commonParameter2(config, timestamp) {
+  const { appKey, shopId, shopCipher } = config;
+  const commonParam =
+    "?app_key=" +
+    appKey +
+    "&sign=" +
+    "" +
+    "&timestamp=" +
+    timestamp +
+    "&shop_id=" +
+    shopId + 
+    "&shop_cipher=" +
+    shopCipher;
+
+  return commonParam;
+}
+
 export function objKeySort(obj) {
   const newKey = Object.keys(obj).sort();
   const newObj = {};
@@ -25,7 +42,9 @@ export function objKeySort(obj) {
   }
   return newObj;
 }
-export function signRequest(params, path, config) {
+export function signRequest(params, path, config, body) {
+  console.log(body);
+  
   const { appSecret } = config;
   delete params["sign"];
   delete params["access_token"];
@@ -35,7 +54,8 @@ export function signRequest(params, path, config) {
   for (const key in sortParam) {
     signstring = signstring + key + sortParam[key];
   }
-  signstring = signstring + appSecret;
+  signstring = signstring + JSON.stringify(body) + appSecret;
+  
   const signature = crypto.HmacSHA256(signstring, appSecret).toString();
   return signature;
 }
@@ -47,10 +67,10 @@ export function parseParmsURL(url) {
   });
   return params;
 }
-export function genURLwithSignature(path, commonParam, config) {
+export function genURLwithSignature(path, commonParam, config, body?) {
   const url = new URL(TIKTOK_END_POINT + path + commonParam);
   const params = parseParmsURL(url);
-  const signature2 = signRequest(params, path, config);
+  const signature2 = signRequest(params, path, config, body);
   url.searchParams.set("sign", signature2);
   return url.toString();
 }

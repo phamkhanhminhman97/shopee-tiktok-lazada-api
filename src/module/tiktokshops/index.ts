@@ -1,5 +1,4 @@
-import { getOrderList, getOrderDetail } from "./api/v1/order.api";
-// import { getOrderDetail } from "./api/v2/order.api";
+import { getOrderDetail, getOrderList } from "./api/v2/order.api";
 import {
   getProductsLists,
   updateStock,
@@ -21,7 +20,7 @@ export class TiktokModule {
     this.config = config;
   }
 
-  async getOrders(beforeHours: number) {
+  async getOrderList(beforeHours: number) {
     return await getOrderList(beforeHours, this.config);
   }
 
@@ -65,7 +64,7 @@ export class TiktokModule {
     return await fetchToken(authCode, this.config);
   }
 
-  async getShopInfo() {
+  async getAuthorizedShop() {
     return await getAuthorizedShop(this.config);
   }
 

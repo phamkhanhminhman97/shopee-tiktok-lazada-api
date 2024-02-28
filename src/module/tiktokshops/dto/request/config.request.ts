@@ -2,9 +2,10 @@ export interface Config {
   appKey: string;
   appSecret: string;
   shopId: string;
-  accessToken: string;
+  accessToken?: string;
   accessTokenExpire?: string;
   refreshToken?: string;
+  shopCipher?: string;
 }
 
 export interface ConfigList {
