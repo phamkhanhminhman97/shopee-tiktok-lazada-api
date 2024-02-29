@@ -9,7 +9,7 @@ import {
 export async function getAuthorizedShop(
   config: TiktokConfig
 ) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
 
   const url = genURLwithSignature(

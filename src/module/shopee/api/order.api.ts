@@ -58,7 +58,7 @@ export async function getOrderDetail(
   orderNumber: string,
   config: ShopeeConfig
 ) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const optionalField: string[] = [
     `buyer_user_id,buyer_username,estimated_shipping_fee,recipient_address,
     actual_shipping_fee,goods_to_declare,note,note_update_time,item_list,
@@ -86,7 +86,7 @@ export async function fetchTokenWithAuthCode(
   config: ShopeeConfig
 ) {
   try {
-    const timestamp = Date.parse(new Date().toString()) / 1000;
+    const timestamp = Math.floor(Date.now() / 1000);
     const { partnerId, shopId, partnerKey } = config;
     const params = [partnerId, SHOPEE_PATH.AUTH_TOKEN, timestamp.toString()];
     const baseString = params.reduce((prev, curr) => (prev += curr), "");

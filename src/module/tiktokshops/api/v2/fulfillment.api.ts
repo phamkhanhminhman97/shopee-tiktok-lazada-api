@@ -1,5 +1,8 @@
 import axios, { AxiosResponse } from "axios";
-import { TIKTOK_DOCUMENT_TYPE, TIKTOK_PATH_202309 } from "../../common/constant";
+import {
+  TIKTOK_DOCUMENT_TYPE,
+  TIKTOK_PATH_202309,
+} from "../../common/constant";
 import {
   commonParameter2,
   genURLwithSignature,
@@ -12,7 +15,7 @@ export async function getPackageTimeSlots(
   packageId: string,
   config: TiktokConfig
 ) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter2(config, timestamp);
   const pathTimeSlot = replacePackageId(
     TIKTOK_PATH_202309.PACKAGE_TIME_SLOT,
@@ -39,7 +42,11 @@ export async function shipPackage(
   payload: TiktokRequestShipPackage,
   config: TiktokConfig
 ): Promise<any> {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  if (!packageId) {
+    throw new Error("Invalid input: packageId are required");
+  }
+
+  const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter2(config, timestamp);
   const pathTimeSlot = replacePackageId(
     TIKTOK_PATH_202309.SHIP_PACKAGE,
@@ -74,8 +81,16 @@ export async function getPackageShippingDocument(
   documentType: TIKTOK_DOCUMENT_TYPE,
   config: TiktokConfig
 ) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
-  const commonParam = commonParameter2(config, timestamp) + "&document_type=" + documentType;
+  if (!packageId || !documentType) {
+    throw new Error("Invalid input: packageId and documentType are required");
+  }
+
+  const timestamp = Math.floor(Date.now() / 1000);
+  const commonParam = `${commonParameter2(
+    config,
+    timestamp
+  )}&document_type=${documentType}`;
+
   const pathShippingDocument = replacePackageId(
     TIKTOK_PATH_202309.PACKAGE_SHIPPING_DOCUMENT,
     packageId
@@ -92,6 +107,13 @@ export async function getPackageShippingDocument(
     });
     return res.data;
   } catch (err: any) {
+    return handleErrorResponse(err);
+  }
+}
+
+function handleErrorResponse(err: any): any {
+  if (err.response && err.response.data) {
     return err.response.data;
   }
+  return { error: "An unexpected error occurred" };
 }

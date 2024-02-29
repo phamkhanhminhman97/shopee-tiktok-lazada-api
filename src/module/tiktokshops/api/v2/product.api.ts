@@ -8,7 +8,7 @@ export async function getProductDetail(
   productId: string,
   config: TiktokConfig
 ) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const commonParam =
     commonParameter2(config, timestamp) + "&product_id=" + productId;
 

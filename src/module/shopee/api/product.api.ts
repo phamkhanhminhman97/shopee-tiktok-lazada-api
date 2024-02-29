@@ -58,7 +58,7 @@ export async function getProductItemBaseInfo(
   itemId: string,
   config: ShopeeConfig
 ) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(SHOPEE_PATH.GET_ITEM_BASE, config, timestamp);
   const commonParam =
     commonParameter(config, signature, timestamp) +
@@ -86,7 +86,7 @@ export async function updateStock(
   config: ShopeeConfig
 ) {
   try {
-    const timestamp = Date.parse(new Date().toString()) / 1000;
+    const timestamp = Math.floor(Date.now() / 1000);
     const signature = signRequest(SHOPEE_PATH.UPDATE_STOCK, config, timestamp);
     const commonParam = commonParameter(config, signature, timestamp);
     const body = {
@@ -126,7 +126,7 @@ export async function unListItem(
   statusUnlist: boolean,
   config: ShopeeConfig
 ) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(SHOPEE_PATH.UNLIST_ITEM, config, timestamp);
   const commonParam = commonParameter(config, signature, timestamp);
 
@@ -157,7 +157,7 @@ export async function updatePrice(
   price: number,
   config: ShopeeConfig
 ) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(SHOPEE_PATH.UPDATE_PRICE, config, timestamp);
   const commonParam = commonParameter(config, signature, timestamp);
 
@@ -184,7 +184,7 @@ export async function updatePrice(
  * @returns
  */
 export async function addItem(body: any, config: ShopeeConfig) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(SHOPEE_PATH.ADD_ITEM, config, timestamp);
   const commonParam = commonParameter(config, signature, timestamp);
 
@@ -276,7 +276,7 @@ export async function addItem(body: any, config: ShopeeConfig) {
 }
 
 export async function getChannelList(config: ShopeeConfig) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(
     "/api/v2/logistics/get_channel_list",
     config,
@@ -293,7 +293,7 @@ export async function getChannelList(config: ShopeeConfig) {
 }
 
 export async function getCategory(config: ShopeeConfig) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(
     "/api/v2/product/get_category",
     config,
@@ -308,7 +308,7 @@ export async function getCategory(config: ShopeeConfig) {
 }
 
 export async function getAttributes(categoryId: number, config: ShopeeConfig) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(
     "/api/v2/product/get_attributes",
     config,
@@ -328,7 +328,7 @@ export async function getAttributes(categoryId: number, config: ShopeeConfig) {
 }
 
 export async function getBrandList(categoryId: number, config: ShopeeConfig) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(
     "/api/v2/product/get_brand_list",
     config,

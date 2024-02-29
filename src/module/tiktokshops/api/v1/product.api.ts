@@ -9,7 +9,7 @@ import axios from "axios";
  * @returns
  */
 export async function getProductsLists(config: TiktokConfig) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
   const productList: any[] = [];
   let i = 1;
@@ -94,7 +94,7 @@ export async function getProductDetail(
   productId: string,
   config: TiktokConfig
 ) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const commonParam =
     commonParameter(config, timestamp) + "&product_id=" + productId;
 
@@ -123,7 +123,7 @@ export async function activeProduct(
   productIds: Array<string>,
   config: TiktokConfig
 ) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
   const body = {
     product_ids: productIds,
@@ -148,7 +148,7 @@ export async function deactiveProduct(
   productIds: Array<string>,
   config: TiktokConfig
 ) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
   const body = {
     product_ids: productIds,
@@ -206,7 +206,7 @@ export async function updatePrice(
 }
 
 export async function createProduct(config) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
   const body = {
     // brand_id: "7082427311584347905",
@@ -301,7 +301,7 @@ export async function createProduct(config) {
 }
 
 export async function getCategories(config) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
 
   const url = genURLwithSignature(
@@ -371,7 +371,7 @@ export async function fetchToken(code: string, config) {
 }
 
 export async function getWarehouseList(config) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
 
   const url = genURLwithSignature(

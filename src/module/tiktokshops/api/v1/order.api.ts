@@ -68,7 +68,7 @@ export async function getOrderDetail(
   orderNumber: string,
   config: TiktokConfig
 ) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
+  const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
   const body = {
     order_id_list: [orderNumber],

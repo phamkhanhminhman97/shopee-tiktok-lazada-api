@@ -11,9 +11,11 @@ export async function getOrderDetail(
   orderNumber: string,
   config: TiktokConfig
 ) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
-  const commonParam =
-    commonParameter2(config, timestamp) + "&ids=" + orderNumber;
+  const timestamp = Math.floor(Date.now() / 1000);
+  const commonParam = `${commonParameter2(
+    config,
+    timestamp
+  )}&ids=${orderNumber}`;
 
   const url = genURLwithSignature(
     TIKTOK_PATH_202309.ORDER_DETAIL,
@@ -35,12 +37,11 @@ export async function getOrderDetail(
 }
 
 export async function getOrderList(before, config: TiktokConfig) {
-  const timestamp = Date.parse(new Date().toString()) / 1000;
-  const commonParam =
-    commonParameter2(config, timestamp) + "&page_size=20";
+  const timestamp = Math.floor(Date.now() / 1000);
+  const commonParam = `${commonParameter2(config, timestamp)}&page_size=20`;
 
   const body = {
-    order_status: 'DELIVERED'
+    order_status: "DELIVERED",
   };
 
   const url = genURLwithSignature(
