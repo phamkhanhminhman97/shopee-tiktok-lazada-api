@@ -5,12 +5,15 @@ import {
   commonParameter2,
   genURLwithSignature,
   getTimestampHoursAgo,
+  httpGet,
+  httpPost,
 } from "../../common/helper";
+import { TiktokResponseOrderDetail } from "../../dto/response/order.response";
 
 export async function getOrderDetail(
   orderNumber: string,
   config: TiktokConfig
-) {
+): Promise<TiktokResponseOrderDetail> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${commonParameter2(
     config,
@@ -23,20 +26,10 @@ export async function getOrderDetail(
     config
   );
 
-  try {
-    const res: AxiosResponse = await axios.get(url, {
-      headers: {
-        "Content-Type": "application/json",
-        "x-tts-access-token": config.accessToken,
-      },
-    });
-    return res.data;
-  } catch (err: any) {
-    return err.response.data;
-  }
+  return httpGet(url, config);
 }
 
-export async function getOrderList(before, config: TiktokConfig) {
+export async function getOrderList(before, config: TiktokConfig): Promise<any> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${commonParameter2(config, timestamp)}&page_size=20`;
 
@@ -51,15 +44,5 @@ export async function getOrderList(before, config: TiktokConfig) {
     body
   );
 
-  try {
-    const res: AxiosResponse = await axios.post(url, body, {
-      headers: {
-        "content-type": "application/json",
-        "x-tts-access-token": config.accessToken,
-      },
-    });
-    return res.data;
-  } catch (err: any) {
-    return err.response.data;
-  }
+  return httpPost(url, body, config);
 }

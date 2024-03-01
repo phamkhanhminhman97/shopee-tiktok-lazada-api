@@ -1,11 +1,12 @@
 enum WEBHOOK_TYPE {
-  ORDER = 1,
-  REVERSE = 2,
-  RECIPIENT = 3,
-  PACKAGE = 4,
-  PRODUCT = 5,
-  SELLER_DEAUTH = 6,
-  AUTH_EXPIRE = 7,
+  ORDER_STATUS = 1,
+  RETURN_STATUS = 2,
+  CANCEL_STATUS = 3,
+  ADDRESS_UPDATE = 4,
+  PACKAGE_UPDATE = 5,
+  PRODUCT_STATUS = 6,
+  SELLER_DEAUTHORIZE = 7,
+  AUTH_EXPIRE = 8,
 }
 
 enum PRODUCT_STATUS {
@@ -98,8 +99,13 @@ enum PATH_202309 {
   ORDER_LIST = "/order/202309/orders/search",
   ORDER_DETAIL = "/order/202309/orders",
   PRODUCT_DETAIL = "/product/202309/products/",
+  CATEGORIES = "/product/202309/categories",
+  BRANDS = "/product/2309/brands",
+  ATTRIBUTES = "/product/202309/categories/{category_id}/attributes",
   PACKAGE_TIME_SLOT = "/fulfillment/202309/packages/{package_id}/handover_time_slots",
   SHIP_PACKAGE = "/fulfillment/202309/packages/{package_id}/ship",
+  ACTIVE_PRODUCT = "/product/202309/products/activate",
+  DEACTIVE_PRODUCT = "/product/202309/products/deactivate",
   PACKAGE_SHIPPING_DOCUMENT = "/fulfillment/202309/packages/{package_id}/shipping_documents",
 }
 
@@ -108,6 +114,11 @@ enum DOCUMENT_TYPE {
   SHIPPING_LABEL = "SHIPPING_LABEL", //PDF
   SHIPPING_LABEL_PICTURE = "SHIPPING_LABEL_PICTURE", //PNG
   SHIPPING_LABEL_AND_PACKING_SLIP = "SHIPPING_LABEL_AND_PACKING_SLIP",
+}
+
+enum PATH_PLACEHOLDER {
+  CATEGORY = "{category_id}",
+  PACKAGE = "{package_id}",
 }
 
 export {
@@ -121,6 +132,7 @@ export {
   USER as TIKTOK_USER,
   PATH as TIKTOK_PATH,
   PATH_202309 as TIKTOK_PATH_202309,
+  PATH_PLACEHOLDER as TIKTOK_PATH_PLACEHOLDER,
   DOCUMENT_TYPE as TIKTOK_DOCUMENT_TYPE,
   ALGORITHM as TIKTOK_ALGORITHM,
   DIGEST as TIKTOK_DIGEST,

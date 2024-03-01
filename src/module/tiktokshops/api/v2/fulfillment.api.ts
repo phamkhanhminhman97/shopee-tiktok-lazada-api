@@ -6,15 +6,18 @@ import {
 import {
   commonParameter2,
   genURLwithSignature,
+  httpGet,
+  httpPost,
   replacePackageId,
 } from "../../common/helper";
 import { TiktokConfig } from "../../dto/request/config.request";
 import { TiktokRequestShipPackage } from "../../dto/request/fulfillment.request";
+import { TiktokResponsePackageTimeSlot } from "../../dto/response/fulfillment.response";
 
 export async function getPackageTimeSlots(
   packageId: string,
   config: TiktokConfig
-) {
+): Promise<TiktokResponsePackageTimeSlot> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter2(config, timestamp);
   const pathTimeSlot = replacePackageId(
@@ -24,17 +27,7 @@ export async function getPackageTimeSlots(
 
   const url = genURLwithSignature(pathTimeSlot, commonParam, config);
 
-  try {
-    const res: AxiosResponse = await axios.get(url, {
-      headers: {
-        "Content-Type": "application/json",
-        "x-tts-access-token": config.accessToken,
-      },
-    });
-    return res.data;
-  } catch (err: any) {
-    return err.response.data;
-  }
+  return httpGet(url, config);
 }
 
 export async function shipPackage(
@@ -63,17 +56,7 @@ export async function shipPackage(
     },
   };
 
-  try {
-    const res: AxiosResponse = await axios.post(url, body, {
-      headers: {
-        "Content-Type": "application/json",
-        "x-tts-access-token": config.accessToken,
-      },
-    });
-    return res.data;
-  } catch (err: any) {
-    return err.response.data;
-  }
+  return httpPost(url, body, config);
 }
 
 export async function getPackageShippingDocument(
@@ -98,22 +81,5 @@ export async function getPackageShippingDocument(
 
   const url = genURLwithSignature(pathShippingDocument, commonParam, config);
 
-  try {
-    const res: AxiosResponse = await axios.get(url, {
-      headers: {
-        "Content-Type": "application/json",
-        "x-tts-access-token": config.accessToken,
-      },
-    });
-    return res.data;
-  } catch (err: any) {
-    return handleErrorResponse(err);
-  }
-}
-
-function handleErrorResponse(err: any): any {
-  if (err.response && err.response.data) {
-    return err.response.data;
-  }
-  return { error: "An unexpected error occurred" };
+  return httpGet(url, config);
 }

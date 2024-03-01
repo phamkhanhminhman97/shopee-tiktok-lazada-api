@@ -19,7 +19,13 @@ interface RequestDeactiveProduct extends TiktokRequestCommon {
   product_ids: string[];
 }
 
+interface RequestActiveProduct extends TiktokRequestCommon {
+  product_ids: string[];
+}
+
+
 export {
   RequestUpdateStock as TiktokRequestUpdateStock,
+  RequestActiveProduct as TiktokRequestActiveProduct,
   RequestDeactiveProduct as TiktokRequestDeactiveProduct,
 };

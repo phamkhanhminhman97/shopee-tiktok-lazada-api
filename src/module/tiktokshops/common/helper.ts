@@ -1,5 +1,7 @@
 import * as crypto from "crypto-js";
 import { TIKTOK_END_POINT } from "./constant";
+import { TiktokConfig } from "../dto/request/config.request";
+import axios, { AxiosResponse } from "axios";
 export function commonParameter(config, timestamp) {
   const { appKey, accessToken, shopId } = config;
   const commonParam =
@@ -79,4 +81,45 @@ export function getTimestampHoursAgo(hours: number): number {
 
 export function replacePackageId(path: string, packageId: string): string {
   return path.replace("{package_id}", packageId);
+}
+
+export function replacePlaceholder(
+  path: string,
+  placeholder: string,
+  replacement: string
+): string {
+  return path.replace(`{${placeholder}}`, replacement);
+}
+
+function getHeaders(config: TiktokConfig) {
+  return {
+    "Content-Type": "application/json",
+    "x-tts-access-token": config.accessToken,
+  };
+}
+
+function handleError(err: any) {
+  return err.response ? err.response.data : { error: "Unknown error" };
+}
+
+export async function httpPost(url: string, body: any, config: TiktokConfig) {
+  try {
+    const res: AxiosResponse = await axios.post(url, body, {
+      headers: getHeaders(config),
+    });
+    return res.data;
+  } catch (err: any) {
+    return handleError(err);
+  }
+}
+
+export async function httpGet(url: string, config: TiktokConfig) {
+  try {
+    const res: AxiosResponse = await axios.get(url, {
+      headers: getHeaders(config),
+    });
+    return res.data.data;
+  } catch (err: any) {
+    return handleError(err);
+  }
 }

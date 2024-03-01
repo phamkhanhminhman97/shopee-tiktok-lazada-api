@@ -4,11 +4,13 @@ import { TIKTOK_PATH_202309 } from "../../common/constant";
 import {
   commonParameter,
   genURLwithSignature,
+  httpGet,
 } from "../../common/helper";
+import { TiktokResponseAuthorized } from "../../dto/response/config.response";
 
 export async function getAuthorizedShop(
   config: TiktokConfig
-) {
+): Promise<TiktokResponseAuthorized> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
 
@@ -17,15 +19,6 @@ export async function getAuthorizedShop(
     commonParam,
     config
   );
-  try {
-    const res: AxiosResponse = await axios.get(url, {
-      headers: {
-        "Content-Type": "application/json",
-        "x-tts-access-token": config.accessToken,
-      },
-    });
-    return res.data;
-  } catch (err: any) {
-    return err.response.data;
-  }
+  
+  return httpGet(url, config);
 }
