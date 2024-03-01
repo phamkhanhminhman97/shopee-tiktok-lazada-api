@@ -8,6 +8,10 @@ import {
 } from "../../common/helper";
 import { TiktokResponseAuthorized } from "../../dto/response/config.response";
 
+/**
+ * @param config - Tiktok API configuration.
+ * @returns {Promise<TiktokResponseAuthorized>} - Response of get authorized shop.
+ */
 export async function getAuthorizedShop(
   config: TiktokConfig
 ): Promise<TiktokResponseAuthorized> {
@@ -19,6 +23,6 @@ export async function getAuthorizedShop(
     commonParam,
     config
   );
-  
+
   return httpGet(url, config);
 }

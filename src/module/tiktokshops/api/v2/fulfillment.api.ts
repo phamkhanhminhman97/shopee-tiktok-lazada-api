@@ -14,6 +14,12 @@ import { TiktokConfig } from "../../dto/request/config.request";
 import { TiktokRequestShipPackage } from "../../dto/request/fulfillment.request";
 import { TiktokResponsePackageTimeSlot } from "../../dto/response/fulfillment.response";
 
+/**
+ * Get Package Time Slots
+ * @param packageId
+ * @param config
+ * @returns
+ */
 export async function getPackageTimeSlots(
   packageId: string,
   config: TiktokConfig
@@ -30,6 +36,13 @@ export async function getPackageTimeSlots(
   return httpGet(url, config);
 }
 
+/**
+ * Ship Package
+ * @param packageId - Package ID.
+ * @param payload - Payload for shipping package.
+ * @param config - Tiktok API configuration. 
+ * @returns Promise of shipping package.
+ */
 export async function shipPackage(
   packageId: string,
   payload: TiktokRequestShipPackage,

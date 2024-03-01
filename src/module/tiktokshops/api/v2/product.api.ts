@@ -23,6 +23,11 @@ import {
   TiktokResponseDeactiveProduct,
 } from "../../dto/response/product.response";
 
+/**
+ * Fetches the list of categories.
+ * @param {TiktokConfig} config - Tiktok API configuration.
+ * @returns {Promise<TiktokResponseCategories>} The response containing the list of categories.
+ */
 export async function getCategories(
   config: TiktokConfig
 ): Promise<TiktokResponseCategories> {
@@ -37,6 +42,12 @@ export async function getCategories(
   return httpGet(url, config);
 }
 
+/**
+ *
+ * @param categoryId - Category ID.
+ * @param config - Tiktok API configuration.
+ * @returns {Promise<TiktokResponseBrands>} - The response containing the list of brands.
+ */
 export async function getBrands(
   categoryId: string,
   config: TiktokConfig
@@ -57,6 +68,12 @@ export async function getBrands(
   return httpGet(url, config);
 }
 
+/**
+ *
+ * @param categoryId - Category ID.
+ * @param config - Tiktok API configuration.
+ * @returns {Promise<TiktokResponseAttributes>} - The response containing the list of attributes.
+ */
 export async function getAttributes(
   categoryId: string,
   config: TiktokConfig
@@ -74,6 +91,12 @@ export async function getAttributes(
   return httpGet(url, config);
 }
 
+/**
+ *
+ * @param productIds - Product IDs.
+ * @param config - Tiktok API configuration.
+ * @returns {Promise<TiktokResponseActiveProduct>}
+ */
 export async function activeProduct(
   productIds: string[],
   config: TiktokConfig
@@ -98,6 +121,12 @@ export async function activeProduct(
   return httpPost(url, body, config);
 }
 
+/**
+ *
+ * @param productIds - Product IDs.
+ * @param config - Tiktok API configuration.
+ * @returns {Promise<TiktokResponseDeactiveProduct>}
+ */
 export async function deactiveProduct(
   productIds: string[],
   config: TiktokConfig
@@ -122,6 +151,13 @@ export async function deactiveProduct(
   return httpPost(url, body, config);
 }
 
+/**
+ *
+ * @param packageId - Package ID.
+ * @param payload - Payload.
+ * @param config - Tiktok API configuration.
+ * @returns {Promise<any>}
+ */
 export async function shipPackage(
   packageId: string,
   payload: TiktokRequestShipPackage,
@@ -152,6 +188,12 @@ export async function shipPackage(
   return httpPost(url, body, config);
 }
 
+/**
+ *
+ * @param productId - Product ID.
+ * @param config - Tiktok API configuration.
+ * @returns {Promise<any>}
+ */
 export async function getProductDetail(
   productId: string,
   config: TiktokConfig

@@ -10,6 +10,12 @@ import {
 } from "../../common/helper";
 import { TiktokResponseOrderDetail } from "../../dto/response/order.response";
 
+/**
+ *
+ * @param orderNumber The order number.
+ * @param config Tiktok API configuration.
+ * @returns The response containing the order detail.
+ */
 export async function getOrderDetail(
   orderNumber: string,
   config: TiktokConfig
@@ -29,6 +35,11 @@ export async function getOrderDetail(
   return httpGet(url, config);
 }
 
+/**
+ * Fetches the list of order.
+ * @param {TiktokConfig} config - Tiktok API configuration.
+ * @returns {Promise<any>} The response containing the list of order.
+ */
 export async function getOrderList(before, config: TiktokConfig): Promise<any> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${commonParameter2(config, timestamp)}&page_size=20`;

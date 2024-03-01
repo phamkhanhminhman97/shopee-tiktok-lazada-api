@@ -12,10 +12,11 @@ interface ResponseRefreshAccessToken extends ResponseGetAccessToken {
   partner_id: string;
 }
 
-interface ResponseCommon {
+interface ResponseCommon<T> {
   request_id: string;
   error: string;
   message: string;
+  response: T;
 }
 
 export {

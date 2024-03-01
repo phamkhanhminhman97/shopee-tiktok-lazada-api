@@ -25,14 +25,14 @@ interface Item {
   update_time: number;
 }
 
-interface ResponseGetItemList extends ShopeeResponseCommon {
-  response: {
-    item: Array<Item>;
-    total_count: number;
-    has_next_page: boolean;
-    next_offset: number;
-  };
+interface ItemList {
+  item: Array<Item>;
+  total_count: number;
+  has_next_page: boolean;
+  next_offset: number;
 }
+
+interface ResponseGetItemList extends ShopeeResponseCommon<ItemList> {}
 
 interface SellerStock {
   location_id: string;
@@ -48,7 +48,7 @@ interface StockInfoV2 {
   shopee_stock: Array<SellerStock>;
 }
 
-interface Model extends ShopeeResponseCommon {
+interface Model {
   model_id: number;
   tier_index: Array<any>;
   promotion_id: number;
@@ -61,12 +61,11 @@ interface Model extends ShopeeResponseCommon {
   stock_info_v2: StockInfoV2;
 }
 
-interface ResponseGetModelList extends ShopeeResponseCommon {
-  response: {
-    tier_variation: Array<any>;
-    model: Array<Model>;
-  };
+interface ModelList {
+  tier_variation: Array<any>;
+  model: Array<Model>;
 }
+interface ResponseGetModelList extends ShopeeResponseCommon<ModelList> {}
 
 interface FailureList {
   item_id: number;
@@ -78,14 +77,18 @@ interface SuccessList {
   unlist: boolean;
 }
 
-interface ResponseUnlistItem extends ShopeeResponseCommon {
-  response: {
-    failure_list: Array<FailureList>;
-    success_list: Array<SuccessList>;
-  };
+interface UnlistItem {
+  failure_list: Array<FailureList>;
+  success_list: Array<SuccessList>;
 }
 
-interface ResponseUpdateStock extends ShopeeResponseCommon {
+interface UpdateStock {
+  failure_list: Array<FailureList>;
+  success_list: Array<SuccessList>;
+}
+
+interface ResponseUnlistItem extends ShopeeResponseCommon<UnlistItem> {}
+interface ResponseUpdateStock extends ShopeeResponseCommon<UpdateStock> {
   warning: string;
 }
 
