@@ -6,13 +6,14 @@ interface PickupSlot {
   start_time: boolean;
 }
 
-interface PackageTimeSlot extends TiktokResponseCommon {
-  data: {
-    can_drop_off: boolean;
-    can_pickup: boolean;
-    drop_off_point_url: string;
-    pickup_slots: Array<PickupSlot>;
-  };
+interface PackgeTimeSlot {
+  can_drop_off: boolean;
+  can_pickup: boolean;
+  drop_off_point_url: string;
+  pickup_slots: Array<PickupSlot>;
 }
 
-export { PackageTimeSlot as TiktokResponsePackageTimeSlot };
+interface ResponsePackageTimeSlot
+  extends TiktokResponseCommon<PackgeTimeSlot> {}
+
+export { ResponsePackageTimeSlot as TiktokResponsePackageTimeSlot };

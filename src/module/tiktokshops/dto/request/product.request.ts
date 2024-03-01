@@ -23,7 +23,6 @@ interface RequestActiveProduct extends TiktokRequestCommon {
   product_ids: string[];
 }
 
-
 export {
   RequestUpdateStock as TiktokRequestUpdateStock,
   RequestActiveProduct as TiktokRequestActiveProduct,

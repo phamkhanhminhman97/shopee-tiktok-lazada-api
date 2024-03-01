@@ -1,9 +1,5 @@
 import { TiktokResponseCommon } from "./config.response";
 
-interface ResponseShipOrder extends TiktokResponseCommon {
-  request_id: string;
-}
-
 interface RecipentAddress {
   full_address: string;
   phone: string;
@@ -65,7 +61,7 @@ interface Packages {
   id: string;
 }
 
-interface ResponseOrderDetail {
+interface OrderDetail {
   id: string;
   status: string;
   is_cod?: boolean;
@@ -118,13 +114,6 @@ interface ResponseOrderDetail {
   packages: Array<Packages>;
 }
 
-// interface ResponseOrderDetail extends TiktokResponseCommon {
-//   data: {
-//     order_list: Array<OrderDetail>;
-//   };
-// }
+interface ResponseOrderDetail extends TiktokResponseCommon<OrderDetail> {}
 
-export {
-  ResponseShipOrder as TiktokResponseShipOrder,
-  ResponseOrderDetail as TiktokResponseOrderDetail,
-};
+export { ResponseOrderDetail as TiktokResponseOrderDetail };
