@@ -1,11 +1,11 @@
-import axios, { AxiosResponse } from "axios";
-import { TiktokConfig } from "../../dto/request/config.request";
-import { TIKTOK_PATH } from "../../common/constant";
+import axios from 'axios';
+import { TiktokConfig } from '../../dto/request/config.request';
+import { TIKTOK_PATH } from '../../common/constant';
 import {
   commonParameter,
   genURLwithSignature,
   getTimestampHoursAgo,
-} from "../../common/helper";
+} from '../../common/helper';
 
 /**
  *
@@ -18,8 +18,8 @@ export async function getOrderList(beforeHours: number, config: TiktokConfig) {
   const commonParam = commonParameter(config, timestamp);
 
   const orderList: string[] = [];
-  let cursor = "";
-  let i = 0;
+  let cursor = '';
+  // const i = 0;
   let hasMoreData = true;
   const timeFrom = getTimestampHoursAgo(beforeHours);
 
@@ -35,7 +35,7 @@ export async function getOrderList(beforeHours: number, config: TiktokConfig) {
       const url = genURLwithSignature(
         TIKTOK_PATH.ORDER_LIST,
         commonParam,
-        config
+        config,
       );
       const response = await axios.post(url, body);
 
@@ -43,16 +43,16 @@ export async function getOrderList(beforeHours: number, config: TiktokConfig) {
 
       if (response.data.data?.order_list) {
         orderList.push(
-          ...response.data.data?.order_list.map((item: any) => item.order_id)
+          ...response.data.data?.order_list.map((item: any) => item.order_id),
         );
       }
 
-      i += 1;
+      // i += 1;
       hasMoreData = response.data.data.more;
     }
   } catch (error) {
     // Handle errors here
-    console.error("Error fetching order list:", error);
+    console.error('Error fetching order list:', error);
   }
 
   return orderList;
@@ -66,7 +66,7 @@ export async function getOrderList(beforeHours: number, config: TiktokConfig) {
  */
 export async function getOrderDetail(
   orderNumber: string,
-  config: TiktokConfig
+  config: TiktokConfig,
 ) {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
@@ -76,13 +76,13 @@ export async function getOrderDetail(
   const url = genURLwithSignature(
     TIKTOK_PATH.ORDER_DETAIL,
     commonParam,
-    config
+    config,
   );
   try {
     const res = await axios.post(url, body);
     const { order_list } = res.data.data;
     return order_list[0];
   } catch (error) {
-    console.log("[GetOrder]", error);
+    console.log('[GetOrder]', error);
   }
 }

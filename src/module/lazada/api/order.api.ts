@@ -1,10 +1,5 @@
-import {
-  LAZADA_PATH,
-  LZD_ALGORITHM,
-  LZD_DIGEST,
-  LZD_END_POINT,
-} from "../common/constant";
-import { execute } from "../common/helper";
+import { LAZADA_PATH, LZD_ALGORITHM } from '../common/constant';
+import { execute } from '../common/helper';
 
 /**
  *

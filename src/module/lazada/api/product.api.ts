@@ -1,4 +1,4 @@
-import { LAZADA_PATH, LZD_ALGORITHM } from "../common/constant";
+import { LAZADA_PATH, LZD_ALGORITHM } from '../common/constant';
 import {
   execute,
   executePOST,
@@ -6,11 +6,11 @@ import {
   productParametersXML,
   toProductXML,
   toRequestProductsXML,
-} from "../common/helper";
+} from '../common/helper';
 import {
   LZD_UPDATE_SELLABLE_QUANTITY,
   LZD_UPDATE_STATUS_PRODUCT,
-} from "../dto/request/product.request";
+} from '../dto/request/product.request';
 
 /**
  *
@@ -27,18 +27,18 @@ export async function getProducts(info) {
   const productList: any[] = [];
   let i = 0;
   while (i < 10000) {
-    obj["offset"] = i;
-    obj["limit"] = 50;
+    obj['offset'] = i;
+    obj['limit'] = 50;
     try {
       const response = await execute(
         LAZADA_PATH.PRODUCT_GET,
         obj,
-        info.appSecret
+        info.appSecret,
       );
       if (!response?.data?.products) break;
       productList.push(...response.data.products);
     } catch (err) {
-      console.log("[GetProductList]", err);
+      console.log('[GetProductList]', err);
     }
     i += 50;
   }
@@ -72,15 +72,15 @@ export async function getProductItem(info, itemId: number) {
 export async function updateSellableQuantity(
   info,
   itemId,
-  payload: Array<LZD_UPDATE_SELLABLE_QUANTITY>
+  payload: Array<LZD_UPDATE_SELLABLE_QUANTITY>,
 ) {
   const obj = {
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
     payload: toRequestProductsXML(
       payload.map((x) =>
-        toProductXML(itemId, x.skuId, x?.sellerSku, x.quantity)
-      )
+        toProductXML(itemId, x.skuId, x?.sellerSku, x.quantity),
+      ),
     ),
     timestamp: new Date().getTime(),
     access_token: info.appAccessToken,
@@ -99,15 +99,15 @@ export async function updateSellableQuantity(
 export async function updateStatusProduct(
   info,
   itemId: number,
-  payload: Array<LZD_UPDATE_STATUS_PRODUCT>
+  payload: Array<LZD_UPDATE_STATUS_PRODUCT>,
 ) {
   const obj = {
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
     payload: toRequestProductsXML(
       payload.map((x) =>
-        productParametersXML(itemId, x.skuId, x?.sellerSku, x.status)
-      )
+        productParametersXML(itemId, x.skuId, x?.sellerSku, x.status),
+      ),
     ),
     timestamp: new Date().getTime(),
     access_token: info.appAccessToken,
@@ -128,15 +128,14 @@ export async function updatePrice(info, itemId: number, payload) {
     sign_method: LZD_ALGORITHM,
     payload: toRequestProductsXML(
       payload.map((x) =>
-        priceParametersXML(itemId, x.skuId, x?.sellerSku, x.price)
-      )
+        priceParametersXML(itemId, x.skuId, x?.sellerSku, x.price),
+      ),
     ),
     timestamp: new Date().getTime(),
     access_token: info.appAccessToken,
   };
   return executePOST(LAZADA_PATH.UPDATE_PRICE, obj, info.appSecret);
 }
-
 
 export async function getCategoryTree(info) {
   const obj = {
@@ -145,5 +144,5 @@ export async function getCategoryTree(info) {
     access_token: info.appAccessToken,
     timestamp: new Date().getTime(),
   };
-  return execute("/category/tree/get", obj, info.appSecret);
+  return execute('/category/tree/get', obj, info.appSecret);
 }

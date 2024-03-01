@@ -1,4 +1,4 @@
-import { ShopeeRequestCommon } from "./config.request";
+import { ShopeeRequestCommon } from './config.request';
 
 interface ItemList {
   item_id: string;

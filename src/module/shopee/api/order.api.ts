@@ -1,14 +1,14 @@
-import axios from "axios";
-import { SHOPEE_END_POINT, SHOPEE_PATH } from "../common/constant";
-import { ShopeeConfig } from "../dto/request/config.request";
-import { createHmac } from "crypto";
+import axios from 'axios';
+import { SHOPEE_END_POINT, SHOPEE_PATH } from '../common/constant';
+import { ShopeeConfig } from '../dto/request/config.request';
+import { createHmac } from 'crypto';
 import {
   buildCommonParameters,
   commonParameter,
   getTimestampMinutesAgo,
   getTimestampNow,
   signRequest,
-} from "../common/helper";
+} from '../common/helper';
 
 /**
  *
@@ -20,7 +20,7 @@ import {
 const END_POINT = SHOPEE_END_POINT;
 
 export async function getOrders(beforeMinutes: number, config) {
-  let cursor = "";
+  let cursor = '';
   const orderList: string[] = [];
   let hasMoreData = true;
   const timeFrom = getTimestampMinutesAgo(beforeMinutes);
@@ -33,7 +33,7 @@ export async function getOrders(beforeMinutes: number, config) {
       signature,
       timestamp,
       timeFrom,
-      cursor
+      cursor,
     );
 
     const url = `${END_POINT}${SHOPEE_PATH.ORDER_LIST}${commonParams}`;
@@ -56,7 +56,7 @@ export async function getOrders(beforeMinutes: number, config) {
  */
 export async function getOrderDetail(
   orderNumber: string,
-  config: ShopeeConfig
+  config: ShopeeConfig,
 ) {
   const timestamp = Math.floor(Date.now() / 1000);
   const optionalField: string[] = [
@@ -70,9 +70,9 @@ export async function getOrderDetail(
   const signature = signRequest(SHOPEE_PATH.ORDER_DETAIL, config, timestamp);
   const commonParam =
     commonParameter(config, signature, timestamp) +
-    "&order_sn_list=" +
+    '&order_sn_list=' +
     orderNumber +
-    "&response_optional_fields=" +
+    '&response_optional_fields=' +
     optionalField.toString();
 
   const url = END_POINT + SHOPEE_PATH.ORDER_DETAIL + commonParam;
@@ -83,23 +83,23 @@ export async function getOrderDetail(
 
 export async function fetchTokenWithAuthCode(
   authCode: string,
-  config: ShopeeConfig
+  config: ShopeeConfig,
 ) {
   try {
     const timestamp = Math.floor(Date.now() / 1000);
     const { partnerId, shopId, partnerKey } = config;
     const params = [partnerId, SHOPEE_PATH.AUTH_TOKEN, timestamp.toString()];
-    const baseString = params.reduce((prev, curr) => (prev += curr), "");
-    const signature = createHmac("sha256", partnerKey)
+    const baseString = params.reduce((prev, curr) => (prev += curr), '');
+    const signature = createHmac('sha256', partnerKey)
       .update(baseString)
-      .digest("hex");
+      .digest('hex');
 
     const commonParam =
-      "?sign=" +
+      '?sign=' +
       signature +
-      "&partner_id=" +
+      '&partner_id=' +
       partnerId +
-      "&timestamp=" +
+      '&timestamp=' +
       timestamp;
     const body = {
       code: authCode,

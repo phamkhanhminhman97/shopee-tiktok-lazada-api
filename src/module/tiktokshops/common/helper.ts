@@ -1,11 +1,11 @@
-import * as crypto from "crypto-js";
-import { TIKTOK_END_POINT } from "./constant";
-import { TiktokConfig } from "../dto/request/config.request";
-import axios, { AxiosResponse } from "axios";
+import * as crypto from 'crypto-js';
+import { TIKTOK_END_POINT } from './constant';
+import { TiktokConfig } from '../dto/request/config.request';
+import axios, { AxiosResponse } from 'axios';
 export function commonParameter(config, timestamp) {
-  const { appKey, accessToken, shopId } = config;
+  const { appKey } = config;
   const commonParam =
-    "?app_key=" + appKey + "&sign=" + "" + "&timestamp=" + timestamp;
+    '?app_key=' + appKey + '&sign=' + '' + '&timestamp=' + timestamp;
 
   return commonParam;
 }
@@ -13,15 +13,15 @@ export function commonParameter(config, timestamp) {
 export function commonParameter2(config, timestamp) {
   const { appKey, shopId, shopCipher } = config;
   const commonParam =
-    "?app_key=" +
+    '?app_key=' +
     appKey +
-    "&sign=" +
-    "" +
-    "&timestamp=" +
+    '&sign=' +
+    '' +
+    '&timestamp=' +
     timestamp +
-    "&shop_id=" +
+    '&shop_id=' +
     shopId +
-    "&shop_cipher=" +
+    '&shop_cipher=' +
     shopCipher;
 
   return commonParam;
@@ -39,11 +39,11 @@ export function signRequest(
   params: Record<string, string>,
   path: string,
   config: Record<string, any>,
-  body: Record<string, any>
+  body: Record<string, any>,
 ) {
   const { appSecret } = config;
-  delete params["sign"];
-  delete params["access_token"];
+  delete params['sign'];
+  delete params['access_token'];
   const sortParam = objKeySort(params);
   let signstring = appSecret + path;
 
@@ -68,7 +68,7 @@ export function genURLwithSignature(path, commonParam, config, body?) {
   const url = new URL(TIKTOK_END_POINT + path + commonParam);
   const params = parseParmsURL(url);
   const signature2 = signRequest(params, path, config, body);
-  url.searchParams.set("sign", signature2);
+  url.searchParams.set('sign', signature2);
   return url.toString();
 }
 
@@ -78,28 +78,27 @@ export function getTimestampHoursAgo(hours: number): number {
   return Math.floor((oldDate.getTime() - hours * 60 * 60 * 1000) / 1000);
 }
 
-
 export function replacePackageId(path: string, packageId: string): string {
-  return path.replace("{package_id}", packageId);
+  return path.replace('{package_id}', packageId);
 }
 
 export function replacePlaceholder(
   path: string,
   placeholder: string,
-  replacement: string
+  replacement: string,
 ): string {
   return path.replace(`{${placeholder}}`, replacement);
 }
 
 function getHeaders(config: TiktokConfig) {
   return {
-    "Content-Type": "application/json",
-    "x-tts-access-token": config.accessToken,
+    'Content-Type': 'application/json',
+    'x-tts-access-token': config.accessToken,
   };
 }
 
 function handleError(err: any) {
-  return err.response ? err.response.data : { error: "Unknown error" };
+  return err.response ? err.response.data : { error: 'Unknown error' };
 }
 
 export async function httpPost(url: string, body: any, config: TiktokConfig) {

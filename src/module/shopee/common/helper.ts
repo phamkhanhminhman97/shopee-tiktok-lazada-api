@@ -1,17 +1,17 @@
-import { ShopeeConfig } from "../dto/request/config.request";
-import { createHmac } from "crypto";
+import { ShopeeConfig } from '../dto/request/config.request';
+import { createHmac } from 'crypto';
 export function commonParameter(config: ShopeeConfig, signature, timestamp) {
   const { partnerId, accessToken, shopId } = config;
   const commonParam =
-    "?shop_id=" +
+    '?shop_id=' +
     shopId +
-    "&partner_id=" +
+    '&partner_id=' +
     partnerId +
-    "&access_token=" +
+    '&access_token=' +
     accessToken +
-    "&sign=" +
+    '&sign=' +
     signature +
-    "&timestamp=" +
+    '&timestamp=' +
     timestamp;
   return commonParam;
 }
@@ -22,9 +22,9 @@ export function signRequest(path: string, config: ShopeeConfig, timestamp) {
   params = params.filter(function (item) {
     return item !== null;
   });
-  const baseString = params.reduce((prev, curr) => (prev += curr), "");
+  const baseString = params.reduce((prev, curr) => (prev += curr), '');
 
-  return createHmac("sha256", partnerKey).update(baseString).digest("hex");
+  return createHmac('sha256', partnerKey).update(baseString).digest('hex');
 }
 
 export function getTimestampNow() {
@@ -42,11 +42,11 @@ export function buildCommonParameters(
   signature,
   timestamp,
   timeFrom,
-  cursor
+  cursor,
 ) {
   return `${commonParameter(
     config,
     signature,
-    timestamp
+    timestamp,
   )}&time_range_field=create_time&time_from=${timeFrom}&time_to=${timestamp}&page_size=50&cursor=${cursor}`;
 }

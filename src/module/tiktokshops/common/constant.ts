@@ -10,8 +10,8 @@ enum WEBHOOK_TYPE {
 }
 
 enum PRODUCT_STATUS {
-  ACTIVE = "active",
-  INACTIVE = "inactive",
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
 }
 
 //staus-product// 1-draft、2-pending、3-failed(initial creation)、4-live、5-seller_deactivated、6-platform_deactivated、7-freeze 8-deleted
@@ -36,9 +36,9 @@ enum REVERSE_USER {
 }
 
 enum USER {
-  BUYER = "BUYER",
-  SELLER = "SELLER",
-  SYSTEM = "SYSTEM",
+  BUYER = 'BUYER',
+  SELLER = 'SELLER',
+  SYSTEM = 'SYSTEM',
 }
 
 enum ORDER_STATUS {
@@ -61,64 +61,64 @@ enum REVERSE_TYPE {
 }
 
 enum REVERSE_EVENT_TYPE {
-  ORDER_REQUEST_CANCEL = "ORDER_REQUEST_CANCEL",
-  ORDER_RETURN = "ORDER_RETURN",
-  ORDER_REFUND = "ORDER_REFUND",
+  ORDER_REQUEST_CANCEL = 'ORDER_REQUEST_CANCEL',
+  ORDER_RETURN = 'ORDER_RETURN',
+  ORDER_REFUND = 'ORDER_REFUND',
 }
 
-const END_POINT = "https://open-api.tiktokglobalshop.com";
-const END_POINT_UAT = "https://open-api-sandbox.tiktokglobalshop.com";
-const END_POINT_AUTH = "https://auth.tiktok-shops.com";
-const END_POINT_AUTH_UAT = "https://auth-sandbox.tiktok-shops.com";
-const ALGORITHM = "sha256";
-const DIGEST = "hex";
+const END_POINT = 'https://open-api.tiktokglobalshop.com';
+const END_POINT_UAT = 'https://open-api-sandbox.tiktokglobalshop.com';
+const END_POINT_AUTH = 'https://auth.tiktok-shops.com';
+const END_POINT_AUTH_UAT = 'https://auth-sandbox.tiktok-shops.com';
+const ALGORITHM = 'sha256';
+const DIGEST = 'hex';
 
 enum PATH {
-  GENERATE_AUTH_LINK = "/oauth/authorize",
+  GENERATE_AUTH_LINK = '/oauth/authorize',
   // FETCH_TOKEN_AUTH = "/api/v2/token/get",
-  FETCH_TOKEN_AUTH = "/api/token/getAccessToken",
-  REFRESH_TOKEN = "/api/token/refreshToken",
-  ORDER_DETAIL = "/api/orders/detail/query",
-  ORDER_LIST = "/api/orders/search",
-  PRODUCT_LIST = "/api/products/search",
-  UPDATE_STOCK = "/api/products/stocks",
-  SHIP_ORDER = "/api/order/rts",
-  GET_AUTHORIZED = "/api/shop/get_authorized_shop",
-  SHIPPING_DOCUMENT = "/api/logistics/shipping_document",
-  SHIPPING_INFO = "/api/logistics/ship/get",
-  FULFILLMENT_DETAIL = "/api/fulfillment/detail",
-  PRODUCT_DETAIL = "/api/products/details",
-  REVERSE_LIST = "/api/reverse/reverse_order/list",
-  ACTIVE_PRODUCT = "/api/products/activate",
-  DEACTIVE_PRODUCT = "/api/products/inactivated_products",
-  UPDATE_PRICE = "/api/products/prices",
+  FETCH_TOKEN_AUTH = '/api/token/getAccessToken',
+  REFRESH_TOKEN = '/api/token/refreshToken',
+  ORDER_DETAIL = '/api/orders/detail/query',
+  ORDER_LIST = '/api/orders/search',
+  PRODUCT_LIST = '/api/products/search',
+  UPDATE_STOCK = '/api/products/stocks',
+  SHIP_ORDER = '/api/order/rts',
+  GET_AUTHORIZED = '/api/shop/get_authorized_shop',
+  SHIPPING_DOCUMENT = '/api/logistics/shipping_document',
+  SHIPPING_INFO = '/api/logistics/ship/get',
+  FULFILLMENT_DETAIL = '/api/fulfillment/detail',
+  PRODUCT_DETAIL = '/api/products/details',
+  REVERSE_LIST = '/api/reverse/reverse_order/list',
+  ACTIVE_PRODUCT = '/api/products/activate',
+  DEACTIVE_PRODUCT = '/api/products/inactivated_products',
+  UPDATE_PRICE = '/api/products/prices',
 }
 
 enum PATH_202309 {
-  AUTHORIZED_SHOP = "/authorization/202309/shops",
-  ORDER_LIST = "/order/202309/orders/search",
-  ORDER_DETAIL = "/order/202309/orders",
-  PRODUCT_DETAIL = "/product/202309/products/",
-  CATEGORIES = "/product/202309/categories",
-  BRANDS = "/product/2309/brands",
-  ATTRIBUTES = "/product/202309/categories/{category_id}/attributes",
-  PACKAGE_TIME_SLOT = "/fulfillment/202309/packages/{package_id}/handover_time_slots",
-  SHIP_PACKAGE = "/fulfillment/202309/packages/{package_id}/ship",
-  ACTIVE_PRODUCT = "/product/202309/products/activate",
-  DEACTIVE_PRODUCT = "/product/202309/products/deactivate",
-  PACKAGE_SHIPPING_DOCUMENT = "/fulfillment/202309/packages/{package_id}/shipping_documents",
+  AUTHORIZED_SHOP = '/authorization/202309/shops',
+  ORDER_LIST = '/order/202309/orders/search',
+  ORDER_DETAIL = '/order/202309/orders',
+  PRODUCT_DETAIL = '/product/202309/products/',
+  CATEGORIES = '/product/202309/categories',
+  BRANDS = '/product/2309/brands',
+  ATTRIBUTES = '/product/202309/categories/{category_id}/attributes',
+  PACKAGE_TIME_SLOT = '/fulfillment/202309/packages/{package_id}/handover_time_slots',
+  SHIP_PACKAGE = '/fulfillment/202309/packages/{package_id}/ship',
+  ACTIVE_PRODUCT = '/product/202309/products/activate',
+  DEACTIVE_PRODUCT = '/product/202309/products/deactivate',
+  PACKAGE_SHIPPING_DOCUMENT = '/fulfillment/202309/packages/{package_id}/shipping_documents',
 }
 
 enum DOCUMENT_TYPE {
-  PACKING_SLIP = "PACKING_SLIP", //PDF
-  SHIPPING_LABEL = "SHIPPING_LABEL", //PDF
-  SHIPPING_LABEL_PICTURE = "SHIPPING_LABEL_PICTURE", //PNG
-  SHIPPING_LABEL_AND_PACKING_SLIP = "SHIPPING_LABEL_AND_PACKING_SLIP",
+  PACKING_SLIP = 'PACKING_SLIP', //PDF
+  SHIPPING_LABEL = 'SHIPPING_LABEL', //PDF
+  SHIPPING_LABEL_PICTURE = 'SHIPPING_LABEL_PICTURE', //PNG
+  SHIPPING_LABEL_AND_PACKING_SLIP = 'SHIPPING_LABEL_AND_PACKING_SLIP',
 }
 
 enum PATH_PLACEHOLDER {
-  CATEGORY = "{category_id}",
-  PACKAGE = "{package_id}",
+  CATEGORY = '{category_id}',
+  PACKAGE = '{package_id}',
 }
 
 export {

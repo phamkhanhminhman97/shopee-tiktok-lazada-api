@@ -1,4 +1,4 @@
-import { TiktokResponseCommon } from "./config.response";
+import { TiktokResponseCommon } from './config.response';
 
 interface UpdateStock {
   failed_skus: Array<any>;

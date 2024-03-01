@@ -1,4 +1,4 @@
-import { TiktokRequestCommon } from "./config.request";
+import { TiktokRequestCommon } from './config.request';
 
 interface StockInfo {
   warehouse_id: string;

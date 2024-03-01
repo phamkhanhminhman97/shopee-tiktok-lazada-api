@@ -1,4 +1,4 @@
-import { ShopeeRequestCommon } from "./config.request";
+import { ShopeeRequestCommon } from './config.request';
 
 interface RequestOrderDetail extends ShopeeRequestCommon {
   order_sn_list: string[];

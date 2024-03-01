@@ -1,7 +1,7 @@
-import { TIKTOK_PATH } from "../../common/constant";
-import { commonParameter, genURLwithSignature } from "../../common/helper";
-import { TiktokConfig } from "../../dto/request/config.request";
-import axios from "axios";
+import { TIKTOK_PATH } from '../../common/constant';
+import { commonParameter, genURLwithSignature } from '../../common/helper';
+import { TiktokConfig } from '../../dto/request/config.request';
+import axios from 'axios';
 
 /**
  *
@@ -22,7 +22,7 @@ export async function getProductsLists(config: TiktokConfig) {
     const url = genURLwithSignature(
       TIKTOK_PATH.PRODUCT_LIST,
       commonParam,
-      config
+      config,
     );
 
     try {
@@ -32,7 +32,7 @@ export async function getProductsLists(config: TiktokConfig) {
       productList.push(...res.data.data.products);
       i++;
     } catch (error) {
-      console.log("[GetProductList]", error);
+      console.log('[GetProductList]', error);
     }
   }
   return productList;
@@ -50,7 +50,7 @@ export async function updateStock(
   productId: string,
   skuId: string,
   quantity: number,
-  config: TiktokConfig
+  config: TiktokConfig,
 ) {
   const stockInfo = {
     available_stock: quantity,
@@ -71,14 +71,14 @@ export async function updateStock(
   const url = genURLwithSignature(
     TIKTOK_PATH.UPDATE_STOCK,
     commonParam,
-    config
+    config,
   );
 
   try {
     const res = await axios.put(url, body);
     return res.data;
   } catch (error) {
-    console.error("Error updating stock:", error);
+    console.error('Error updating stock:', error);
     // Handle the error or rethrow it if necessary
     throw error;
   }
@@ -92,16 +92,16 @@ export async function updateStock(
  */
 export async function getProductDetail(
   productId: string,
-  config: TiktokConfig
+  config: TiktokConfig,
 ) {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam =
-    commonParameter(config, timestamp) + "&product_id=" + productId;
+    commonParameter(config, timestamp) + '&product_id=' + productId;
 
   const url = genURLwithSignature(
     TIKTOK_PATH.PRODUCT_DETAIL,
     commonParam,
-    config
+    config,
   );
 
   try {
@@ -109,7 +109,7 @@ export async function getProductDetail(
 
     return res.data.data;
   } catch (error) {
-    console.log("[GetProductDetail]", error);
+    console.log('[GetProductDetail]', error);
   }
 }
 
@@ -121,7 +121,7 @@ export async function getProductDetail(
  */
 export async function activeProduct(
   productIds: Array<string>,
-  config: TiktokConfig
+  config: TiktokConfig,
 ) {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
@@ -131,7 +131,7 @@ export async function activeProduct(
   const url = genURLwithSignature(
     TIKTOK_PATH.ACTIVE_PRODUCT,
     commonParam,
-    config
+    config,
   );
 
   const res = await axios.post(url, body);
@@ -146,7 +146,7 @@ export async function activeProduct(
  */
 export async function deactiveProduct(
   productIds: Array<string>,
-  config: TiktokConfig
+  config: TiktokConfig,
 ) {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
@@ -156,7 +156,7 @@ export async function deactiveProduct(
   const url = genURLwithSignature(
     TIKTOK_PATH.DEACTIVE_PRODUCT,
     commonParam,
-    config
+    config,
   );
 
   const res = await axios.post(url, body);
@@ -175,7 +175,7 @@ export async function updatePrice(
   productId: string,
   skuId: string,
   price: number,
-  config: TiktokConfig
+  config: TiktokConfig,
 ) {
   const sku = {
     id: skuId,
@@ -192,14 +192,14 @@ export async function updatePrice(
   const url = genURLwithSignature(
     TIKTOK_PATH.UPDATE_PRICE,
     commonParam,
-    config
+    config,
   );
 
   try {
     const res = await axios.put(url, body);
     return res.data;
   } catch (error) {
-    console.error("Error updating PRICE:", error);
+    console.error('Error updating PRICE:', error);
     // Handle the error or rethrow it if necessary
     throw error;
   }
@@ -213,13 +213,13 @@ export async function createProduct(config) {
     category_id: 848648,
     // delivery_service_ids: "1729592969712203232",
     description:
-      "Đắp mặt nạ là một trong những bước chăm sóc đặc biệt cho da để bổ sung thêm dinh dưỡng nuôi dưỡng da kéo dài tuổi thanh xuân. Mặt nạ REAL NATURE là mặt nạ dạng miếng cot",
+      'Đắp mặt nạ là một trong những bước chăm sóc đặc biệt cho da để bổ sung thêm dinh dưỡng nuôi dưỡng da kéo dài tuổi thanh xuân. Mặt nạ REAL NATURE là mặt nạ dạng miếng cot',
     // exemption_of_identifier_code: {
     //   exemption_reason: "1",
     // },
     images: [
       {
-        id: "tos-maliva-i-o3syd03w52-us/7804a7533ff54d2a8cba41281f6f4e5c",
+        id: 'tos-maliva-i-o3syd03w52-us/7804a7533ff54d2a8cba41281f6f4e5c',
       },
     ],
     is_cod_open: true,
@@ -227,7 +227,7 @@ export async function createProduct(config) {
     // package_dimension_unit: "metric",
     package_height: 12,
     package_length: 10,
-    package_weight: "1",
+    package_weight: '1',
     package_width: 11,
     // product_attributes: [
     //   {
@@ -257,7 +257,7 @@ export async function createProduct(config) {
     //     ],
     //   },
     // ],
-    product_name: "TEST MASK MASK MASK MASK MASK",
+    product_name: 'TEST MASK MASK MASK MASK MASK',
     // product_video: {
     //   video_id: "v09e40f40000cfu0ovhc77ub7fl97k4w",
     // },
@@ -266,7 +266,7 @@ export async function createProduct(config) {
     // },
     skus: [
       {
-        original_price: "999",
+        original_price: '999',
         // outer_sku_id: "1729592969712207012",
         // product_identifier_code: {
         //   identifier_code: "12345678901234",
@@ -283,7 +283,7 @@ export async function createProduct(config) {
         //     value_id: "1729592969712207000",
         //   },
         // ],
-        seller_sku: "seller sku xxaa",
+        seller_sku: 'seller sku xxaa',
         // stock_infos: [
         //   {
         //     available_stock: 999,
@@ -293,7 +293,7 @@ export async function createProduct(config) {
       },
     ],
   };
-  const url = genURLwithSignature("/api/products", commonParam, config);
+  const url = genURLwithSignature('/api/products', commonParam, config);
   const res = await axios.post(url, body);
   console.log(res.data);
 
@@ -305,16 +305,16 @@ export async function getCategories(config) {
   const commonParam = commonParameter(config, timestamp);
 
   const url = genURLwithSignature(
-    "/api/products/categories",
+    '/api/products/categories',
     commonParam,
-    config
+    config,
   );
 
   try {
     const res = await axios.get(url);
     return res.data.data;
   } catch (error) {
-    console.log("[GetProductDetail]", error);
+    console.log('[GetProductDetail]', error);
   }
 }
 
@@ -350,7 +350,7 @@ export async function getCategories(config) {
 export async function fetchToken(code: string, config) {
   const { appKey, appSecret } = config;
   const authCode = code;
-  const grantType = "authorized_code";
+  const grantType = 'authorized_code';
   const body = {
     app_key: appKey,
     app_secret: appSecret,
@@ -363,7 +363,7 @@ export async function fetchToken(code: string, config) {
 
   try {
     const res = await axios.post(url, body);
-    
+
     return res.data;
   } catch (error) {
     console.log(error);
@@ -375,9 +375,9 @@ export async function getWarehouseList(config) {
   const commonParam = commonParameter(config, timestamp);
 
   const url = genURLwithSignature(
-    "/api/logistics/get_warehouse_list",
+    '/api/logistics/get_warehouse_list',
     commonParam,
-    config
+    config,
   );
 
   const res = await axios.get(url);

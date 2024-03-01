@@ -1,18 +1,17 @@
-import axios, { AxiosResponse } from "axios";
 import {
   TIKTOK_DOCUMENT_TYPE,
   TIKTOK_PATH_202309,
-} from "../../common/constant";
+} from '../../common/constant';
 import {
   commonParameter2,
   genURLwithSignature,
   httpGet,
   httpPost,
   replacePackageId,
-} from "../../common/helper";
-import { TiktokConfig } from "../../dto/request/config.request";
-import { TiktokRequestShipPackage } from "../../dto/request/fulfillment.request";
-import { TiktokResponsePackageTimeSlot } from "../../dto/response/fulfillment.response";
+} from '../../common/helper';
+import { TiktokConfig } from '../../dto/request/config.request';
+import { TiktokRequestShipPackage } from '../../dto/request/fulfillment.request';
+import { TiktokResponsePackageTimeSlot } from '../../dto/response/fulfillment.response';
 
 /**
  * Get Package Time Slots
@@ -22,13 +21,13 @@ import { TiktokResponsePackageTimeSlot } from "../../dto/response/fulfillment.re
  */
 export async function getPackageTimeSlots(
   packageId: string,
-  config: TiktokConfig
+  config: TiktokConfig,
 ): Promise<TiktokResponsePackageTimeSlot> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter2(config, timestamp);
   const pathTimeSlot = replacePackageId(
     TIKTOK_PATH_202309.PACKAGE_TIME_SLOT,
-    packageId
+    packageId,
   );
 
   const url = genURLwithSignature(pathTimeSlot, commonParam, config);
@@ -40,23 +39,23 @@ export async function getPackageTimeSlots(
  * Ship Package
  * @param packageId - Package ID.
  * @param payload - Payload for shipping package.
- * @param config - Tiktok API configuration. 
+ * @param config - Tiktok API configuration.
  * @returns Promise of shipping package.
  */
 export async function shipPackage(
   packageId: string,
   payload: TiktokRequestShipPackage,
-  config: TiktokConfig
+  config: TiktokConfig,
 ): Promise<any> {
   if (!packageId) {
-    throw new Error("Invalid input: packageId are required");
+    throw new Error('Invalid input: packageId are required');
   }
 
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter2(config, timestamp);
   const pathTimeSlot = replacePackageId(
     TIKTOK_PATH_202309.SHIP_PACKAGE,
-    packageId
+    packageId,
   );
 
   const url = genURLwithSignature(pathTimeSlot, commonParam, config);
@@ -75,21 +74,21 @@ export async function shipPackage(
 export async function getPackageShippingDocument(
   packageId: string,
   documentType: TIKTOK_DOCUMENT_TYPE,
-  config: TiktokConfig
+  config: TiktokConfig,
 ) {
   if (!packageId || !documentType) {
-    throw new Error("Invalid input: packageId and documentType are required");
+    throw new Error('Invalid input: packageId and documentType are required');
   }
 
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${commonParameter2(
     config,
-    timestamp
+    timestamp,
   )}&document_type=${documentType}`;
 
   const pathShippingDocument = replacePackageId(
     TIKTOK_PATH_202309.PACKAGE_SHIPPING_DOCUMENT,
-    packageId
+    packageId,
   );
 
   const url = genURLwithSignature(pathShippingDocument, commonParam, config);

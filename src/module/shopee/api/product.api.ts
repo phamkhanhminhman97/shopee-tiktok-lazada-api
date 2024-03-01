@@ -1,10 +1,7 @@
-import {
-  SHOPEE_END_POINT,
-  SHOPEE_PATH,
-} from "../common/constant";
-import { commonParameter, signRequest } from "../common/helper";
-import axios from "axios";
-import { ShopeeConfig } from "../dto/request/config.request";
+import { SHOPEE_END_POINT, SHOPEE_PATH } from '../common/constant';
+import { commonParameter, signRequest } from '../common/helper';
+import axios from 'axios';
+import { ShopeeConfig } from '../dto/request/config.request';
 /**
  *
  * @param config
@@ -23,7 +20,7 @@ export async function getProductItemList(config: ShopeeConfig) {
       const commonParam = `${commonParameter(
         config,
         signature,
-        timestamp
+        timestamp,
       )}&page_size=100&item_status=NORMAL&offset=${offset}`;
       const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_ITEM_LIST}${commonParam}`;
       const { data } = await axios.get<{
@@ -56,14 +53,14 @@ export async function getProductItemList(config: ShopeeConfig) {
  */
 export async function getProductItemBaseInfo(
   itemId: string,
-  config: ShopeeConfig
+  config: ShopeeConfig,
 ) {
   const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(SHOPEE_PATH.GET_ITEM_BASE, config, timestamp);
   const commonParam =
     commonParameter(config, signature, timestamp) +
     // + '&offset=' + '0' +
-    "&item_id_list=" +
+    '&item_id_list=' +
     itemId;
 
   const url = SHOPEE_END_POINT + SHOPEE_PATH.GET_ITEM_BASE + commonParam;
@@ -83,7 +80,7 @@ export async function updateStock(
   shopeeItemId: any,
   shopeeModelId: any = 0,
   stock: number,
-  config: ShopeeConfig
+  config: ShopeeConfig,
 ) {
   try {
     const timestamp = Math.floor(Date.now() / 1000);
@@ -109,7 +106,7 @@ export async function updateStock(
     const res = await axios.post(url, body);
     return res.data;
   } catch (e) {
-    console.log("Cannot sync: ", shopeeItemId);
+    console.log('Cannot sync: ', shopeeItemId);
     return false;
   }
 }
@@ -124,7 +121,7 @@ export async function updateStock(
 export async function unListItem(
   itemId: string,
   statusUnlist: boolean,
-  config: ShopeeConfig
+  config: ShopeeConfig,
 ) {
   const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(SHOPEE_PATH.UNLIST_ITEM, config, timestamp);
@@ -155,7 +152,7 @@ export async function unListItem(
 export async function updatePrice(
   itemId: string,
   price: number,
-  config: ShopeeConfig
+  config: ShopeeConfig,
 ) {
   const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(SHOPEE_PATH.UPDATE_PRICE, config, timestamp);
@@ -271,22 +268,22 @@ export async function addItem(body: any, config: ShopeeConfig) {
 
   const url = process.env.SHOPEE_ENDPOINT + SHOPEE_PATH.ADD_ITEM + commonParam;
   const res = await axios.post(url, body);
-  
+
   return res.data;
 }
 
 export async function getChannelList(config: ShopeeConfig) {
   const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(
-    "/api/v2/logistics/get_channel_list",
+    '/api/v2/logistics/get_channel_list',
     config,
-    timestamp
+    timestamp,
   );
   const commonParam = commonParameter(config, signature, timestamp);
 
   const url =
     process.env.SHOPEE_ENDPOINT +
-    "/api/v2/logistics/get_channel_list" +
+    '/api/v2/logistics/get_channel_list' +
     commonParam;
   const res = await axios.get(url);
   return res.data;
@@ -295,14 +292,14 @@ export async function getChannelList(config: ShopeeConfig) {
 export async function getCategory(config: ShopeeConfig) {
   const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(
-    "/api/v2/product/get_category",
+    '/api/v2/product/get_category',
     config,
-    timestamp
+    timestamp,
   );
   const commonParam = commonParameter(config, signature, timestamp);
 
   const url =
-    process.env.SHOPEE_ENDPOINT + "/api/v2/product/get_category" + commonParam;
+    process.env.SHOPEE_ENDPOINT + '/api/v2/product/get_category' + commonParam;
   const res = await axios.get(url);
   return res.data;
 }
@@ -310,18 +307,18 @@ export async function getCategory(config: ShopeeConfig) {
 export async function getAttributes(categoryId: number, config: ShopeeConfig) {
   const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(
-    "/api/v2/product/get_attributes",
+    '/api/v2/product/get_attributes',
     config,
-    timestamp
+    timestamp,
   );
   const commonParam =
     commonParameter(config, signature, timestamp) +
-    "&category_id=" +
+    '&category_id=' +
     categoryId;
 
   const url =
     process.env.SHOPEE_ENDPOINT +
-    "/api/v2/product/get_attributes" +
+    '/api/v2/product/get_attributes' +
     commonParam;
   const res = await axios.get(url);
   return res.data;
@@ -330,18 +327,19 @@ export async function getAttributes(categoryId: number, config: ShopeeConfig) {
 export async function getBrandList(categoryId: number, config: ShopeeConfig) {
   const timestamp = Math.floor(Date.now() / 1000);
   const signature = signRequest(
-    "/api/v2/product/get_brand_list",
+    '/api/v2/product/get_brand_list',
     config,
-    timestamp
+    timestamp,
   );
   const commonParam =
     commonParameter(config, signature, timestamp) +
-    "&category_id=" +
-    categoryId + `&offset=1&page_size=100&status=1`;
+    '&category_id=' +
+    categoryId +
+    `&offset=1&page_size=100&status=1`;
 
   const url =
     process.env.SHOPEE_ENDPOINT +
-    "/api/v2/product/get_brand_list" +
+    '/api/v2/product/get_brand_list' +
     commonParam;
   const res = await axios.get(url);
   return res.data;

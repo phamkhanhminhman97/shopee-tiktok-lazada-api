@@ -13,9 +13,9 @@ interface PackageDetail {
           title: string;
           event_time: number;
           package_location_name: string;
-        }
+        },
       ];
-    }
+    },
   ];
 }
 

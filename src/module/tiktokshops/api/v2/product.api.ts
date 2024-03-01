@@ -1,27 +1,27 @@
 import {
   TIKTOK_PATH_202309,
   TIKTOK_PATH_PLACEHOLDER,
-} from "../../common/constant";
+} from '../../common/constant';
 import {
   commonParameter2,
   genURLwithSignature,
   replacePlaceholder,
   httpGet,
   httpPost,
-} from "../../common/helper";
-import { TiktokConfig } from "../../dto/request/config.request";
+} from '../../common/helper';
+import { TiktokConfig } from '../../dto/request/config.request';
 import {
   TiktokRequestActiveProduct,
   TiktokRequestDeactiveProduct,
-} from "../../dto/request/product.request";
-import { TiktokRequestShipPackage } from "../../dto/request/fulfillment.request";
+} from '../../dto/request/product.request';
+import { TiktokRequestShipPackage } from '../../dto/request/fulfillment.request';
 import {
   TiktokResponseActiveProduct,
   TiktokResponseAttributes,
   TiktokResponseBrands,
   TiktokResponseCategories,
   TiktokResponseDeactiveProduct,
-} from "../../dto/response/product.response";
+} from '../../dto/response/product.response';
 
 /**
  * Fetches the list of categories.
@@ -29,14 +29,14 @@ import {
  * @returns {Promise<TiktokResponseCategories>} The response containing the list of categories.
  */
 export async function getCategories(
-  config: TiktokConfig
+  config: TiktokConfig,
 ): Promise<TiktokResponseCategories> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${commonParameter2(config, timestamp)}`;
   const url = genURLwithSignature(
     TIKTOK_PATH_202309.CATEGORIES,
     commonParam,
-    config
+    config,
   );
 
   return httpGet(url, config);
@@ -50,20 +50,20 @@ export async function getCategories(
  */
 export async function getBrands(
   categoryId: string,
-  config: TiktokConfig
+  config: TiktokConfig,
 ): Promise<TiktokResponseBrands> {
   if (!categoryId) {
-    throw new Error("Invalid input: categoryId are required");
+    throw new Error('Invalid input: categoryId are required');
   }
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${commonParameter2(
     config,
-    timestamp
+    timestamp,
   )}&category_id=${categoryId}&page_size=100`;
   const url = genURLwithSignature(
     TIKTOK_PATH_202309.BRANDS,
     commonParam,
-    config
+    config,
   );
   return httpGet(url, config);
 }
@@ -76,7 +76,7 @@ export async function getBrands(
  */
 export async function getAttributes(
   categoryId: string,
-  config: TiktokConfig
+  config: TiktokConfig,
 ): Promise<TiktokResponseAttributes> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${commonParameter2(config, timestamp)}`;
@@ -84,7 +84,7 @@ export async function getAttributes(
   const pathGetAttributes = replacePlaceholder(
     TIKTOK_PATH_202309.ATTRIBUTES,
     TIKTOK_PATH_PLACEHOLDER.CATEGORY,
-    categoryId
+    categoryId,
   );
   const url = genURLwithSignature(pathGetAttributes, commonParam, config);
 
@@ -99,10 +99,10 @@ export async function getAttributes(
  */
 export async function activeProduct(
   productIds: string[],
-  config: TiktokConfig
+  config: TiktokConfig,
 ): Promise<TiktokResponseActiveProduct> {
   if (!productIds) {
-    throw new Error("Invalid input: productIds are required");
+    throw new Error('Invalid input: productIds are required');
   }
 
   const timestamp = Math.floor(Date.now() / 1000);
@@ -111,7 +111,7 @@ export async function activeProduct(
   const url = genURLwithSignature(
     TIKTOK_PATH_202309.ACTIVE_PRODUCT,
     commonParam,
-    config
+    config,
   );
 
   const body: TiktokRequestActiveProduct = {
@@ -129,10 +129,10 @@ export async function activeProduct(
  */
 export async function deactiveProduct(
   productIds: string[],
-  config: TiktokConfig
+  config: TiktokConfig,
 ): Promise<TiktokResponseDeactiveProduct> {
   if (!productIds) {
-    throw new Error("Invalid input: productIds are required");
+    throw new Error('Invalid input: productIds are required');
   }
 
   const timestamp = Math.floor(Date.now() / 1000);
@@ -141,7 +141,7 @@ export async function deactiveProduct(
   const url = genURLwithSignature(
     TIKTOK_PATH_202309.DEACTIVE_PRODUCT,
     commonParam,
-    config
+    config,
   );
 
   const body: TiktokRequestDeactiveProduct = {
@@ -161,10 +161,10 @@ export async function deactiveProduct(
 export async function shipPackage(
   packageId: string,
   payload: TiktokRequestShipPackage,
-  config: TiktokConfig
+  config: TiktokConfig,
 ): Promise<any> {
   if (!packageId) {
-    throw new Error("Invalid input: packageId are required");
+    throw new Error('Invalid input: packageId are required');
   }
 
   const timestamp = Math.floor(Date.now() / 1000);
@@ -172,7 +172,7 @@ export async function shipPackage(
   const pathTimeSlot = replacePlaceholder(
     TIKTOK_PATH_202309.SHIP_PACKAGE,
     TIKTOK_PATH_PLACEHOLDER.PACKAGE,
-    packageId
+    packageId,
   );
 
   const url = genURLwithSignature(pathTimeSlot, commonParam, config);
@@ -196,17 +196,17 @@ export async function shipPackage(
  */
 export async function getProductDetail(
   productId: string,
-  config: TiktokConfig
+  config: TiktokConfig,
 ): Promise<any> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${commonParameter2(
     config,
-    timestamp
+    timestamp,
   )}&product_id=${productId}`;
   const url = genURLwithSignature(
     TIKTOK_PATH_202309.PRODUCT_DETAIL,
     commonParam,
-    config
+    config,
   );
 
   return httpGet(url, config);

@@ -1,4 +1,4 @@
-import { TiktokResponseCommon } from "./config.response";
+import { TiktokResponseCommon } from './config.response';
 
 interface PickupSlot {
   avaliable: boolean;

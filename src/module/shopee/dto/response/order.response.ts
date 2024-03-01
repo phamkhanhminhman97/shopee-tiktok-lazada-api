@@ -1,4 +1,4 @@
-import { ShopeeResponseCommon } from "./config.response";
+import { ShopeeResponseCommon } from './config.response';
 
 interface OrderList {
   more: boolean;
