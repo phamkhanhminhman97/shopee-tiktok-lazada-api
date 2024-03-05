@@ -43,6 +43,15 @@ interface CategoryRules {
   cod: COD;
   package_dimension: PackageDimension;
 }
+
+interface UploadImage {
+  height: number;
+  width: number;
+  uri: string;
+  url: string;
+  use_case: string; //The usage scenarios include MAIN_IMAGE DESCRIPTION_IMAGE ATTRIBUTE_IMAGE CERTIFICATION_IMAGE SIZE_CHART_IMAGE
+}
+
 interface Brands {
   brands: Array<any>;
 }
@@ -58,6 +67,7 @@ interface ResponseCategories extends TiktokResponseCommon<Categories> {}
 interface ResponseCategoryRules extends TiktokResponseCommon<CategoryRules> {}
 interface ResponseBrands extends TiktokResponseCommon<Brands> {}
 interface ResponseAttributes extends TiktokResponseCommon<Attributes> {}
+interface ResponseUploadImage extends TiktokResponseCommon<UploadImage> {}
 
 export {
   ResponseUpdateStock as TiktokResponseUpdateStock,
@@ -67,4 +77,5 @@ export {
   ResponseCategoryRules as TiktokResponseCategoryRules,
   ResponseBrands as TiktokResponseBrands,
   ResponseAttributes as TiktokResponseAttributes,
+  ResponseUploadImage as TiktokResponseUploadImage,
 };

@@ -1,7 +1,7 @@
 import { TIKTOK_PATH_202309, TIKTOK_PATH_PLACEHOLDER } from '../../common/constant';
 import * as TiktokHelper from '../../common/helper';
 import { TiktokConfig } from '../../dto/request/config.request';
-import { TiktokRequestActiveProduct, TiktokRequestDeactiveProduct } from '../../dto/request/product.request';
+import { TiktokRequestActiveProduct, TiktokRequestCreateProduct, TiktokRequestDeactiveProduct } from '../../dto/request/product.request';
 import {
   TiktokResponseActiveProduct,
   TiktokResponseAttributes,
@@ -9,6 +9,7 @@ import {
   TiktokResponseCategories,
   TiktokResponseCategoryRules,
   TiktokResponseDeactiveProduct,
+  TiktokResponseUploadImage,
 } from '../../dto/response/product.response';
 
 /**
@@ -78,12 +79,11 @@ export async function getAttributes(categoryId: string, config: TiktokConfig): P
   return TiktokHelper.httpGet(url, config);
 }
 
-export async function uploadProductImage(productId: string, imagePath: string, config: TiktokConfig): Promise<any> {
+export async function uploadProductImage(imagePath: string, config: TiktokConfig): Promise<TiktokResponseUploadImage> {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = `${TiktokHelper.commonParameter2(config, timestamp)}`;
 
-  const path = TIKTOK_PATH_202309.PRODUCT_IMAGE + productId;
-  const url = TiktokHelper.genURLwithSignature(path, commonParam, config);
+  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.PRODUCT_IMAGE, commonParam, config);
 
   const formData = new FormData();
   formData.append('data', imagePath);
@@ -156,93 +156,12 @@ export async function getProductDetail(productId: string, config: TiktokConfig):
   return TiktokHelper.httpGet(url, config);
 }
 
-// export async function createProduct(config) {
-//   const timestamp = Math.floor(Date.now() / 1000);
-//   const commonParam = commonParameter2(config, timestamp);
-//   const body = {
-//     // brand_id: "7082427311584347905",
-//     category_id: 848648,
-//     // delivery_service_ids: "1729592969712203232",
-//     description:
-//       'Đắp mặt nạ là một trong những bước chăm sóc đặc biệt cho da để bổ sung thêm dinh dưỡng nuôi dưỡng da kéo dài tuổi thanh xuân. Mặt nạ REAL NATURE là mặt nạ dạng miếng cot',
-//     // exemption_of_identifier_code: {
-//     //   exemption_reason: "1",
-//     // },
-//     images: [
-//       {
-//         id: 'tos-maliva-i-o3syd03w52-us/7804a7533ff54d2a8cba41281f6f4e5c',
-//       },
-//     ],
-//     is_cod_open: true,
-//     // outer_product_id: "172959296971220002",
-//     // package_dimension_unit: "metric",
-//     package_height: 12,
-//     package_length: 10,
-//     package_weight: '1',
-//     package_width: 11,
-//     // product_attributes: [
-//     //   {
-//     //     attribute_id: "100392",
-//     //     attribute_values: [
-//     //       {
-//     //         value_id: "1001533",
-//     //         value_name: "Birthday",
-//     //       },
-//     //     ],
-//     //   },
-//     // ],
-//     // product_certifications: [
-//     //   {
-//     //     files: [
-//     //       {
-//     //         id: "tos-maliva-i-o3syd03w52-us/c668cdf70b7f483c94dbe",
-//     //         name: "xxx.PDF",
-//     //         type: "PDF",
-//     //       },
-//     //     ],
-//     //     id: "123456",
-//     //     images: [
-//     //       {
-//     //         id: "tos-maliva-i-o3syd03w52-us/c668cdf70b7f483c94dbe",
-//     //       },
-//     //     ],
-//     //   },
-//     // ],
-//     product_name: 'TEST MASK MASK MASK MASK MASK',
-//     // product_video: {
-//     //   video_id: "v09e40f40000cfu0ovhc77ub7fl97k4w",
-//     // },
-//     // size_chart: {
-//     //   img_id: "tos-maliva-i-o3syd03w52-us/c668cdf70b7f483c94dbe",
-//     // },
-//     skus: [
-//       {
-//         original_price: '999',
-//         // outer_sku_id: "1729592969712207012",
-//         // product_identifier_code: {
-//         //   identifier_code: "12345678901234",
-//         //   identifier_code_type: 1,
-//         // },
-//         // sales_attributes: [
-//         //   {
-//         //     attribute_id: "100089",
-//         //     attribute_name: "Specification",
-//         //     custom_value: "XL",
-//         //     sku_img: {
-//         //       id: "tos-maliva-i-o3syd03w52-us/c668cdf70b7f483c94dbe",
-//         //     },
-//         //     value_id: "1729592969712207000",
-//         //   },
-//         // ],
-//         seller_sku: 'seller sku xxaa',
-//         // stock_infos: [
-//         //   {
-//         //     available_stock: 999,
-//         //     warehouse_id: "7068517275539719942",
-//         //   },
-//         // ],
-//       },
-//     ],
-//   };
-//   // const url = genURLwithSignature('/api/products', commonParam, config);
-// }
+export async function createProduct(payload: TiktokRequestCreateProduct, config) {
+  const timestamp = Math.floor(Date.now() / 1000);
+  const commonParam = TiktokHelper.commonParameter2(config, timestamp);
+  const body = payload;
+  const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.CREATE_PRODUCT, commonParam, config);
+
+  const headers = TiktokHelper.getHeaders(config);
+  return await TiktokHelper.httpPost(url, body, headers);
+}

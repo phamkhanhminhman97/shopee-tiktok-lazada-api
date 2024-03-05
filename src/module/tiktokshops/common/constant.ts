@@ -104,6 +104,7 @@ enum PATH_202309 {
   BRANDS = '/product/2309/brands',
   ATTRIBUTES = '/product/202309/categories/{category_id}/attributes',
   PRODUCT_IMAGE = '/product/202309/images/upload',
+  CREATE_PRODUCT = ' /product/202309/products',
   PACKAGE_TIME_SLOT = '/fulfillment/202309/packages/{package_id}/handover_time_slots',
   SHIP_PACKAGE = '/fulfillment/202309/packages/{package_id}/ship',
   ACTIVE_PRODUCT = '/product/202309/products/activate',
