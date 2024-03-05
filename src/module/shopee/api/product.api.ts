@@ -105,7 +105,7 @@ export async function updateStock(
 
 /**
  *
- * @param itemIds - Product IDs.
+ * @param itemIds - Shopee Item ID.
  * @param statusUnlist - Unlist status.
  * @param config - Shopee API configuration.
  * @returns {Promise<ShopeeResponseGetCategories>}
@@ -132,10 +132,10 @@ export async function unListItem(itemId: string, statusUnlist: boolean, config: 
 
 /**
  *
- * @param itemId
- * @param price
- * @param config
- * @returns
+ * @param itemId - Shopee Item ID.
+ * @param price - Price.
+ * @param config - Shopee API configuration.
+ * @returns {Promise<ShopeeResponseUpdatePrice>}
  */
 export async function updatePrice(itemId: string, price: number, config: ShopeeConfig): Promise<ShopeeResponseUpdatePrice> {
   const timestamp = ShopeeHelper.getTimestampNow();
@@ -258,7 +258,6 @@ export async function addItem(body: any, config: ShopeeConfig) {
 
 /**
  *
- * @param itemIds - Product IDs.
  * @param config - Shopee API configuration.
  * @returns {Promise<ShopeeResponseGetCategories>}
  */
@@ -273,7 +272,7 @@ export async function getCategory(config: ShopeeConfig): Promise<ShopeeResponseG
 
 /**
  *
- * @param itemIds - Product IDs.
+ * @param categoryId - Category ID.
  * @param config - Shopee API configuration.
  * @returns {Promise<ShopeeResponseGetCategories>}
  */

@@ -13,13 +13,16 @@ import {
 } from './api/product.api';
 import { ShopeeResponseOrderDetail } from './dto/response/order.response';
 import {
+  ShopeeResponseGetAttributes,
   ShopeeResponseGetBrandList,
+  ShopeeResponseGetCategories,
   ShopeeResponseProductBaseItemInfo,
   ShopeeResponseUnlistItem,
   ShopeeResponseUpdatePrice,
   ShopeeResponseUpdateStock,
 } from './dto/response/product.response';
 import { getChannelList } from './api/logistic.api';
+import { ShopeeResponseLogisticChannelList } from './dto/response/logistic.reponse';
 
 export class ShopeeModule {
   private config: ShopeeConfig;
@@ -59,7 +62,7 @@ export class ShopeeModule {
     return await addItem(body, this.config);
   }
 
-  async getChannelList(): Promise<any> {
+  async getChannelList(): Promise<ShopeeResponseLogisticChannelList> {
     return await getChannelList(this.config);
   }
 
@@ -67,11 +70,11 @@ export class ShopeeModule {
     return await fetchTokenWithAuthCode(authCode, this.config);
   }
 
-  async getCategory(): Promise<any> {
+  async getCategory(): Promise<ShopeeResponseGetCategories> {
     return await getCategory(this.config);
   }
 
-  async getAttributes(categoryId: number): Promise<any> {
+  async getAttributes(categoryId: number): Promise<ShopeeResponseGetAttributes> {
     return await getAttributes(categoryId, this.config);
   }
 
