@@ -1,24 +1,11 @@
 import { getOrderDetail, getOrderList } from './api/v2/order.api';
 import { TiktokConfig } from './dto/request/config.request';
 import { getAuthorizedShop } from './api/v2/authorization.api';
-import {
-  getAttributes,
-  getBrands,
-  getCategories,
-  getProductDetail,
-} from './api/v2/product.api';
-import {
-  getPackageShippingDocument,
-  getPackageTimeSlots,
-  shipPackage,
-} from './api/v2/fulfillment.api';
+import { getAttributes, getBrands, getCategories, getProductDetail } from './api/v2/product.api';
+import { getPackageShippingDocument, getPackageTimeSlots, shipPackage } from './api/v2/fulfillment.api';
 import { TiktokRequestShipPackage } from './dto/request/fulfillment.request';
 import { TIKTOK_DOCUMENT_TYPE } from './common/constant';
-import {
-  TiktokResponseAttributes,
-  TiktokResponseBrands,
-  TiktokResponseCategories,
-} from './dto/response/product.response';
+import { TiktokResponseAttributes, TiktokResponseBrands, TiktokResponseCategories } from './dto/response/product.response';
 import { TiktokResponseAuthorized } from './dto/response/config.response';
 import { TiktokResponsePackageTimeSlot } from './dto/response/fulfillment.response';
 import { TiktokResponseOrderDetail } from './dto/response/order.response';
@@ -33,9 +20,7 @@ export class TiktokModule {
     return await getOrderList(beforeHours, this.config);
   }
 
-  async getOrderDetail(
-    orderNumber: string,
-  ): Promise<TiktokResponseOrderDetail> {
+  async getOrderDetail(orderNumber: string): Promise<TiktokResponseOrderDetail> {
     return await getOrderDetail(orderNumber, this.config);
   }
 
@@ -47,9 +32,7 @@ export class TiktokModule {
     return await getAuthorizedShop(this.config);
   }
 
-  async getPackageTimeSlots(
-    packageId: string,
-  ): Promise<TiktokResponsePackageTimeSlot> {
+  async getPackageTimeSlots(packageId: string): Promise<TiktokResponsePackageTimeSlot> {
     return await getPackageTimeSlots(packageId, this.config);
   }
 
@@ -57,15 +40,8 @@ export class TiktokModule {
     return await shipPackage(packageId, payload, this.config);
   }
 
-  async getShippingDocument(
-    packageId: string,
-    documentType: TIKTOK_DOCUMENT_TYPE,
-  ): Promise<any> {
-    return await getPackageShippingDocument(
-      packageId,
-      documentType,
-      this.config,
-    );
+  async getShippingDocument(packageId: string, documentType: TIKTOK_DOCUMENT_TYPE): Promise<any> {
+    return await getPackageShippingDocument(packageId, documentType, this.config);
   }
 
   async getCategories(): Promise<TiktokResponseCategories> {

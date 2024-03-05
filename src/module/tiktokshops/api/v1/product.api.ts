@@ -19,11 +19,7 @@ export async function getProductsLists(config: TiktokConfig) {
       page_size: 100,
       search_status: 4,
     };
-    const url = genURLwithSignature(
-      TIKTOK_PATH.PRODUCT_LIST,
-      commonParam,
-      config,
-    );
+    const url = genURLwithSignature(TIKTOK_PATH.PRODUCT_LIST, commonParam, config);
 
     try {
       const res = await axios.post(url, body);
@@ -46,12 +42,7 @@ export async function getProductsLists(config: TiktokConfig) {
  * @param config
  * @returns
  */
-export async function updateStock(
-  productId: string,
-  skuId: string,
-  quantity: number,
-  config: TiktokConfig,
-) {
+export async function updateStock(productId: string, skuId: string, quantity: number, config: TiktokConfig) {
   const stockInfo = {
     available_stock: quantity,
   };
@@ -68,11 +59,7 @@ export async function updateStock(
 
   const timestamp = Math.floor(new Date().getTime() / 1000);
   const commonParam = commonParameter(config, timestamp);
-  const url = genURLwithSignature(
-    TIKTOK_PATH.UPDATE_STOCK,
-    commonParam,
-    config,
-  );
+  const url = genURLwithSignature(TIKTOK_PATH.UPDATE_STOCK, commonParam, config);
 
   try {
     const res = await axios.put(url, body);
@@ -90,19 +77,11 @@ export async function updateStock(
  * @param config
  * @returns
  */
-export async function getProductDetail(
-  productId: string,
-  config: TiktokConfig,
-) {
+export async function getProductDetail(productId: string, config: TiktokConfig) {
   const timestamp = Math.floor(Date.now() / 1000);
-  const commonParam =
-    commonParameter(config, timestamp) + '&product_id=' + productId;
+  const commonParam = commonParameter(config, timestamp) + '&product_id=' + productId;
 
-  const url = genURLwithSignature(
-    TIKTOK_PATH.PRODUCT_DETAIL,
-    commonParam,
-    config,
-  );
+  const url = genURLwithSignature(TIKTOK_PATH.PRODUCT_DETAIL, commonParam, config);
 
   try {
     const res = await axios.get(url);
@@ -119,20 +98,13 @@ export async function getProductDetail(
  * @param config
  * @returns
  */
-export async function activeProduct(
-  productIds: Array<string>,
-  config: TiktokConfig,
-) {
+export async function activeProduct(productIds: Array<string>, config: TiktokConfig) {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
   const body = {
     product_ids: productIds,
   };
-  const url = genURLwithSignature(
-    TIKTOK_PATH.ACTIVE_PRODUCT,
-    commonParam,
-    config,
-  );
+  const url = genURLwithSignature(TIKTOK_PATH.ACTIVE_PRODUCT, commonParam, config);
 
   const res = await axios.post(url, body);
   return res.data;
@@ -144,20 +116,13 @@ export async function activeProduct(
  * @param config
  * @returns
  */
-export async function deactiveProduct(
-  productIds: Array<string>,
-  config: TiktokConfig,
-) {
+export async function deactiveProduct(productIds: Array<string>, config: TiktokConfig) {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
   const body = {
     product_ids: productIds,
   };
-  const url = genURLwithSignature(
-    TIKTOK_PATH.DEACTIVE_PRODUCT,
-    commonParam,
-    config,
-  );
+  const url = genURLwithSignature(TIKTOK_PATH.DEACTIVE_PRODUCT, commonParam, config);
 
   const res = await axios.post(url, body);
   return res.data;
@@ -171,12 +136,7 @@ export async function deactiveProduct(
  * @param config
  * @returns
  */
-export async function updatePrice(
-  productId: string,
-  skuId: string,
-  price: number,
-  config: TiktokConfig,
-) {
+export async function updatePrice(productId: string, skuId: string, price: number, config: TiktokConfig) {
   const sku = {
     id: skuId,
     original_price: price,
@@ -189,11 +149,7 @@ export async function updatePrice(
 
   const timestamp = Math.floor(new Date().getTime() / 1000);
   const commonParam = commonParameter(config, timestamp);
-  const url = genURLwithSignature(
-    TIKTOK_PATH.UPDATE_PRICE,
-    commonParam,
-    config,
-  );
+  const url = genURLwithSignature(TIKTOK_PATH.UPDATE_PRICE, commonParam, config);
 
   try {
     const res = await axios.put(url, body);
@@ -304,11 +260,7 @@ export async function getCategories(config) {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
 
-  const url = genURLwithSignature(
-    '/api/products/categories',
-    commonParam,
-    config,
-  );
+  const url = genURLwithSignature('/api/products/categories', commonParam, config);
 
   try {
     const res = await axios.get(url);
@@ -374,11 +326,7 @@ export async function getWarehouseList(config) {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = commonParameter(config, timestamp);
 
-  const url = genURLwithSignature(
-    '/api/logistics/get_warehouse_list',
-    commonParam,
-    config,
-  );
+  const url = genURLwithSignature('/api/logistics/get_warehouse_list', commonParam, config);
 
   const res = await axios.get(url);
   return res.data.data;

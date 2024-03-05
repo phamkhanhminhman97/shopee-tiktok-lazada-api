@@ -1,16 +1,6 @@
 import { getOrderById, getOrdersBeforeSomeDay } from './api/order.api';
-import {
-  getCategoryTree,
-  getProductItem,
-  getProducts,
-  updatePrice,
-  updateSellableQuantity,
-  updateStatusProduct,
-} from './api/product.api';
-import {
-  LZD_UPDATE_SELLABLE_QUANTITY,
-  LZD_UPDATE_STATUS_PRODUCT,
-} from './dto/request/product.request';
+import { getCategoryTree, getProductItem, getProducts, updatePrice, updateSellableQuantity, updateStatusProduct } from './api/product.api';
+import { LZD_UPDATE_SELLABLE_QUANTITY, LZD_UPDATE_STATUS_PRODUCT } from './dto/request/product.request';
 
 export class LazadaModule {
   private config;
@@ -34,17 +24,11 @@ export class LazadaModule {
     return await getProductItem(this.config, itemId);
   }
 
-  async updateSellableQuantity(
-    itemId: number,
-    payload: LZD_UPDATE_SELLABLE_QUANTITY,
-  ) {
+  async updateSellableQuantity(itemId: number, payload: LZD_UPDATE_SELLABLE_QUANTITY) {
     return await updateSellableQuantity(this.config, itemId, [payload]);
   }
 
-  async updateStatusProduct(
-    itemId: number,
-    payload: LZD_UPDATE_STATUS_PRODUCT,
-  ) {
+  async updateStatusProduct(itemId: number, payload: LZD_UPDATE_STATUS_PRODUCT) {
     return await updateStatusProduct(this.config, itemId, [payload]);
   }
 

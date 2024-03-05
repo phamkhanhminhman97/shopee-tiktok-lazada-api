@@ -13,7 +13,6 @@ interface PackgeTimeSlot {
   pickup_slots: Array<PickupSlot>;
 }
 
-interface ResponsePackageTimeSlot
-  extends TiktokResponseCommon<PackgeTimeSlot> {}
+interface ResponsePackageTimeSlot extends TiktokResponseCommon<PackgeTimeSlot> {}
 
 export { ResponsePackageTimeSlot as TiktokResponsePackageTimeSlot };

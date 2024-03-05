@@ -8,7 +8,4 @@ interface RequestOrderDetail {
   order_id_list: string[]; //Must be less than 50
 }
 
-export {
-  RequestShipOrder as TiktokRequestShipOrder,
-  RequestOrderDetail as TiktokRequestOrderDetail,
-};
+export { RequestShipOrder as TiktokRequestShipOrder, RequestOrderDetail as TiktokRequestOrderDetail };

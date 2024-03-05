@@ -1,16 +1,6 @@
 import { LAZADA_PATH, LZD_ALGORITHM } from '../common/constant';
-import {
-  execute,
-  executePOST,
-  priceParametersXML,
-  productParametersXML,
-  toProductXML,
-  toRequestProductsXML,
-} from '../common/helper';
-import {
-  LZD_UPDATE_SELLABLE_QUANTITY,
-  LZD_UPDATE_STATUS_PRODUCT,
-} from '../dto/request/product.request';
+import { execute, executePOST, priceParametersXML, productParametersXML, toProductXML, toRequestProductsXML } from '../common/helper';
+import { LZD_UPDATE_SELLABLE_QUANTITY, LZD_UPDATE_STATUS_PRODUCT } from '../dto/request/product.request';
 
 /**
  *
@@ -30,11 +20,7 @@ export async function getProducts(info) {
     obj['offset'] = i;
     obj['limit'] = 50;
     try {
-      const response = await execute(
-        LAZADA_PATH.PRODUCT_GET,
-        obj,
-        info.appSecret,
-      );
+      const response = await execute(LAZADA_PATH.PRODUCT_GET, obj, info.appSecret);
       if (!response?.data?.products) break;
       productList.push(...response.data.products);
     } catch (err) {
@@ -69,19 +55,11 @@ export async function getProductItem(info, itemId: number) {
  * @param payload
  * @returns
  */
-export async function updateSellableQuantity(
-  info,
-  itemId,
-  payload: Array<LZD_UPDATE_SELLABLE_QUANTITY>,
-) {
+export async function updateSellableQuantity(info, itemId, payload: Array<LZD_UPDATE_SELLABLE_QUANTITY>) {
   const obj = {
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
-    payload: toRequestProductsXML(
-      payload.map((x) =>
-        toProductXML(itemId, x.skuId, x?.sellerSku, x.quantity),
-      ),
-    ),
+    payload: toRequestProductsXML(payload.map((x) => toProductXML(itemId, x.skuId, x?.sellerSku, x.quantity))),
     timestamp: new Date().getTime(),
     access_token: info.appAccessToken,
   };
@@ -96,19 +74,11 @@ export async function updateSellableQuantity(
  * @param payload
  * @returns
  */
-export async function updateStatusProduct(
-  info,
-  itemId: number,
-  payload: Array<LZD_UPDATE_STATUS_PRODUCT>,
-) {
+export async function updateStatusProduct(info, itemId: number, payload: Array<LZD_UPDATE_STATUS_PRODUCT>) {
   const obj = {
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
-    payload: toRequestProductsXML(
-      payload.map((x) =>
-        productParametersXML(itemId, x.skuId, x?.sellerSku, x.status),
-      ),
-    ),
+    payload: toRequestProductsXML(payload.map((x) => productParametersXML(itemId, x.skuId, x?.sellerSku, x.status))),
     timestamp: new Date().getTime(),
     access_token: info.appAccessToken,
   };
@@ -126,11 +96,7 @@ export async function updatePrice(info, itemId: number, payload) {
   const obj = {
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
-    payload: toRequestProductsXML(
-      payload.map((x) =>
-        priceParametersXML(itemId, x.skuId, x?.sellerSku, x.price),
-      ),
-    ),
+    payload: toRequestProductsXML(payload.map((x) => priceParametersXML(itemId, x.skuId, x?.sellerSku, x.price))),
     timestamp: new Date().getTime(),
     access_token: info.appAccessToken,
   };

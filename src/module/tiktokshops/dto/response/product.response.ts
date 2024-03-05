@@ -27,8 +27,7 @@ interface Attributes {
 }
 
 interface ResponseUpdateStock extends TiktokResponseCommon<UpdateStock> {}
-interface ResponseDeactiveProduct
-  extends TiktokResponseCommon<DeactiveProduct> {}
+interface ResponseDeactiveProduct extends TiktokResponseCommon<DeactiveProduct> {}
 interface ResponseActiveProduct extends TiktokResponseCommon<ActiveProduct> {}
 interface ResponseCategories extends TiktokResponseCommon<Categories> {}
 interface ResponseBrands extends TiktokResponseCommon<Brands> {}

@@ -12,7 +12,4 @@ interface UpdateStatusProduct {
   status: any;
 }
 
-export {
-  UpdateSellableQuantity as LZD_UPDATE_SELLABLE_QUANTITY,
-  UpdateStatusProduct as LZD_UPDATE_STATUS_PRODUCT,
-};
+export { UpdateSellableQuantity as LZD_UPDATE_SELLABLE_QUANTITY, UpdateStatusProduct as LZD_UPDATE_STATUS_PRODUCT };

@@ -1,11 +1,6 @@
 import { TiktokConfig } from '../../dto/request/config.request';
 import { TIKTOK_PATH_202309 } from '../../common/constant';
-import {
-  commonParameter2,
-  genURLwithSignature,
-  httpGet,
-  httpPost,
-} from '../../common/helper';
+import { commonParameter2, genURLwithSignature, httpGet, httpPost } from '../../common/helper';
 import { TiktokResponseOrderDetail } from '../../dto/response/order.response';
 
 /**
@@ -14,21 +9,11 @@ import { TiktokResponseOrderDetail } from '../../dto/response/order.response';
  * @param config Tiktok API configuration.
  * @returns The response containing the order detail.
  */
-export async function getOrderDetail(
-  orderNumber: string,
-  config: TiktokConfig,
-): Promise<TiktokResponseOrderDetail> {
+export async function getOrderDetail(orderNumber: string, config: TiktokConfig): Promise<TiktokResponseOrderDetail> {
   const timestamp = Math.floor(Date.now() / 1000);
-  const commonParam = `${commonParameter2(
-    config,
-    timestamp,
-  )}&ids=${orderNumber}`;
+  const commonParam = `${commonParameter2(config, timestamp)}&ids=${orderNumber}`;
 
-  const url = genURLwithSignature(
-    TIKTOK_PATH_202309.ORDER_DETAIL,
-    commonParam,
-    config,
-  );
+  const url = genURLwithSignature(TIKTOK_PATH_202309.ORDER_DETAIL, commonParam, config);
 
   return httpGet(url, config);
 }
@@ -46,12 +31,7 @@ export async function getOrderList(before, config: TiktokConfig): Promise<any> {
     order_status: 'DELIVERED',
   };
 
-  const url = genURLwithSignature(
-    TIKTOK_PATH_202309.ORDER_LIST,
-    commonParam,
-    config,
-    body,
-  );
+  const url = genURLwithSignature(TIKTOK_PATH_202309.ORDER_LIST, commonParam, config, body);
 
   return httpPost(url, body, config);
 }

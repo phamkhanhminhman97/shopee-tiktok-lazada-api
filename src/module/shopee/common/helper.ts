@@ -3,16 +3,7 @@ import { createHmac } from 'crypto';
 export function commonParameter(config: ShopeeConfig, signature, timestamp) {
   const { partnerId, accessToken, shopId } = config;
   const commonParam =
-    '?shop_id=' +
-    shopId +
-    '&partner_id=' +
-    partnerId +
-    '&access_token=' +
-    accessToken +
-    '&sign=' +
-    signature +
-    '&timestamp=' +
-    timestamp;
+    '?shop_id=' + shopId + '&partner_id=' + partnerId + '&access_token=' + accessToken + '&sign=' + signature + '&timestamp=' + timestamp;
   return commonParam;
 }
 
@@ -37,13 +28,7 @@ export function getTimestampMinutesAgo(minutes) {
   return Math.floor((oldDate.getTime() - minutes * 60 * 1000) / 1000);
 }
 
-export function buildCommonParameters(
-  config,
-  signature,
-  timestamp,
-  timeFrom,
-  cursor,
-) {
+export function buildCommonParameters(config, signature, timestamp, timeFrom, cursor) {
   return `${commonParameter(
     config,
     signature,

@@ -66,7 +66,4 @@ class ResponseReview {
   review_type?: string;
 }
 
-export {
-  ResponseReview as LazadaResponseReview,
-  ResponseProductItem as LazadaResponseProductItem,
-};
+export { ResponseReview as LazadaResponseReview, ResponseProductItem as LazadaResponseProductItem };

@@ -2,13 +2,7 @@ import axios from 'axios';
 import { SHOPEE_END_POINT, SHOPEE_PATH } from '../common/constant';
 import { ShopeeConfig } from '../dto/request/config.request';
 import { createHmac } from 'crypto';
-import {
-  buildCommonParameters,
-  commonParameter,
-  getTimestampMinutesAgo,
-  getTimestampNow,
-  signRequest,
-} from '../common/helper';
+import { buildCommonParameters, commonParameter, getTimestampMinutesAgo, getTimestampNow, signRequest } from '../common/helper';
 
 /**
  *
@@ -28,13 +22,7 @@ export async function getOrders(beforeMinutes: number, config) {
   while (hasMoreData) {
     const timestamp = getTimestampNow();
     const signature = signRequest(SHOPEE_PATH.ORDER_LIST, config, timestamp);
-    const commonParams = buildCommonParameters(
-      config,
-      signature,
-      timestamp,
-      timeFrom,
-      cursor,
-    );
+    const commonParams = buildCommonParameters(config, signature, timestamp, timeFrom, cursor);
 
     const url = `${END_POINT}${SHOPEE_PATH.ORDER_LIST}${commonParams}`;
     const res = await axios.get(url);
@@ -54,10 +42,7 @@ export async function getOrders(beforeMinutes: number, config) {
  * @param config
  * @returns
  */
-export async function getOrderDetail(
-  orderNumber: string,
-  config: ShopeeConfig,
-) {
+export async function getOrderDetail(orderNumber: string, config: ShopeeConfig) {
   const timestamp = Math.floor(Date.now() / 1000);
   const optionalField: string[] = [
     `buyer_user_id,buyer_username,estimated_shipping_fee,recipient_address,
@@ -81,26 +66,15 @@ export async function getOrderDetail(
   return res.data;
 }
 
-export async function fetchTokenWithAuthCode(
-  authCode: string,
-  config: ShopeeConfig,
-) {
+export async function fetchTokenWithAuthCode(authCode: string, config: ShopeeConfig) {
   try {
     const timestamp = Math.floor(Date.now() / 1000);
     const { partnerId, shopId, partnerKey } = config;
     const params = [partnerId, SHOPEE_PATH.AUTH_TOKEN, timestamp.toString()];
     const baseString = params.reduce((prev, curr) => (prev += curr), '');
-    const signature = createHmac('sha256', partnerKey)
-      .update(baseString)
-      .digest('hex');
+    const signature = createHmac('sha256', partnerKey).update(baseString).digest('hex');
 
-    const commonParam =
-      '?sign=' +
-      signature +
-      '&partner_id=' +
-      partnerId +
-      '&timestamp=' +
-      timestamp;
+    const commonParam = '?sign=' + signature + '&partner_id=' + partnerId + '&timestamp=' + timestamp;
     const body = {
       code: authCode,
       partner_id: parseInt(partnerId),

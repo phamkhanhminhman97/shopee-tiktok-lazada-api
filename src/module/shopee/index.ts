@@ -1,9 +1,5 @@
 import { ShopeeConfig } from './dto/request/config.request';
-import {
-  fetchTokenWithAuthCode,
-  getOrderDetail,
-  getOrders,
-} from './api/order.api';
+import { fetchTokenWithAuthCode, getOrderDetail, getOrders } from './api/order.api';
 import {
   getProductItemBaseInfo,
   getProductItemList,

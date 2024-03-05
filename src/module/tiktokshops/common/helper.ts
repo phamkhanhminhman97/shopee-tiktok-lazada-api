@@ -4,8 +4,7 @@ import { TiktokConfig } from '../dto/request/config.request';
 import axios, { AxiosResponse } from 'axios';
 export function commonParameter(config, timestamp) {
   const { appKey } = config;
-  const commonParam =
-    '?app_key=' + appKey + '&sign=' + '' + '&timestamp=' + timestamp;
+  const commonParam = '?app_key=' + appKey + '&sign=' + '' + '&timestamp=' + timestamp;
 
   return commonParam;
 }
@@ -13,16 +12,7 @@ export function commonParameter(config, timestamp) {
 export function commonParameter2(config, timestamp) {
   const { appKey, shopId, shopCipher } = config;
   const commonParam =
-    '?app_key=' +
-    appKey +
-    '&sign=' +
-    '' +
-    '&timestamp=' +
-    timestamp +
-    '&shop_id=' +
-    shopId +
-    '&shop_cipher=' +
-    shopCipher;
+    '?app_key=' + appKey + '&sign=' + '' + '&timestamp=' + timestamp + '&shop_id=' + shopId + '&shop_cipher=' + shopCipher;
 
   return commonParam;
 }
@@ -35,12 +25,7 @@ export function objKeySort(obj) {
   }
   return newObj;
 }
-export function signRequest(
-  params: Record<string, string>,
-  path: string,
-  config: Record<string, any>,
-  body: Record<string, any>,
-) {
+export function signRequest(params: Record<string, string>, path: string, config: Record<string, any>, body: Record<string, any>) {
   const { appSecret } = config;
   delete params['sign'];
   delete params['access_token'];
@@ -50,8 +35,7 @@ export function signRequest(
   for (const key in sortParam) {
     signstring = signstring + key + sortParam[key];
   }
-  signstring =
-    signstring + (!body ? appSecret : JSON.stringify(body) + appSecret);
+  signstring = signstring + (!body ? appSecret : JSON.stringify(body) + appSecret);
 
   const signature = crypto.HmacSHA256(signstring, appSecret).toString();
   return signature;
@@ -82,11 +66,7 @@ export function replacePackageId(path: string, packageId: string): string {
   return path.replace('{package_id}', packageId);
 }
 
-export function replacePlaceholder(
-  path: string,
-  placeholder: string,
-  replacement: string,
-): string {
+export function replacePlaceholder(path: string, placeholder: string, replacement: string): string {
   return path.replace(`{${placeholder}}`, replacement);
 }
 
