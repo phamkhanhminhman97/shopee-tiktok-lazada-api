@@ -93,6 +93,9 @@ enum PATH {
   RETURN_SOLUTION = '/api/v2/returns/get_available_solutions',
   RETURN_CONFIRM = '/api/v2/returns/confirm',
   GET_COMMENTS = '/api/v2/product/get_comment',
+  GET_CATEGORY = '/api/v2/product/get_category',
+  GET_BRAND_LIST = '/api/v2/product/get_brand_list',
+  GET_ATTRIBUTES = '/api/v2/product/get_attributes',
 }
 
 export {

@@ -6,7 +6,7 @@ export interface MultiQuantity {
 }
 
 export interface Config {
-  partnerId: any;
+  partnerId: string;
   partnerKey: string;
   shopId: string;
   accessToken: string;

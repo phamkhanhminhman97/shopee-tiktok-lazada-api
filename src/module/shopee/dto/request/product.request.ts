@@ -1,7 +1,7 @@
 import { ShopeeRequestCommon } from './config.request';
 
 interface ItemList {
-  item_id: string;
+  item_id: number;
   unlist: boolean;
 }
 
@@ -24,6 +24,15 @@ interface RequestUpdateStock extends ShopeeRequestCommon {
   stock_list: Array<StockList>;
 }
 
+interface PriceList {
+  model_id?: number;
+  original_price: number;
+}
+interface RequestUpdatePrice extends ShopeeRequestCommon {
+  item_id: number;
+  price_list: Array<PriceList>;
+}
+
 interface RequestGetItemList extends ShopeeRequestCommon {
   offset: number;
   page_size: number; //	the size of one page Max=100.
@@ -36,9 +45,19 @@ interface RequestGetModelList extends ShopeeRequestCommon {
   item_id: number;
 }
 
+interface RequestGetBrandList {
+  offset: number;
+  page_size: number;
+  category_id: number;
+  status: number; //Brand status , 1: normal brand, 2: pending brand
+  language?: string;
+}
+
 export {
   RequestUnlistItem as ShopeeRequestUnlistItem,
   RequestUpdateStock as ShopeeRequestUpdateStock,
   RequestGetItemList as ShopeeRequestGetItemList,
   RequestGetModelList as ShopeeRequestGetModelList,
+  RequestGetBrandList as ShopeeRequestGetBrandList,
+  RequestUpdatePrice as ShopeeRequestUpdatePrice,
 };

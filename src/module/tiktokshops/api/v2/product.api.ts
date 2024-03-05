@@ -156,12 +156,18 @@ export async function getProductDetail(productId: string, config: TiktokConfig):
   return TiktokHelper.httpGet(url, config);
 }
 
-export async function createProduct(payload: TiktokRequestCreateProduct, config) {
+/**
+ * Create Product
+ * @param {TiktokRequestCreateProduct} payload
+ * @param {TiktokConfig} config
+ * @return {Promise<any>}
+ */
+export async function createProduct(payload: TiktokRequestCreateProduct, config: TiktokConfig) {
   const timestamp = Math.floor(Date.now() / 1000);
   const commonParam = TiktokHelper.commonParameter2(config, timestamp);
   const body = payload;
   const url = TiktokHelper.genURLwithSignature(TIKTOK_PATH_202309.CREATE_PRODUCT, commonParam, config);
 
   const headers = TiktokHelper.getHeaders(config);
-  return await TiktokHelper.httpPost(url, body, headers);
+  return TiktokHelper.httpPost(url, body, headers);
 }
