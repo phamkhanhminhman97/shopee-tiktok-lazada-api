@@ -18,6 +18,31 @@ interface Categories {
   categories: Array<any>;
 }
 
+interface SizeChart {
+  is_supported: boolean;
+  is_required: boolean;
+}
+
+interface COD {
+  is_supported: boolean;
+}
+
+interface PackageDimension {
+  is_required: boolean;
+}
+
+interface ProductCertification {
+  id: string;
+  name: string;
+  is_required: boolean;
+  same_image_url: string;
+}
+interface CategoryRules {
+  product_certifications: Array<ProductCertification>;
+  size_chart: SizeChart;
+  cod: COD;
+  package_dimension: PackageDimension;
+}
 interface Brands {
   brands: Array<any>;
 }
@@ -30,6 +55,7 @@ interface ResponseUpdateStock extends TiktokResponseCommon<UpdateStock> {}
 interface ResponseDeactiveProduct extends TiktokResponseCommon<DeactiveProduct> {}
 interface ResponseActiveProduct extends TiktokResponseCommon<ActiveProduct> {}
 interface ResponseCategories extends TiktokResponseCommon<Categories> {}
+interface ResponseCategoryRules extends TiktokResponseCommon<CategoryRules> {}
 interface ResponseBrands extends TiktokResponseCommon<Brands> {}
 interface ResponseAttributes extends TiktokResponseCommon<Attributes> {}
 
@@ -38,6 +64,7 @@ export {
   ResponseActiveProduct as TiktokResponseActiveProduct,
   ResponseDeactiveProduct as TiktokResponseDeactiveProduct,
   ResponseCategories as TiktokResponseCategories,
+  ResponseCategoryRules as TiktokResponseCategoryRules,
   ResponseBrands as TiktokResponseBrands,
   ResponseAttributes as TiktokResponseAttributes,
 };
