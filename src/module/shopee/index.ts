@@ -21,8 +21,12 @@ import {
   ShopeeResponseUpdatePrice,
   ShopeeResponseUpdateStock,
 } from './dto/response/product.response';
-import { getChannelList } from './api/logistic.api';
-import { ShopeeResponseLogisticChannelList } from './dto/response/logistic.reponse';
+import { getChannelList, shipOrder, shippingParameter } from './api/logistic.api';
+import {
+  ShopeeResponseLogisticChannelList,
+  ShopeeResponseShipOrder,
+  ShopeeResponseShippingParameter,
+} from './dto/response/logistic.reponse';
 
 export class ShopeeModule {
   private config: ShopeeConfig;
@@ -80,5 +84,13 @@ export class ShopeeModule {
 
   async getBrandList(categoryId: number): Promise<ShopeeResponseGetBrandList> {
     return await getBrandList(categoryId, this.config);
+  }
+
+  async shippingParameter(orderNumber: string): Promise<ShopeeResponseShippingParameter> {
+    return await shippingParameter(orderNumber, this.config);
+  }
+
+  async shipOrder(orderNumber: string, addressId: number, timeSlot: string): Promise<ShopeeResponseShipOrder> {
+    return await shipOrder(orderNumber, addressId, timeSlot, this.config);
   }
 }

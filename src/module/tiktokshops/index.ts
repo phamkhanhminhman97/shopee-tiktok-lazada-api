@@ -1,7 +1,7 @@
 import { getOrderDetail, getOrderList } from './api/v2/order.api';
 import { TiktokConfig } from './dto/request/config.request';
 import { getAuthorizedShop } from './api/v2/authorization.api';
-import { getAttributes, getBrands, getCategories, getProductDetail } from './api/v2/product.api';
+import { createProduct, getAttributes, getBrands, getCategories, getProductDetail } from './api/v2/product.api';
 import { getPackageShippingDocument, getPackageTimeSlots, shipPackage } from './api/v2/fulfillment.api';
 import { TiktokRequestShipPackage } from './dto/request/fulfillment.request';
 import { TIKTOK_DOCUMENT_TYPE } from './common/constant';
@@ -9,6 +9,7 @@ import { TiktokResponseAttributes, TiktokResponseBrands, TiktokResponseCategorie
 import { TiktokResponseAuthorized } from './dto/response/config.response';
 import { TiktokResponsePackageTimeSlot } from './dto/response/fulfillment.response';
 import { TiktokResponseOrderDetail } from './dto/response/order.response';
+import { TiktokRequestCreateProduct } from './dto/request/product.request';
 
 export class TiktokModule {
   private config: TiktokConfig;
@@ -54,5 +55,9 @@ export class TiktokModule {
 
   async getAttributes(categoryId: string): Promise<TiktokResponseAttributes> {
     return await getAttributes(categoryId, this.config);
+  }
+
+  async createProduct(payload: TiktokRequestCreateProduct) {
+    return await createProduct(payload, this.config);
   }
 }

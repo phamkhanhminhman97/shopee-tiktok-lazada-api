@@ -15,6 +15,20 @@
 });
 ```
 
+| Function            | Status |
+| ------------------- | ------ |
+| getOrderList        | Doing  |
+| getOrderDetail      | Done   |
+| getProductDetail    | Done   |
+| getAuthorizedShop   | Done   |
+| getPackageTimeSlots | Done   |
+| shipPackage         | Done   |
+| getShippingDocument | Done   |
+| getCategories       | Done   |
+| getBrands           | Done   |
+| getAttributes       | Done   |
+| createProduct       | Done   |
+
 ![alt](./src/assets/tiktok.method.png)
 
 ## SHOPEE MODULE
@@ -27,6 +41,24 @@
   accessToken: '1234567890',
 });
 ```
+
+| Function               | Status |
+| ---------------------- | ------ |
+| getOrders              | Doing  |
+| getOrderDetail         | Done   |
+| getProductItemList     | Done   |
+| getProductItemBaseInfo | Done   |
+| updateStock            | Done   |
+| unListItem             | Done   |
+| updatePrice            | Done   |
+| addItem                | Done   |
+| getChannelList         | Done   |
+| fetchToken             | Done   |
+| getCategory            | Done   |
+| getAttributes          | Done   |
+| getBrandList           | Done   |
+| shippingParameter      | Done   |
+| shipOrder              | Done   |
 
 ![alt](./src/assets/shopee.method.png)
 
