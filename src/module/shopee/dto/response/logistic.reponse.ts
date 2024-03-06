@@ -44,7 +44,70 @@ interface LogisticsChannel {
 interface LogisticChannelList {
   logistics_channel_list: LogisticsChannel[];
 }
+interface InfoNeeded {
+  dropoff: string[];
+  pickup: string[];
+  non_integrated: string[];
+}
 
+interface Dropoff {
+  branch_list: Branch[];
+  slug_list?: Slug[];
+}
+
+interface Branch {
+  branch_id: number;
+  region: string;
+  state: string;
+  city: string;
+  address: string;
+  zipcode: string;
+  district: string;
+  town: string;
+}
+
+interface Slug {
+  slug: string;
+  slug_name: string;
+}
+
+interface Pickup {
+  address_list: PickupAddress[];
+}
+
+interface PickupAddress {
+  address_id: number;
+  region: string;
+  state: string;
+  city: string;
+  district: string;
+  town: string;
+  address: string;
+  zipcode: string;
+  address_flag: string[];
+  time_slot_list: PickupTime[] | null;
+}
+
+interface PickupTime {
+  date: number; // timestamp
+  time_text?: string;
+  pickup_time_id: string;
+}
+
+interface ShippingParameter {
+  info_needed: InfoNeeded;
+  dropoff: Dropoff | null;
+  pickup: Pickup;
+}
+
+interface ShipOrder {}
+
+interface ResponseShippingParameter extends ShopeeResponseCommon<ShippingParameter> {}
 interface ResponseLogisticChannelList extends ShopeeResponseCommon<LogisticChannelList> {}
+interface ResponseShipOrder extends ShopeeResponseCommon<ShipOrder> {}
 
-export { ResponseLogisticChannelList as ShopeeResponseLogisticChannelList };
+export {
+  ResponseLogisticChannelList as ShopeeResponseLogisticChannelList,
+  ResponseShippingParameter as ShopeeResponseShippingParameter,
+  ResponseShipOrder as ShopeeResponseShipOrder,
+};
