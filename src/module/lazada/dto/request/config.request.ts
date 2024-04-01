@@ -1,10 +1,12 @@
 interface Config {
   appKey: string;
   appSecret: string;
-  countryCode: string;
-  shopId: string;
-  appAccessToken: string;
-  refreshToken: string;
+  countryCode?: string;
+  shopId?: string;
+  appAccessToken?: string;
+  refreshToken?: string;
+  expiresIn?: number;
+  refreshExpiresIn?: number;
 }
 
 export interface ConfigList {

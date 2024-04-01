@@ -1,9 +1,10 @@
 export interface Config {
   appKey: string;
   appSecret: string;
-  shopId: string;
+  shopId?: string;
   accessToken?: string;
-  accessTokenExpire?: string;
+  accessTokenExpire?: number;
+  refreshTokenExipre?: number;
   refreshToken?: string;
   shopCipher?: string;
 }

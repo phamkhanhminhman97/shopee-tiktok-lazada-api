@@ -2,6 +2,7 @@ import * as crypto from 'crypto-js';
 import { TIKTOK_END_POINT } from './constant';
 import { TiktokConfig } from '../dto/request/config.request';
 import axios, { AxiosResponse } from 'axios';
+
 export function commonParameter(config, timestamp) {
   const { appKey } = config;
   const commonParam = '?app_key=' + appKey + '&sign=' + '' + '&timestamp=' + timestamp;
@@ -25,6 +26,7 @@ function objKeySort(obj) {
   }
   return newObj;
 }
+
 function signRequest(params: Record<string, string>, path: string, config: Record<string, any>, body: Record<string, any>) {
   const { appSecret } = config;
   delete params['sign'];
@@ -48,6 +50,7 @@ function parseParmsURL(url) {
   });
   return params;
 }
+
 function genURLwithSignature(path, commonParam, config, body?) {
   const url = new URL(TIKTOK_END_POINT + path + commonParam);
   const params = parseParmsURL(url);
@@ -74,7 +77,7 @@ function handleError(err: any) {
   return err.response ? err.response.data : { error: 'Unknown error' };
 }
 
-function getHeaders(config: TiktokConfig, contentType: string = 'application/json') {
+function getHeaders(config: TiktokConfig, contentType = 'application/json') {
   return {
     'Content-Type': contentType,
     'x-tts-access-token': config.accessToken,
@@ -91,21 +94,45 @@ async function httpPost(url: string, body: any, headers: any) {
     return handleError(err);
   }
 }
+
 async function httpGet(url: string, config: TiktokConfig) {
   try {
     const res: AxiosResponse = await axios.get(url, {
       headers: getHeaders(config),
     });
-    return res.data.data;
+    return res.data;
   } catch (err: any) {
     return handleError(err);
   }
+}
+
+function getTimestamp() {
+  return new Date().getTime();
+}
+
+function isAccessTokenValid(time: any): boolean {
+  if (time.toString().length === 13) {
+    time = time / 1000;
+  }
+  const now = Math.floor(Date.now() / 1000);
+  return time > now;
+}
+
+function isTokenExpired(time: any): boolean {
+  if (time.toString().length === 13) {
+    time = time / 1000;
+  }
+  const now = Math.floor(Date.now() / 1000);
+
+  // If expiration time is less than or equal to current time, it's expired
+  return time <= now;
 }
 
 export {
   httpGet,
   httpPost,
   getHeaders,
+  getTimestamp,
   commonParameter2,
   objKeySort,
   signRequest,
@@ -113,4 +140,6 @@ export {
   genURLwithSignature,
   getTimestampHoursAgo,
   replacePlaceholder,
+  isAccessTokenValid,
+  isTokenExpired,
 };

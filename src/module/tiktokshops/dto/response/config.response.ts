@@ -1,5 +1,5 @@
 interface ResponseCommon<T> {
-  code: string;
+  code: string | number;
   message: string;
   request_id: string;
   data: T;
@@ -26,11 +26,15 @@ interface ShopList {
   type: number;
 }
 
-interface ResponseAccessToken extends ResponseCommon<AccessToken> {}
-interface ResponseAuthorizedShop extends ResponseCommon<ShopList> {}
+type RefreshToken = AccessToken;
+
+type ResponseAccessToken = ResponseCommon<AccessToken>;
+type ResponseAuthorizedShop = ResponseCommon<ShopList>;
+type ResponseRefreshToken = ResponseCommon<RefreshToken>;
 
 export {
   ResponseCommon as TiktokResponseCommon,
   ResponseAccessToken as TiktokResponseAccessToken,
   ResponseAuthorizedShop as TiktokResponseAuthorized,
+  ResponseRefreshToken as TiktokResponseRefreshToken,
 };

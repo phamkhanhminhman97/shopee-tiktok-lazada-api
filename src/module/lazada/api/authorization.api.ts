@@ -1,6 +1,8 @@
 import { LAZADA_PATH, LZD_ALGORITHM, LZD_END_POINT_AUTH } from '../common/constant';
-import { execute, executeAuth } from '../common/helper';
+import { executeAuth } from '../common/helper';
 import { LazadaConfig } from '../dto/request/config.request';
+import { LazadaResponseAccessToken } from '../dto/response/config.response';
+import * as LazadaHelper from '../common/helper';
 
 /**
  *
@@ -9,20 +11,17 @@ import { LazadaConfig } from '../dto/request/config.request';
  * @param shopId
  * @returns
  */
-export function generateAuthLink(host: string, appKey: string, shopId: string) {
-  const redirect = `https://${host}/marketplace/lazada/redirect`;
-
+export function generateAuthLink(redirectURL: string, appKey: string, uuid: string) {
   const queryParams = new URLSearchParams({
     response_type: 'code',
-    redirect_uri: redirect,
+    redirect_uri: redirectURL,
     client_id: appKey,
-    state: shopId,
+    uuid,
   });
 
   const url = decodeURIComponent(`${LZD_END_POINT_AUTH}?${queryParams}`);
-  //  const url = `${LZD_END_POINT_AUTH}?response_type=code&force_auth=true&redirect_uri=${redirect}&client_id=${appKey}&state=${shopId}`;
 
-  return { url, redirect };
+  return { url, redirect: redirectURL };
 }
 
 /**
@@ -31,14 +30,15 @@ export function generateAuthLink(host: string, appKey: string, shopId: string) {
  * @param config
  * @returns
  */
-export function fetchTokenWithAuthCode(authCode: string, config: LazadaConfig) {
+export function fetchTokenWithAuthCode(authCode: string, uuid: string, config: LazadaConfig): Promise<LazadaResponseAccessToken> {
   const { appKey, appSecret } = config;
 
   const payload = {
     app_key: appKey,
     sign_method: LZD_ALGORITHM,
-    timestamp: new Date().getTime(),
+    timestamp: LazadaHelper.getTimestampMilisec(),
     code: authCode,
+    uuid,
   };
 
   return executeAuth(LAZADA_PATH.FETCH_TOKEN, payload, appSecret);
@@ -49,7 +49,7 @@ export async function refreshToken(config: LazadaConfig) {
     refresh_token: config.refreshToken,
     app_key: config.appKey,
     sign_method: LZD_ALGORITHM,
-    timestamp: new Date().getTime(),
+    timestamp: LazadaHelper.getTimestampMilisec(),
   };
-  return execute(LAZADA_PATH.REFRESH_TOKEN, payload, config.appSecret);
+  return LazadaHelper.httpGet(LAZADA_PATH.REFRESH_TOKEN, payload, config.appSecret);
 }

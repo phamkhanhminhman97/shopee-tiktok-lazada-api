@@ -5,14 +5,14 @@ interface StockInfo {
   available_stock: number;
 }
 
-interface Sku {
+interface Sku1 {
   id: string; //sku_id
   stock_infos: StockInfo;
 }
 
 interface RequestUpdateStock extends TiktokRequestCommon {
   product_id: string;
-  skus: Array<Sku>;
+  skus: Array<Sku1>;
 }
 
 interface RequestDeactiveProduct extends TiktokRequestCommon {

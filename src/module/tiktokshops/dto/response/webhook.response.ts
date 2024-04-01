@@ -39,15 +39,15 @@ interface AuthExpire {
   expiration_time: string; // 1627587506
 }
 
-interface WebhookOrder extends WebhookBase<Order> {}
+type WebhookOrder = WebhookBase<Order>;
 
-interface WebhookReturn extends WebhookBase<Return> {}
+type WebhookReturn = WebhookBase<Return>;
 
-interface WebhookAddressUpdate extends WebhookBase<Address> {}
+type WebhookAddressUpdate = WebhookBase<Address>;
 
-interface WebhookCancellation extends WebhookBase<Cancellation> {}
+type WebhookCancellation = WebhookBase<Cancellation>;
 
-interface WebhookUpcomingAuthExpire extends WebhookBase<AuthExpire> {}
+type WebhookUpcomingAuthExpire = WebhookBase<AuthExpire>;
 
 export {
   WebhookOrder as TiktokWebhookOrder,

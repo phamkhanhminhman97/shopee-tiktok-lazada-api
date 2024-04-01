@@ -60,14 +60,14 @@ interface Attributes {
   attributes: Array<any>;
 }
 
-interface ResponseUpdateStock extends TiktokResponseCommon<UpdateStock> {}
-interface ResponseDeactiveProduct extends TiktokResponseCommon<DeactiveProduct> {}
-interface ResponseActiveProduct extends TiktokResponseCommon<ActiveProduct> {}
-interface ResponseCategories extends TiktokResponseCommon<Categories> {}
-interface ResponseCategoryRules extends TiktokResponseCommon<CategoryRules> {}
-interface ResponseBrands extends TiktokResponseCommon<Brands> {}
-interface ResponseAttributes extends TiktokResponseCommon<Attributes> {}
-interface ResponseUploadImage extends TiktokResponseCommon<UploadImage> {}
+type ResponseUpdateStock = TiktokResponseCommon<UpdateStock>;
+type ResponseDeactiveProduct = TiktokResponseCommon<DeactiveProduct>;
+type ResponseActiveProduct = TiktokResponseCommon<ActiveProduct>;
+type ResponseCategories = TiktokResponseCommon<Categories>;
+type ResponseCategoryRules = TiktokResponseCommon<CategoryRules>;
+type ResponseBrands = TiktokResponseCommon<Brands>;
+type ResponseAttributes = TiktokResponseCommon<Attributes>;
+type ResponseUploadImage = TiktokResponseCommon<UploadImage>;
 
 export {
   ResponseUpdateStock as TiktokResponseUpdateStock,

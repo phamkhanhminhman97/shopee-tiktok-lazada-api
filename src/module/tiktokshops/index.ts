@@ -1,12 +1,12 @@
 import { getOrderDetail, getOrderList } from './api/v2/order.api';
 import { TiktokConfig } from './dto/request/config.request';
-import { getAuthorizedShop } from './api/v2/authorization.api';
+import { fetchTokenWithAuthCode, getAuthorizedShop, refreshToken } from './api/v2/authorization.api';
 import { createProduct, getAttributes, getBrands, getCategories, getProductDetail } from './api/v2/product.api';
 import { getPackageShippingDocument, getPackageTimeSlots, shipPackage } from './api/v2/fulfillment.api';
 import { TiktokRequestShipPackage } from './dto/request/fulfillment.request';
 import { TIKTOK_DOCUMENT_TYPE } from './common/constant';
 import { TiktokResponseAttributes, TiktokResponseBrands, TiktokResponseCategories } from './dto/response/product.response';
-import { TiktokResponseAuthorized } from './dto/response/config.response';
+import { TiktokResponseAccessToken, TiktokResponseAuthorized, TiktokResponseRefreshToken } from './dto/response/config.response';
 import { TiktokResponsePackageTimeSlot } from './dto/response/fulfillment.response';
 import { TiktokResponseOrderDetail } from './dto/response/order.response';
 import { TiktokRequestCreateProduct } from './dto/request/product.request';
@@ -15,6 +15,17 @@ export class TiktokModule {
   private config: TiktokConfig;
   constructor(config: TiktokConfig) {
     this.config = config;
+  }
+
+  setConfig(config: TiktokConfig) {
+    this.config.accessToken = config.accessToken;
+    this.config.refreshToken = config.refreshToken;
+    this.config.accessTokenExpire = config.accessTokenExpire;
+    this.config.refreshTokenExipre = config.refreshTokenExipre;
+  }
+
+  getConfig(): TiktokConfig {
+    return this.config;
   }
 
   async getOrderList(beforeHours: number): Promise<any> {
@@ -59,5 +70,13 @@ export class TiktokModule {
 
   async createProduct(payload: TiktokRequestCreateProduct) {
     return await createProduct(payload, this.config);
+  }
+
+  async refreshToken(): Promise<TiktokResponseRefreshToken> {
+    return await refreshToken(this.config);
+  }
+
+  async fetchTokenWithAuthCode(authCode: string): Promise<TiktokResponseAccessToken> {
+    return await fetchTokenWithAuthCode(authCode, this.config);
   }
 }

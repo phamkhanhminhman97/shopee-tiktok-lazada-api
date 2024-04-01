@@ -1,5 +1,5 @@
 import { LAZADA_PATH, LZD_ALGORITHM } from '../common/constant';
-import { execute } from '../common/helper';
+import * as LazadaHelper from '../common/helper';
 
 /**
  *
@@ -12,10 +12,10 @@ export async function getOrderById(info, order_id: string) {
     order_id,
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
-    timestamp: new Date().getTime(),
+    timestamp: LazadaHelper.getTimestampMilisec(),
     access_token: info.appAccessToken,
   };
-  return execute(LAZADA_PATH.SINGLE_ORDER_GET, obj, info.appSecret);
+  return LazadaHelper.httpGet(LAZADA_PATH.SINGLE_ORDER_GET, obj, info.appSecret);
 }
 
 export async function getOrdersBeforeSomeDay(info, offset = 1, limit = 100) {
@@ -27,9 +27,9 @@ export async function getOrdersBeforeSomeDay(info, offset = 1, limit = 100) {
     limit,
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
-    timestamp: new Date().getTime(),
+    timestamp: LazadaHelper.getTimestampMilisec(),
     access_token: info.appAccessToken,
     update_after: fifteenDaysAgo.toISOString(),
   };
-  return execute(LAZADA_PATH.ORDERS_GET, obj, info.appSecret);
+  return LazadaHelper.httpGet(LAZADA_PATH.ORDERS_GET, obj, info.appSecret);
 }

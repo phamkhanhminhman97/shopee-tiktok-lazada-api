@@ -1,5 +1,7 @@
 import { LAZADA_PATH, LZD_ALGORITHM } from '../common/constant';
-import { execute, executePOST, priceParametersXML, productParametersXML, toProductXML, toRequestProductsXML } from '../common/helper';
+import { executePOST, priceParametersXML, productParametersXML, toProductXML, toRequestProductsXML } from '../common/helper';
+import * as LazadaHelper from '../common/helper';
+import { LazadaConfig } from '../dto/request/config.request';
 import { LZD_UPDATE_SELLABLE_QUANTITY, LZD_UPDATE_STATUS_PRODUCT } from '../dto/request/product.request';
 
 /**
@@ -20,7 +22,7 @@ export async function getProducts(info) {
     obj['offset'] = i;
     obj['limit'] = 50;
     try {
-      const response = await execute(LAZADA_PATH.PRODUCT_GET, obj, info.appSecret);
+      const response = await LazadaHelper.httpGet(LAZADA_PATH.PRODUCT_GET, obj, info.appSecret);
       if (!response?.data?.products) break;
       productList.push(...response.data.products);
     } catch (err) {
@@ -43,9 +45,9 @@ export async function getProductItem(info, itemId: number) {
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
     access_token: info.appAccessToken,
-    timestamp: new Date().getTime(),
+    timestamp: LazadaHelper.getTimestampMilisec(),
   };
-  return execute(LAZADA_PATH.PRODUCT_ITEM_GET, obj, info.appSecret);
+  return LazadaHelper.httpGet(LAZADA_PATH.PRODUCT_ITEM_GET, obj, info.appSecret);
 }
 
 /**
@@ -60,11 +62,11 @@ export async function updateSellableQuantity(info, itemId, payload: Array<LZD_UP
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
     payload: toRequestProductsXML(payload.map((x) => toProductXML(itemId, x.skuId, x?.sellerSku, x.quantity))),
-    timestamp: new Date().getTime(),
+    timestamp: LazadaHelper.getTimestampMilisec(),
     access_token: info.appAccessToken,
   };
 
-  return execute(LAZADA_PATH.UPDATE_SELLABLE_QUANTITY, obj, info.appSecret);
+  return LazadaHelper.httpGet(LAZADA_PATH.UPDATE_SELLABLE_QUANTITY, obj, info.appSecret);
 }
 
 /**
@@ -79,7 +81,7 @@ export async function updateStatusProduct(info, itemId: number, payload: Array<L
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
     payload: toRequestProductsXML(payload.map((x) => productParametersXML(itemId, x.skuId, x?.sellerSku, x.status))),
-    timestamp: new Date().getTime(),
+    timestamp: LazadaHelper.getTimestampMilisec(),
     access_token: info.appAccessToken,
   };
   return executePOST(LAZADA_PATH.UPDATE_PRODUCT, obj, info.appSecret);
@@ -97,7 +99,7 @@ export async function updatePrice(info, itemId: number, payload) {
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
     payload: toRequestProductsXML(payload.map((x) => priceParametersXML(itemId, x.skuId, x?.sellerSku, x.price))),
-    timestamp: new Date().getTime(),
+    timestamp: LazadaHelper.getTimestampMilisec(),
     access_token: info.appAccessToken,
   };
   return executePOST(LAZADA_PATH.UPDATE_PRICE, obj, info.appSecret);
@@ -108,7 +110,60 @@ export async function getCategoryTree(info) {
     app_key: info.appKey,
     sign_method: LZD_ALGORITHM,
     access_token: info.appAccessToken,
-    timestamp: new Date().getTime(),
+    timestamp: LazadaHelper.getTimestampMilisec(),
   };
-  return execute('/category/tree/get', obj, info.appSecret);
+  return LazadaHelper.httpGet('/category/tree/get', obj, info.appSecret);
+}
+
+export async function getCategorySuggestion(info, productName: string) {
+  const obj = {
+    app_key: info.appKey,
+    sign_method: LZD_ALGORITHM,
+    access_token: info.appAccessToken,
+    timestamp: LazadaHelper.getTimestampMilisec(),
+    product_name: productName,
+  };
+  return LazadaHelper.httpGet('/product/category/suggestion/get', obj, info.appSecret);
+}
+
+export async function getCategoryAttributes(info, categoryId: string) {
+  const obj = {
+    app_key: info.appKey,
+    sign_method: LZD_ALGORITHM,
+    access_token: info.appAccessToken,
+    timestamp: LazadaHelper.getTimestampMilisec(),
+    primary_category_id: categoryId,
+  };
+  return LazadaHelper.httpGet('/category/attributes/get', obj, info.appSecret);
+}
+
+/**
+ *
+ * @param {} payload
+ * @param {LazadaConfig} config
+ * @returns
+ */
+export async function createProduct(payload, config: LazadaConfig) {
+  const obj = {
+    app_key: config.appKey,
+    sign_method: LZD_ALGORITHM,
+    payload: LazadaHelper.createProductParametersXML2(payload),
+    timestamp: LazadaHelper.getTimestampMilisec(),
+    access_token: config.appAccessToken,
+  };
+  console.log(obj);
+
+  return executePOST(LAZADA_PATH.CREATE_PRODUCT, obj, config.appSecret);
+}
+
+export async function getBrandByPages(info) {
+  const obj = {
+    app_key: info.appKey,
+    sign_method: LZD_ALGORITHM,
+    access_token: info.appAccessToken,
+    timestamp: LazadaHelper.getTimestampMilisec(),
+    startRow: 0,
+    pageSize: 20,
+  };
+  return LazadaHelper.httpGet('/category/brands/query', obj, info.appSecret);
 }

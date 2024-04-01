@@ -1,20 +1,20 @@
 interface CountryUserInfo {
   country: string;
+  user_id: string;
   seller_id: string;
-  user_id: number;
+  short_code: string;
 }
 
-interface TokenData {
-  access_token: string;
-  refresh_token: string;
-  country: string;
-  refresh_expires_in: number;
-  account_platform: string;
+interface ResponseGetAccessToken {
   expires_in: number;
-  account: string;
+  country: string;
   country_user_info: CountryUserInfo[];
+  account_platform: string;
+  access_token: string;
+  account: string;
+  refresh_expires_in: number;
+  refresh_token: string;
+  code: string;
 }
 
-type ResponseAccessToken = TokenData;
-
-export { ResponseAccessToken as LazadaResponseAccessToken };
+export { ResponseGetAccessToken as LazadaResponseAccessToken };

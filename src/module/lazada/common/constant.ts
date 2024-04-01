@@ -84,6 +84,11 @@ enum PATH {
   TRACE_ORDER = '/logistic/order/trace',
   FETCH_TOKEN = '/auth/token/create',
   REFRESH_TOKEN = '/auth/token/refresh',
+  CREATE_PRODUCT = '/product/create',
+}
+
+enum CODE {
+  SUCCESS = '0',
 }
 
 export {
@@ -91,6 +96,7 @@ export {
   REVERSE_STATUS as LAZADA_REVERSE_STATUS,
   ORDER_STATUS as LAZADA_ORDER_STATUS,
   PATH as LAZADA_PATH,
+  CODE as LAZADA_CODE,
   WEBHOOK_TYPE as LAZADA_WEBHOOK_TYPE,
   END_POINT as LZD_END_POINT,
   END_POINT_AUTH as LZD_END_POINT_AUTH,

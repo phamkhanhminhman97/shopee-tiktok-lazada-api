@@ -50,7 +50,7 @@ export function priceParametersXML(itemId, skuId, sellerSku, price) {
   return `<Sku> <ItemId>${itemId}</ItemId> <SkuId>${skuId}</SkuId> <SellerSku>${sellerSku}</SellerSku><Price>${price}</Price></Sku>`;
 }
 
-export async function execute(path: string, payload: any, appSecret: string) {
+async function httpGet(path: string, payload: any, appSecret: string) {
   const sortObject = keySort(payload);
   const params = parseToRequestParam(sortObject);
   const signature = createSignature(path, sortObject, appSecret);
@@ -79,14 +79,81 @@ export async function executeAuth(path: string, payload: any, appSecret: string)
   const sortObject = keySort(payload);
   const params = parseToRequestParam(sortObject);
   const signature = createSignature(path, sortObject, appSecret);
+
   try {
     const res = await axios.get(`https://auth.lazada.com/rest${path}?${params}&sign=${signature}`);
+
     return res.data;
   } catch (e) {
     console.log(e);
   }
 }
 
-export function isAccessTokenValid(time: number): boolean {
-  return time > 0;
+function createProductParametersXML2(payload) {
+  const { primaryCategory, images, name, description, disableAttributeAutoFill, brand_id, video, phoneType, warrantyType, skus } = payload;
+
+  // Build the Skus XML
+  const skusXML = skus
+    .map((sku) => {
+      return `
+        <Sku>
+            <SellerSku>${sku.sellerSku}</SellerSku>
+            <quantity>${sku.quantity}</quantity>
+            <price>${sku.price}</price>
+            <special_price>${sku.specialPrice}</special_price>
+            <package_height>${sku.packageHeight}</package_height>
+            <package_length>${sku.packageLength}</package_length>
+            <package_width>${sku.packageWidth}</package_width>
+            <package_weight>${sku.packageWeight}</package_weight>
+            <Images>
+                ${sku.images.map((image) => `<Image>${image}</Image>`).join('\n')}
+            </Images>
+        </Sku>
+    `;
+    })
+    .join('\n');
+
+  // Build the final XML
+  const xml = `<Request>
+    <Product>
+        <PrimaryCategory>${primaryCategory}</PrimaryCategory>
+        <Images>
+            ${images.map((image) => `<Image>${image}</Image>`).join('\n')}
+        </Images>
+        <Attributes>
+            <name>${name}</name>
+            <description>${description}</description>
+            <disableAttributeAutoFill>${disableAttributeAutoFill}</disableAttributeAutoFill>
+            <brand_id>${brand_id}</brand_id>
+            <video>${video}</video>
+            <phone_type>${phoneType}</phone_type>
+            <warranty_type>${warrantyType}</warranty_type>
+        </Attributes>
+        <Skus>
+            ${skusXML}
+        </Skus>
+    </Product>
+</Request>`;
+
+  return xml;
 }
+
+function getTimestampMilisec() {
+  return new Date().getTime();
+}
+
+function getTimestampSec() {
+  return Math.floor(Date.now() / 1000);
+}
+
+function isTokenExpired(time: any): boolean {
+  if (time.toString().length === 13) {
+    time = time / 1000;
+  }
+  const now = Math.floor(Date.now() / 1000);
+
+  // If expiration time is less than or equal to current time, it's expired
+  return time <= now;
+}
+
+export { httpGet, getTimestampMilisec, getTimestampSec, isTokenExpired, createProductParametersXML2 };

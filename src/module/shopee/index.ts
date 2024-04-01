@@ -30,7 +30,7 @@ import {
 import { fetchTokenWithAuthCode, fetchTokenWithRefreshToken } from './api/authorization.api';
 import { ShopeeResponseRefreshAccessToken } from './dto/response/config.response';
 
-export class ShopeeClient {
+export class ShopeeModule {
   private config: ShopeeConfig;
   constructor(config: ShopeeConfig) {
     this.config = config;
