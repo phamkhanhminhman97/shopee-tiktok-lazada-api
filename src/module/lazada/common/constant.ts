@@ -83,6 +83,7 @@ enum PATH {
   UPDATE_PRODUCT = '/product/update',
   TRACE_ORDER = '/logistic/order/trace',
   FETCH_TOKEN = '/auth/token/create',
+  REFRESH_TOKEN = '/auth/token/refresh',
 }
 
 export {

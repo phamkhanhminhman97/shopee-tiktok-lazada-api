@@ -1,6 +1,7 @@
 import { ShopeeConfig } from '../dto/request/config.request';
 import axios, { AxiosResponse } from 'axios';
 import { createHmac } from 'crypto';
+
 function commonParameter(config: ShopeeConfig, signature: string, timestamp: number) {
   const { partnerId, accessToken, shopId } = config;
   const commonParam = `?shop_id=${shopId}&partner_id=${partnerId}&access_token=${accessToken}&sign=${signature}&timestamp=${timestamp}`;
@@ -86,7 +87,7 @@ function handleError(err: any) {
   return err.response ? err.response.data : { error: 'Unknown error' };
 }
 
-function getHeaders(config: ShopeeConfig, contentType: string = 'application/json') {
+function getHeaders(config: ShopeeConfig, contentType = 'application/json') {
   return {
     'Content-Type': contentType,
   };
@@ -114,6 +115,25 @@ async function httpGet(url: string, config: ShopeeConfig) {
   }
 }
 
+function isAccessTokenValid(time: any): boolean {
+  const now = Math.floor(Date.now() / 1000);
+  return time > now;
+}
+
+function isTokenExpired(time: any): boolean {
+  if (time.toString().length === 13) {
+    time = time / 1000;
+  }
+  const now = Math.floor(Date.now() / 1000);
+
+  // If expiration time is less than or equal to current time, it's expired
+  return time <= now;
+}
+
+function refreshTokenExpire30Days() {
+  return getTimestampNow() + 30 * 24 * 60 * 60;
+}
+
 export {
   buildCommonParameters,
   getTimestampMinutesAgo,
@@ -125,4 +145,7 @@ export {
   httpPost,
   getHeaders,
   buildCommonParams,
+  isAccessTokenValid,
+  isTokenExpired,
+  refreshTokenExpire30Days,
 };

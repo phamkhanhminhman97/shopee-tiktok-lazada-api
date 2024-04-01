@@ -19,31 +19,11 @@ interface ResponseComment {
   comment_reply?: CommentReply;
 }
 
-interface Item {
-  item_id: number;
-  item_status: string;
-  update_time: number;
-}
-
 interface ItemList {
   item: Array<Item>;
   total_count: number;
   has_next_page: boolean;
   next_offset: number;
-}
-
-interface SellerStock {
-  location_id: string;
-  stock: number;
-}
-
-interface StockInfoV2 {
-  summary_info: {
-    total_reserved_stock: number;
-    total_available_stock: number;
-  };
-  seller_stock: Array<SellerStock>;
-  shopee_stock: Array<SellerStock>;
 }
 
 interface Model {
@@ -63,7 +43,7 @@ interface ModelList {
   tier_variation: Array<any>;
   model: Array<Model>;
 }
-interface ResponseGetModelList extends ShopeeResponseCommon<ModelList> {}
+type ResponseGetModelList = ShopeeResponseCommon<ModelList>;
 
 interface FailureList {
   item_id: number;
@@ -83,19 +63,6 @@ interface UnlistItem {
 interface UpdateStock {
   failure_list: Array<FailureList>;
   success_list: Array<SuccessList>;
-}
-
-interface AttributeValue {
-  value_id: number;
-  original_value_name: string;
-  value_unit: string;
-}
-
-interface Attribute {
-  attribute_id: number;
-  original_attribute_name: string;
-  is_mandatory: boolean;
-  attribute_value_list: AttributeValue[];
 }
 
 interface PriceInfo {
@@ -147,11 +114,6 @@ interface Wholesale {
   max_count: number;
   unit_price: number;
   inflated_price_of_unit_price: number;
-}
-
-interface Brand {
-  brand_id: number;
-  original_brand_name: string;
 }
 
 interface ComplaintPolicy {
@@ -314,13 +276,13 @@ interface UpdatePrice {
   success_list: Array<any>;
 }
 
-interface ResponseUnlistItem extends ShopeeResponseCommon<UnlistItem> {}
-interface ResponseUpdateStock extends ShopeeResponseCommon<UpdateStock> {}
-interface ResponseGetItemList extends ShopeeResponseCommon<ItemList> {}
-interface ResponseProductBaseItemInfo extends ShopeeResponseCommon<ProductBaseItemInfo> {}
-interface ResponseGetCategories extends ShopeeResponseCommon<Categories> {}
-interface ResponseGetAttributes extends ShopeeResponseCommon<AttributeValues> {}
-interface ResponseUpdatePrice extends ShopeeResponseCommon<UpdatePrice> {}
+type ResponseUnlistItem = ShopeeResponseCommon<UnlistItem>;
+type ResponseUpdateStock = ShopeeResponseCommon<UpdateStock>;
+type ResponseGetItemList = ShopeeResponseCommon<ItemList>;
+type ResponseProductBaseItemInfo = ShopeeResponseCommon<ProductBaseItemInfo>;
+type ResponseGetCategories = ShopeeResponseCommon<Categories>;
+type ResponseGetAttributes = ShopeeResponseCommon<AttributeValues>;
+type ResponseUpdatePrice = ShopeeResponseCommon<UpdatePrice>;
 
 export {
   ResponseComment as ShopeeResponseComment,

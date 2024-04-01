@@ -87,7 +87,6 @@ export async function executeAuth(path: string, payload: any, appSecret: string)
   }
 }
 
-export function isAccessTokenValid(time: any): boolean {
-  const now = Math.floor(Date.now() / 1000);
-  return time > now;
+export function isAccessTokenValid(time: number): boolean {
+  return time > 0;
 }

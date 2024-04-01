@@ -6,12 +6,14 @@ export interface MultiQuantity {
 }
 
 export interface Config {
-  partnerId: string;
+  partnerId: number;
   partnerKey: string;
-  shopId: string;
-  accessToken: string;
+  shopId?: string;
+  accessToken?: string;
   refreshToken?: string;
   tokenExpired?: string;
+  expireIn?: number;
+  refreshTokenExpireIn?: number;
 }
 
 export interface ConfigList {

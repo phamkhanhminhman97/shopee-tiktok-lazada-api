@@ -1,5 +1,5 @@
 import { ShopeeConfig } from './dto/request/config.request';
-import { fetchTokenWithAuthCode, getOrderDetail, getOrders } from './api/order.api';
+import { getOrderDetail, getOrders } from './api/order.api';
 import {
   getProductItemBaseInfo,
   getProductItemList,
@@ -27,11 +27,22 @@ import {
   ShopeeResponseShipOrder,
   ShopeeResponseShippingParameter,
 } from './dto/response/logistic.reponse';
+import { fetchTokenWithAuthCode, fetchTokenWithRefreshToken } from './api/authorization.api';
+import { ShopeeResponseRefreshAccessToken } from './dto/response/config.response';
 
-export class ShopeeModule {
+export class ShopeeClient {
   private config: ShopeeConfig;
   constructor(config: ShopeeConfig) {
     this.config = config;
+  }
+
+  setConfig(config: ShopeeConfig) {
+    this.config.accessToken = config.accessToken;
+    this.config.refreshToken = config.refreshToken;
+  }
+
+  getConfig() {
+    return this.config;
   }
 
   async getOrders(beforeMinutes: number): Promise<any> {
@@ -70,7 +81,7 @@ export class ShopeeModule {
     return await getChannelList(this.config);
   }
 
-  async fetchToken(authCode): Promise<any> {
+  async fetchToken(authCode: string): Promise<any> {
     return await fetchTokenWithAuthCode(authCode, this.config);
   }
 
@@ -92,5 +103,13 @@ export class ShopeeModule {
 
   async shipOrder(orderNumber: string, addressId: number, timeSlot: string): Promise<ShopeeResponseShipOrder> {
     return await shipOrder(orderNumber, addressId, timeSlot, this.config);
+  }
+
+  async refreshToken(): Promise<ShopeeResponseRefreshAccessToken> {
+    return await fetchTokenWithRefreshToken(this.config);
+  }
+
+  async generateAuthLink() {
+    // return await generateAuthLink()
   }
 }

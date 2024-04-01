@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { SHOPEE_END_POINT, SHOPEE_PATH } from '../common/constant';
 import { ShopeeConfig } from '../dto/request/config.request';
-import { createHmac } from 'crypto';
 import * as ShopeeHelper from '../common/helper';
 import { ShopeeResponseOrderDetail } from '../dto/response/order.response';
 
@@ -54,29 +53,4 @@ export async function getOrderDetail(orderNumber: string, config: ShopeeConfig):
   const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.ORDER_DETAIL}${commonParam}`;
 
   return ShopeeHelper.httpGet(url, config);
-}
-
-/**
- * Fetch token with auth code
- * @param authCode
- * @param config
- * @returns
- */
-export async function fetchTokenWithAuthCode(authCode: string, config: ShopeeConfig): Promise<any> {
-  const { partnerId, shopId, partnerKey } = config;
-  const timestamp = ShopeeHelper.getTimestampNow();
-  const params = [partnerId, SHOPEE_PATH.AUTH_TOKEN, timestamp.toString()];
-  const baseString = params.reduce((prev, curr) => (prev += curr), '');
-  const signature = createHmac('sha256', partnerKey).update(baseString).digest('hex');
-
-  const commonParam = `?sign=${signature}&partner_id=${partnerId}&timestamp=${timestamp}`;
-  const body = {
-    code: authCode,
-    partner_id: parseInt(partnerId),
-    shop_id: parseInt(shopId),
-  };
-  const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.AUTH_TOKEN}${commonParam}`;
-  const headers = ShopeeHelper.getHeaders(config);
-
-  return ShopeeHelper.httpPost(url, body, headers);
 }

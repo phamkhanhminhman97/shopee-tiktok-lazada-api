@@ -1,5 +1,5 @@
 import { LAZADA_PATH, LZD_ALGORITHM, LZD_END_POINT_AUTH } from '../common/constant';
-import { executeAuth } from '../common/helper';
+import { execute, executeAuth } from '../common/helper';
 import { LazadaConfig } from '../dto/request/config.request';
 
 /**
@@ -42,4 +42,14 @@ export function fetchTokenWithAuthCode(authCode: string, config: LazadaConfig) {
   };
 
   return executeAuth(LAZADA_PATH.FETCH_TOKEN, payload, appSecret);
+}
+
+export async function refreshToken(config: LazadaConfig) {
+  const payload = {
+    refresh_token: config.refreshToken,
+    app_key: config.appKey,
+    sign_method: LZD_ALGORITHM,
+    timestamp: new Date().getTime(),
+  };
+  return execute(LAZADA_PATH.REFRESH_TOKEN, payload, config.appSecret);
 }

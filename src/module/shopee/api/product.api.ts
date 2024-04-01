@@ -91,7 +91,7 @@ export async function updateStock(
         model_id: shopeeModelId,
         seller_stock: [
           {
-            stock: stock,
+            stock,
           },
         ],
       },

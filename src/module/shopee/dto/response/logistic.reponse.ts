@@ -100,11 +100,13 @@ interface ShippingParameter {
   pickup: Pickup;
 }
 
-interface ShipOrder {}
+interface ShipOrder {
+  error: string;
+}
 
-interface ResponseShippingParameter extends ShopeeResponseCommon<ShippingParameter> {}
-interface ResponseLogisticChannelList extends ShopeeResponseCommon<LogisticChannelList> {}
-interface ResponseShipOrder extends ShopeeResponseCommon<ShipOrder> {}
+type ResponseShippingParameter = ShopeeResponseCommon<ShippingParameter>;
+type ResponseLogisticChannelList = ShopeeResponseCommon<LogisticChannelList>;
+type ResponseShipOrder = ShopeeResponseCommon<ShipOrder>;
 
 export {
   ResponseLogisticChannelList as ShopeeResponseLogisticChannelList,
