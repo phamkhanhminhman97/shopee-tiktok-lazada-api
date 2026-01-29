@@ -26,7 +26,7 @@ import {
   ShopeeResponseLogisticChannelList,
   ShopeeResponseShipOrder,
   ShopeeResponseShippingParameter,
-} from './dto/response/logistic.reponse';
+} from './dto/response/logistic.response';
 import { fetchTokenWithAuthCode, fetchTokenWithRefreshToken } from './api/authorization.api';
 import { ShopeeResponseRefreshAccessToken } from './dto/response/config.response';
 

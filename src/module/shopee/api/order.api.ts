@@ -12,7 +12,7 @@ import { ShopeeResponseOrderDetail } from '../dto/response/order.response';
  */
 export async function getOrders(beforeMinutes: number, config: ShopeeConfig) {
   let cursor = '';
-  const orderList: string[] = [];
+  const orderList: any[] = [];
   let hasMoreData = true;
   const timeFrom = ShopeeHelper.getTimestampMinutesAgo(beforeMinutes);
 
@@ -23,7 +23,7 @@ export async function getOrders(beforeMinutes: number, config: ShopeeConfig) {
 
     const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.ORDER_LIST}${commonParams}`;
     const res = await axios.get(url);
-    if (res.data?.respone?.order_list.length < 1) break;
+    if (res.data?.response?.order_list.length < 1) break;
     orderList.push(...res.data.response.order_list);
 
     cursor = res.data.response.next_cursor;
