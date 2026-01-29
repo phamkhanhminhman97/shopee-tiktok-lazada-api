@@ -1,7 +1,6 @@
 import * as ShopeeHelper from '../common/helper';
 import { ShopeeConfig } from '../dto/request/config.request';
 import { SHOPEE_END_POINT, SHOPEE_PATH } from '../common/constant';
-import axios from 'axios';
 import {
   ShopeeResponseGetAttributes,
   ShopeeResponseGetBrandList,
@@ -30,13 +29,7 @@ export async function getProductItemList(config: ShopeeConfig): Promise<any> {
     while (hasNextPage) {
       const commonParam = `${ShopeeHelper.commonParameter(config, signature, timestamp)}&page_size=100&item_status=NORMAL&offset=${offset}`;
       const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.GET_ITEM_LIST}${commonParam}`;
-      const { data } = await axios.get<{
-        response: {
-          item: any[];
-          next_offset: number;
-          has_next_page: boolean;
-        };
-      }>(url);
+      const data = await ShopeeHelper.httpGet(url, config);
 
       if (data.response.item && Array.isArray(data.response.item)) {
         productItems.push(...data.response.item);
@@ -250,10 +243,9 @@ export async function addItem(body: any, config: ShopeeConfig) {
   //   // },
   // };
 
-  const url = process.env.SHOPEE_ENDPOINT + SHOPEE_PATH.ADD_ITEM + commonParam;
-  const res = await axios.post(url, body);
-
-  return res.data;
+  const url = SHOPEE_END_POINT + SHOPEE_PATH.ADD_ITEM + commonParam;
+  const headers = ShopeeHelper.getHeaders(config);
+  return ShopeeHelper.httpPost(url, body, headers);
 }
 
 /**

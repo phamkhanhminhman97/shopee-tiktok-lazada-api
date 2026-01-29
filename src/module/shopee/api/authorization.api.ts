@@ -34,7 +34,7 @@ export async function fetchTokenWithAuthCode(authCode: string, config: ShopeeCon
   const { partnerId, shopId, partnerKey } = config;
   const timestamp = ShopeeHelper.getTimestampNow();
   const params = [partnerId, SHOPEE_PATH.AUTH_TOKEN, timestamp.toString()];
-  const baseString = params.reduce((prev: any, curr: any) => (prev += curr), '');
+  const baseString = params.reduce((prev: string, curr: any) => (prev += curr), '');
   const signature = createHmac('sha256', partnerKey).update(baseString).digest('hex');
 
   const commonParam = `?sign=${signature}&partner_id=${partnerId}&timestamp=${timestamp}`;
@@ -65,7 +65,7 @@ export async function fetchTokenWithRefreshToken(config: ShopeeConfig): Promise<
   const { partnerId, shopId, partnerKey, refreshToken } = config;
 
   const params = [partnerId, SHOPEE_PATH.REFRESH_TOKEN, timestamp.toString()];
-  const baseString = params.reduce((prev: any, curr: any) => (prev += curr), '');
+  const baseString = params.reduce((prev: string, curr: any) => (prev += curr), '');
   const signature = createHmac('sha256', partnerKey).update(baseString).digest('hex');
 
   const commonParam = '?sign=' + signature + '&partner_id=' + partnerId + '&timestamp=' + timestamp;

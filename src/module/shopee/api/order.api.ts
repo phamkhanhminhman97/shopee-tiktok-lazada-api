@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { SHOPEE_END_POINT, SHOPEE_PATH } from '../common/constant';
 import { ShopeeConfig } from '../dto/request/config.request';
 import * as ShopeeHelper from '../common/helper';
@@ -22,12 +21,12 @@ export async function getOrders(beforeMinutes: number, config: ShopeeConfig) {
     const commonParams = ShopeeHelper.buildCommonParameters(config, signature, timestamp, timeFrom, cursor);
 
     const url = `${SHOPEE_END_POINT}${SHOPEE_PATH.ORDER_LIST}${commonParams}`;
-    const res = await axios.get(url);
-    if (res.data?.response?.order_list.length < 1) break;
-    orderList.push(...res.data.response.order_list);
+    const data = await ShopeeHelper.httpGet(url, config);
+    if (data?.response?.order_list.length < 1) break;
+    orderList.push(...data.response.order_list);
 
-    cursor = res.data.response.next_cursor;
-    hasMoreData = res.data.response.more;
+    cursor = data.response.next_cursor;
+    hasMoreData = data.response.more;
   }
 
   return orderList.map((item: any) => item.order_sn);
