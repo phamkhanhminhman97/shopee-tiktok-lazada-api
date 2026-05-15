@@ -66,6 +66,7 @@ enum PATH {
   ADD_ITEM = '/api/v2/product/add_item',
   ORDER_LIST = '/api/v2/order/get_order_list',
   ORDER_DETAIL = '/api/v2/order/get_order_detail',
+  GET_SHIPMENT_LIST = '/api/v2/order/get_shipment_list',
   SHIPPING_PARAMS = '/api/v2/logistics/get_shipping_parameter',
   SHIP_ORDER = '/api/v2/logistics/ship_order',
   ADDRESS_LIST = '/api/v2/logistics/get_address_list',
