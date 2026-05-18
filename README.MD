@@ -8,6 +8,28 @@ A unified, strongly-typed Open API wrapper for **Shopee**, **TikTok Shop**, and 
 
 ---
 
+## ✨ What's New in v4.2.0
+
+This release completes the **Shopee Logistics Open API v2 Suite** integration, enabling robust, multi-warehouse, and bulk fulfillment capability.
+
+### 🛒 Shopee Logistics & Fulfillment Suite Integration
+- **Advanced Bulk Operations:**
+  - **`massShipOrder`**: Arrange batch logistics (pickup, dropoff, non-integrated) for multiple orders concurrently.
+  - **`getMassShippingParameter`**: Fetch available addresses, dropoff branches, and recommended time slots for bulk orders under the same location/channel.
+  - **`getMassTrackingNumber`**: Batch fetch tracking numbers from Shopee 3PLs asynchronously.
+  - **`getShippingDocumentParameter`**: Query selectable and Shopee-suggested document formats (thermal/normal airwaybills).
+- **Single Fulfillment & Tracking:**
+  - **`getTrackingNumber`**: Retrieve the 3PL-generated tracking number for single-order packages.
+  - **`getTrackingInfo`**: Get comprehensive real-time tracking logs and reversed logistics history.
+  - **`updateShippingOrder`**: Reschedule pickup details (address ID and time slot ID) for active shipments.
+  - **`getAddressList`**: Query active merchant shop addresses.
+- **Waybills & Documents Handling:**
+  - **`createShippingDocument`**: Asynchronously trigger document generation tasks.
+  - **`getShippingDocumentResult`**: Track the compilation progress of airwaybill tasks.
+  - **`downloadShippingDocument`**: Direct binary stream download (`arraybuffer`) to fetch generated waybills as buffer outputs.
+
+---
+
 ## ✨ What's New in v4.1.0
 
 This update focuses on performance optimization, pagination bug fixes, and adding the latest data fields from Shopee Open API v2.
@@ -55,24 +77,35 @@ const shopee = new ShopeeModule({
 
 **Supported Methods:**
 
-| Function                 | Status |
-| ------------------------ | ------ |
-| `getOrders`              | ✅ Done |
-| `getOrderDetail`         | ✅ Done |
-| `getShipmentList`        | ✅ Done |
-| `getProductItemList`     | ✅ Done |
-| `getProductItemBaseInfo` | ✅ Done |
-| `updateStock`            | ✅ Done |
-| `unListItem`             | ✅ Done |
-| `updatePrice`            | ✅ Done |
-| `addItem`                | ✅ Done |
-| `getChannelList`         | ✅ Done |
-| `fetchToken`             | ✅ Done |
-| `getCategory`            | ✅ Done |
-| `getAttributes`          | ✅ Done |
-| `getBrandList`           | ✅ Done |
-| `shippingParameter`      | ✅ Done |
-| `shipOrder`              | ✅ Done |
+| Function                       | Status  |
+| ------------------------------ | ------- |
+| `getOrders`                    | ✅ Done |
+| `getOrderDetail`               | ✅ Done |
+| `getShipmentList`              | ✅ Done |
+| `getProductItemList`           | ✅ Done |
+| `getProductItemBaseInfo`       | ✅ Done |
+| `updateStock`                  | ✅ Done |
+| `unListItem`                   | ✅ Done |
+| `updatePrice`                  | ✅ Done |
+| `addItem`                      | ✅ Done |
+| `getChannelList`               | ✅ Done |
+| `fetchToken`                   | ✅ Done |
+| `getCategory`                  | ✅ Done |
+| `getAttributes`                | ✅ Done |
+| `getBrandList`                 | ✅ Done |
+| `shippingParameter`            | ✅ Done |
+| `shipOrder`                    | ✅ Done |
+| `getTrackingNumber`            | ✅ Done |
+| `createShippingDocument`       | ✅ Done |
+| `getShippingDocumentResult`    | ✅ Done |
+| `downloadShippingDocument`     | ✅ Done |
+| `getTrackingInfo`              | ✅ Done |
+| `massShipOrder`                | ✅ Done |
+| `getMassShippingParameter`     | ✅ Done |
+| `updateShippingOrder`          | ✅ Done |
+| `getMassTrackingNumber`        | ✅ Done |
+| `getShippingDocumentParameter` | ✅ Done |
+| `getAddressList`               | ✅ Done |
 
 ---
 
