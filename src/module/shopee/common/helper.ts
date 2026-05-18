@@ -104,6 +104,18 @@ async function httpPost(url: string, body: any, headers: any) {
   }
 }
 
+async function httpPostDownload(url: string, body: any, headers: any) {
+  try {
+    const res: AxiosResponse = await axios.post(url, body, {
+      headers,
+      responseType: 'arraybuffer',
+    });
+    return res.data; // this will be the buffer
+  } catch (err: any) {
+    return handleError(err);
+  }
+}
+
 async function httpGet(url: string, config: ShopeeConfig) {
   try {
     const res: AxiosResponse = await axios.get(url, {
@@ -143,6 +155,7 @@ export {
   optionalField,
   httpGet,
   httpPost,
+  httpPostDownload,
   getHeaders,
   buildCommonParams,
   isAccessTokenValid,
