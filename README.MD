@@ -1,36 +1,48 @@
-# shopee-tiktokshops-lazada-api
+# 🛍️ shopee-tiktokshops-lazada-api
 
-<p align="center">
-  Unified TypeScript SDK for <b>Shopee</b>, <b>TikTok Shop</b>, and <b>Lazada</b> APIs.
-</p>
+[![npm version](https://badge.fury.io/js/shopee-tiktokshops-lazada-api.svg)](https://badge.fury.io/js/shopee-tiktokshops-lazada-api)
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
-<p align="center">
-  <a href="https://badge.fury.io/js/shopee-tiktokshops-lazada-api"><img src="https://badge.fury.io/js/shopee-tiktokshops-lazada-api.svg" alt="npm version" /></a>
-  <a href="https://opensource.org/licenses/ISC"><img src="https://img.shields.io/badge/License-ISC-blue.svg" alt="License ISC" /></a>
-  <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-Ready-blue.svg" alt="TypeScript" /></a>
-</p>
+A unified, strongly-typed Open API wrapper for **Shopee**, **TikTok Shop**, and **Lazada** built with TypeScript. Simplify e-commerce integrations and manage your multi-channel stores efficiently.
 
 ---
 
-## Why this package?
+## ✨ What's New in v4.1.0
 
-- One consistent interface for 3 major marketplaces.
-- Strong TypeScript typings for safer integrations.
-- Production-focused methods for orders, products, shipping, and auth.
+This update focuses on performance optimization, pagination bug fixes, and adding the latest data fields from Shopee Open API v2.
 
-## Install
+### 🛒 Shopee Module Improvements
+- **Fix Data Shifting Bug:** Resolved a critical issue where orders could be duplicated or missed during pagination because the query time window shifted between loop iterations.
+- **`getOrders` Enhancements:**
+  - Optimized `page_size` to 100 (reducing HTTP requests by 50%).
+  - Added a 15-day time range validation as required by Shopee.
+- **`getOrderDetail` Enhancements:**
+  - Support for fetching multiple orders simultaneously by passing a `string[]`.
+  - Added the latest response fields: `return_request_due_date`, `edt`, `payment_info`, `international_label`.
+  - Added support for the `PENDING` order status (via `request_order_status_pending`).
+- **New Feature `getShipmentList`:** Added a dedicated API to retrieve orders ready for fulfillment (`READY_TO_SHIP`) or those requiring a retry (`RETRY_SHIP`).
+- **Enhanced Error Handling:** The system now explicitly catches Shopee API errors and returns detailed error messages instead of silently returning an empty result.
+
+---
+
+## ⚡️ Installation
+
+You can install the package via `npm` or `yarn`:
 
 ```bash
+# Using npm
 npm install shopee-tiktokshops-lazada-api
-# or
+
+# Using yarn
 yarn add shopee-tiktokshops-lazada-api
 ```
 
-## Quick Start
+## 🚀 Usage
 
-### Shopee
+### 🛒 Shopee Module
 
-```ts
+```typescript
 import { ShopeeModule } from 'shopee-tiktokshops-lazada-api';
 
 const shopee = new ShopeeModule({
@@ -41,9 +53,32 @@ const shopee = new ShopeeModule({
 });
 ```
 
-### TikTok Shop
+**Supported Methods:**
 
-```ts
+| Function                 | Status |
+| ------------------------ | ------ |
+| `getOrders`              | ✅ Done |
+| `getOrderDetail`         | ✅ Done |
+| `getShipmentList`        | ✅ Done |
+| `getProductItemList`     | ✅ Done |
+| `getProductItemBaseInfo` | ✅ Done |
+| `updateStock`            | ✅ Done |
+| `unListItem`             | ✅ Done |
+| `updatePrice`            | ✅ Done |
+| `addItem`                | ✅ Done |
+| `getChannelList`         | ✅ Done |
+| `fetchToken`             | ✅ Done |
+| `getCategory`            | ✅ Done |
+| `getAttributes`          | ✅ Done |
+| `getBrandList`           | ✅ Done |
+| `shippingParameter`      | ✅ Done |
+| `shipOrder`              | ✅ Done |
+
+---
+
+### 🎵 TikTok Shop Module (v2 2309)
+
+```typescript
 import { TiktokModule } from 'shopee-tiktokshops-lazada-api';
 
 const tiktok = new TiktokModule({
@@ -55,9 +90,27 @@ const tiktok = new TiktokModule({
 });
 ```
 
-### Lazada
+**Supported Methods:**
 
-```ts
+| Function              | Status |
+| --------------------- | ------ |
+| `getOrderList`        | ✅ Done |
+| `getOrderDetail`      | ✅ Done |
+| `getProductDetail`    | ✅ Done |
+| `getAuthorizedShop`   | ✅ Done |
+| `getPackageTimeSlots` | ✅ Done |
+| `shipPackage`         | ✅ Done |
+| `getShippingDocument` | ✅ Done |
+| `getCategories`       | ✅ Done |
+| `getBrands`           | ✅ Done |
+| `getAttributes`       | ✅ Done |
+| `createProduct`       | ✅ Done |
+
+---
+
+### 🛍 Lazada Module
+
+```typescript
 import { LazadaModule } from 'shopee-tiktokshops-lazada-api';
 
 const lazada = new LazadaModule({
@@ -68,25 +121,14 @@ const lazada = new LazadaModule({
 });
 ```
 
-## Available Methods
-
-### Shopee
-
-`getOrders`, `getOrderDetail`, `getShipmentList`, `getProductItemList`, `getProductItemBaseInfo`, `updateStock`, `unListItem`, `updatePrice`, `addItem`, `getChannelList`, `fetchToken`, `getCategory`, `getAttributes`, `getBrandList`, `shippingParameter`, `shipOrder`
-
-### TikTok Shop
-
-`getOrderList`, `getOrderDetail`, `getProductDetail`, `getAuthorizedShop`, `getPackageTimeSlots`, `shipPackage`, `getShippingDocument`, `getCategories`, `getBrands`, `getAttributes`, `createProduct`
-
-### Lazada
-
-Core APIs for authorization, orders, and products are available via `LazadaModule`.
-
-## Contact
-
-- Email: **phamkhanhminhman97@gmail.com**
-- Skype: **phamkhanhminhman97@gmail.com**
-
 ---
 
-<p align="center"><i>Built for fast multi-channel commerce integrations.</i></p>
+
+
+## 📬 Contact / Hỗ trợ
+
+- **Email:** phamkhanhminhman97@gmail.com
+- **Skype:** phamkhanhminhman97@gmail.com
+
+---
+*Built with ❤️ for E-commerce Integrations. To be continued...*
